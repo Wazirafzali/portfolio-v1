@@ -25,9 +25,12 @@ export default function Image() {
           padding: "80px",
         }}
       >
+        {/* Small title */}
         <div
           style={{
+            display: "flex",
             fontSize: 28,
+            fontWeight: 600,
             color: "#22d3ee",
             marginBottom: 30,
           }}
@@ -35,37 +38,61 @@ export default function Image() {
           FULL-STACK WEB DEVELOPER
         </div>
 
+        {/* Name */}
         <div
           style={{
-            fontSize: 76,
+            display: "flex",
+            fontSize: 82,
             fontWeight: 800,
-            lineHeight: 1.05,
+            lineHeight: 1,
           }}
         >
           Wazir Afzali
         </div>
 
+        {/* Description */}
         <div
           style={{
-            marginTop: 30,
-            fontSize: 34,
-            color: "#a1a1aa",
+            display: "flex",
+            marginTop: 35,
             maxWidth: 900,
+            fontSize: 32,
+            lineHeight: 1.4,
+            color: "#a1a1aa",
           }}
         >
           Building modern web products with Next.js,
           React, TypeScript and AI.
         </div>
 
+        {/* Bottom */}
         <div
           style={{
             display: "flex",
-            marginTop: 60,
-            fontSize: 24,
-            color: "#22d3ee",
+            alignItems: "center",
+            marginTop: 65,
+            gap: 18,
           }}
         >
-          wazirafzali • developer portfolio
+          <div
+            style={{
+              display: "flex",
+              width: 16,
+              height: 16,
+              borderRadius: 999,
+              background: "#22d3ee",
+            }}
+          />
+
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              color: "#d4d4d8",
+            }}
+          >
+            Developer Portfolio
+          </div>
         </div>
       </div>
     ),
