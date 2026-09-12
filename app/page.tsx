@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import Team from "@/components/Team";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
@@ -69,6 +71,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+         <Services />
+          
+          <Team />
 
         {/* Technologies */}
         <TechStack />

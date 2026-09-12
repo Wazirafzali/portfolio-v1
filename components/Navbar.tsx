@@ -8,7 +8,8 @@ export default function Navbar() {
 
   const links = [
     { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
+    { name: "Services", href: "#services" },
+    { name: "Team", href: "#team" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
@@ -18,11 +19,12 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         {/* Logo */}
         <a
-           href="#"
-           className="text-lg font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-xl"
-             >
-             {profile.name}
-            </a>
+          href="#"
+          className="text-lg font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-xl"
+        >
+          {profile.name}
+          <span className="text-cyan-400"> Team</span>
+        </a>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
@@ -37,12 +39,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Desktop Hire Button */}
+        {/* Desktop CTA */}
         <a
           href="#contact"
           className="hidden rounded-full border border-cyan-400/40 px-5 py-2 text-sm font-semibold text-cyan-400 transition duration-300 hover:bg-cyan-400 hover:text-zinc-950 md:block"
         >
-          Hire Me
+          Start a Project
         </a>
 
         {/* Mobile Menu Button */}
@@ -66,7 +68,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-               className="rounded-lg border-b border-white/5 px-2 py-4 text-base font-medium text-zinc-300 transition hover:bg-white/5 hover:pl-4 hover:text-cyan-400"
+                className="rounded-lg border-b border-white/5 px-2 py-4 text-base font-medium text-zinc-300 transition hover:bg-white/5 hover:pl-4 hover:text-cyan-400"
               >
                 {link.name}
               </a>
@@ -77,7 +79,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className="mt-6 rounded-xl bg-cyan-400 px-5 py-3 text-center font-bold text-zinc-950 transition hover:bg-cyan-300"
             >
-              Hire Me
+              Start a Project
             </a>
           </div>
         </div>

@@ -7,13 +7,27 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const { name, email, subject, message } = body;
+    const {
+      name,
+      email,
+      service,
+      budget,
+      deadline,
+      message,
+    } = body;
 
-    if (!name || !email || !subject || !message) {
+    if (
+      !name ||
+      !email ||
+      !service ||
+      !budget ||
+      !deadline ||
+      !message
+    ) {
       return NextResponse.json(
         {
           success: false,
-          message: "All fields are required.",
+          message: "Please complete all required fields.",
         },
         {
           status: 400,
@@ -24,13 +38,15 @@ export async function POST(request: Request) {
     if (
       typeof name !== "string" ||
       typeof email !== "string" ||
-      typeof subject !== "string" ||
+      typeof service !== "string" ||
+      typeof budget !== "string" ||
+      typeof deadline !== "string" ||
       typeof message !== "string"
     ) {
       return NextResponse.json(
         {
           success: false,
-          message: "Invalid form data.",
+          message: "Invalid project request.",
         },
         {
           status: 400,
@@ -38,13 +54,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(email)) {
       return NextResponse.json(
         {
           success: false,
-          message: "Please enter a valid email address.",
+          message:
+            "Please enter a valid email address.",
         },
         {
           status: 400,
@@ -52,15 +70,19 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipientEmail = process.env.CONTACT_TO_EMAIL;
+    const recipientEmail =
+      process.env.CONTACT_TO_EMAIL;
 
     if (!recipientEmail) {
-      console.error("CONTACT_TO_EMAIL is not configured.");
+      console.error(
+        "CONTACT_TO_EMAIL is not configured."
+      );
 
       return NextResponse.json(
         {
           success: false,
-          message: "Server configuration error.",
+          message:
+            "Server configuration error.",
         },
         {
           status: 500,
@@ -68,37 +90,49 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+    const { data, error } =
+      await resend.emails.send({
+        from:
+          "Project Inquiry <onboarding@resend.dev>",
 
-      to: [recipientEmail],
+        to: [recipientEmail],
 
-      subject: `Portfolio Contact: ${subject}`,
+        replyTo: email,
 
-      text: `
-New Portfolio Message
+        subject:
+          `New Project Request: ${service}`,
 
-Name:
-${name}
+        text: `
+NEW PROJECT REQUEST
 
-Email:
-${email}
+CLIENT
+Name: ${name}
+Email: ${email}
 
-Project Type:
-${subject}
+PROJECT
+Service: ${service}
+Budget: ${budget}
+Deadline: ${deadline}
 
-Message:
+PROJECT DETAILS
 ${message}
-      `,
-    });
+
+---
+Submitted through Wazir Afzali & Team website.
+        `,
+      });
 
     if (error) {
-      console.error("Resend error:", error);
+      console.error(
+        "Resend error:",
+        error
+      );
 
       return NextResponse.json(
         {
           success: false,
-          message: "Email could not be sent.",
+          message:
+            "Project request could not be sent.",
         },
         {
           status: 500,
@@ -108,16 +142,21 @@ ${message}
 
     return NextResponse.json({
       success: true,
-      message: "Message sent successfully.",
+      message:
+        "Project request sent successfully.",
       id: data?.id,
     });
   } catch (error) {
-    console.error("Contact API error:", error);
+    console.error(
+      "Project inquiry API error:",
+      error
+    );
 
     return NextResponse.json(
       {
         success: false,
-        message: "Something went wrong.",
+        message:
+          "Something went wrong. Please try again.",
       },
       {
         status: 500,

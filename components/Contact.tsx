@@ -20,7 +20,9 @@ export default function Contact() {
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
-      subject: formData.get("subject"),
+      service: formData.get("service"),
+      budget: formData.get("budget"),
+      deadline: formData.get("deadline"),
       message: formData.get("message"),
     };
 
@@ -38,12 +40,14 @@ export default function Contact() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Message could not be sent.");
+        throw new Error(
+          result.message || "Project request could not be sent."
+        );
       }
 
       setStatus("success");
       setStatusMessage(
-        "Message sent successfully. Thank you for contacting me!"
+        "Your project request was sent successfully. We will review it and contact you soon."
       );
 
       form.reset();
@@ -53,7 +57,9 @@ export default function Contact() {
       if (error instanceof Error) {
         setStatusMessage(error.message);
       } else {
-        setStatusMessage("Something went wrong. Please try again.");
+        setStatusMessage(
+          "Something went wrong. Please try again."
+        );
       }
     }
   }
@@ -69,76 +75,73 @@ export default function Contact() {
           {/* Left side */}
           <div>
             <p className="mb-4 font-medium text-cyan-400">
-              Contact
+              Start a Project
             </p>
 
             <h2 className="max-w-xl text-4xl font-bold tracking-tight sm:text-5xl">
-              Have a project in mind?
-
+              Tell us what you
               <span className="block text-zinc-500">
-                Let&apos;s build it together.
+                want to build.
               </span>
             </h2>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-400">
-              I&apos;m open to freelance projects, collaborations, and
-              interesting opportunities. Send me a message and tell me about
-              what you want to build.
+              Share your project requirements and I will review them
+              as the team lead, assign the right specialist, and get
+              back to you with the next steps.
             </p>
 
             <div className="mt-12 space-y-6">
-
-              {/* Email */}
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-xl">
-                  ✉
+              <div className="flex gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                  01
                 </div>
 
                 <div>
-                  <p className="text-sm text-zinc-500">
-                    Email
-                  </p>
+                  <h3 className="font-semibold">
+                    Submit your project
+                  </h3>
 
-                  <p className="font-medium text-zinc-200">
-                    Available through contact form
+                  <p className="mt-1 text-sm leading-6 text-zinc-500">
+                    Tell us the service you need, your budget,
+                    timeline, and project requirements.
                   </p>
                 </div>
               </div>
 
-              {/* Location */}
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-xl">
-                  ◉
+              <div className="flex gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                  02
                 </div>
 
                 <div>
-                  <p className="text-sm text-zinc-500">
-                    Location
-                  </p>
+                  <h3 className="font-semibold">
+                    We review it
+                  </h3>
 
-                  <p className="font-medium text-zinc-200">
-                    Available Worldwide
+                  <p className="mt-1 text-sm leading-6 text-zinc-500">
+                    I review the request and coordinate with the
+                    specialist responsible for that service.
                   </p>
                 </div>
               </div>
 
-              {/* Availability */}
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-xl">
-                  ✓
+              <div className="flex gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                  03
                 </div>
 
                 <div>
-                  <p className="text-sm text-zinc-500">
-                    Availability
-                  </p>
+                  <h3 className="font-semibold">
+                    We plan the project
+                  </h3>
 
-                  <p className="font-medium text-green-400">
-                    Open for new projects
+                  <p className="mt-1 text-sm leading-6 text-zinc-500">
+                    We confirm scope, timeline, price, and delivery
+                    requirements before development begins.
                   </p>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -148,7 +151,6 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-
               {/* Name */}
               <div>
                 <label
@@ -164,7 +166,7 @@ export default function Contact() {
                   type="text"
                   required
                   maxLength={100}
-                  placeholder="John Doe"
+                  placeholder="Your name"
                   className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
@@ -184,48 +186,141 @@ export default function Contact() {
                   type="email"
                   required
                   maxLength={150}
-                  placeholder="john@example.com"
+                  placeholder="you@example.com"
                   className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
 
-              {/* Project type */}
+              {/* Service */}
               <div>
                 <label
-                  htmlFor="subject"
+                  htmlFor="service"
                   className="mb-2 block text-sm font-medium text-zinc-300"
                 >
-                  Project Type
+                  Service Needed
                 </label>
 
                 <select
-                  id="subject"
-                  name="subject"
+                  id="service"
+                  name="service"
                   required
                   defaultValue=""
                   className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
                 >
-                  <option
-                    value=""
-                    disabled
-                  >
-                    Select project type
+                  <option value="" disabled>
+                    Select a service
                   </option>
 
-                  <option value="Website Development">
-                    Website Development
+                  <option value="Web Development">
+                    Web Development
                   </option>
 
-                  <option value="Web Application">
-                    Web Application
+                  <option value="Android Development">
+                    Android Development
                   </option>
 
-                  <option value="AI Project">
-                    AI Project
+                  <option value="iOS Development">
+                    iOS Development
+                  </option>
+
+                  <option value="Video Editing">
+                    Video Editing
+                  </option>
+
+                  <option value="Multiple Services">
+                    Multiple Services
                   </option>
 
                   <option value="Other">
                     Other
+                  </option>
+                </select>
+              </div>
+
+              {/* Budget */}
+              <div>
+                <label
+                  htmlFor="budget"
+                  className="mb-2 block text-sm font-medium text-zinc-300"
+                >
+                  Estimated Budget
+                </label>
+
+                <select
+                  id="budget"
+                  name="budget"
+                  required
+                  defaultValue=""
+                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
+                >
+                  <option value="" disabled>
+                    Select your budget
+                  </option>
+
+                  <option value="Under $500">
+                    Under $500
+                  </option>
+
+                  <option value="$500 - $1,000">
+                    $500 - $1,000
+                  </option>
+
+                  <option value="$1,000 - $3,000">
+                    $1,000 - $3,000
+                  </option>
+
+                  <option value="$3,000 - $5,000">
+                    $3,000 - $5,000
+                  </option>
+
+                  <option value="$5,000+">
+                    $5,000+
+                  </option>
+
+                  <option value="Not sure yet">
+                    Not sure yet
+                  </option>
+                </select>
+              </div>
+
+              {/* Deadline */}
+              <div>
+                <label
+                  htmlFor="deadline"
+                  className="mb-2 block text-sm font-medium text-zinc-300"
+                >
+                  Preferred Deadline
+                </label>
+
+                <select
+                  id="deadline"
+                  name="deadline"
+                  required
+                  defaultValue=""
+                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
+                >
+                  <option value="" disabled>
+                    Select a timeline
+                  </option>
+
+                  <option value="As soon as possible">
+                    As soon as possible
+                  </option>
+
+                  <option value="1 - 2 weeks">
+                    1 - 2 weeks
+                  </option>
+
+                  <option value="2 - 4 weeks">
+                    2 - 4 weeks
+                  </option>
+
+                  <option value="1 - 3 months">
+                    1 - 3 months
+                  </option>
+
+                  <option value="Flexible">
+                    Flexible
                   </option>
                 </select>
               </div>
@@ -236,47 +331,45 @@ export default function Contact() {
                   htmlFor="message"
                   className="mb-2 block text-sm font-medium text-zinc-300"
                 >
-                  Your Message
+                  Project Details
                 </label>
 
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows={6}
-                  maxLength={3000}
-                  placeholder="Tell me about your project..."
+                  rows={7}
+                  maxLength={5000}
+                  placeholder="Tell us what you want to build, the main features you need, and any other important details..."
                   className="w-full resize-none rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
 
-              {/* Button */}
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition duration-300 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50"
               >
                 {status === "loading"
-                  ? "Sending..."
-                  : "Send Message →"}
+                  ? "Sending Request..."
+                  : "Submit Project Request →"}
               </button>
 
-              {/* Success */}
               {status === "success" && (
-                <div className="rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-sm text-green-400">
+                <div className="rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-sm leading-6 text-green-400">
                   ✓ {statusMessage}
                 </div>
               )}
 
-              {/* Error */}
               {status === "error" && (
-                <div className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-400">
+                <div className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm leading-6 text-red-400">
                   ✕ {statusMessage}
                 </div>
               )}
-
             </form>
           </div>
+
         </div>
       </div>
     </section>
