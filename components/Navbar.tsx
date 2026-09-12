@@ -11,46 +11,43 @@ export default function Navbar() {
     { name: "Services", href: "#services" },
     { name: "Team", href: "#team" },
     { name: "Projects", href: "#projects" },
+    { name: "Process", href: "#process" },
     { name: "Contact", href: "#contact" },
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 shadow-lg shadow-black/5 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        {/* Logo */}
         <a
           href="#"
           className="text-lg font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-xl"
         >
           {profile.name}
-          <span className="text-cyan-400"> Team</span>
+          <span className="text-cyan-400"> & Team</span>
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-zinc-300 transition duration-300 hover:text-cyan-400"
+              className="text-sm font-medium text-zinc-300 transition hover:text-cyan-400"
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <a
           href="#contact"
-          className="hidden rounded-full border border-cyan-400/40 px-5 py-2 text-sm font-semibold text-cyan-400 transition duration-300 hover:bg-cyan-400 hover:text-zinc-950 md:block"
+          className="hidden rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-cyan-300 md:inline-flex"
         >
           Start a Project
         </a>
 
-        {/* Mobile Menu Button */}
         <button
           type="button"
-          onClick={() => setMenuOpen((previous) => !previous)}
+          onClick={() => setMenuOpen((prev) => !prev)}
           className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-2xl text-white transition hover:border-cyan-400 hover:text-cyan-400 md:hidden"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
@@ -59,7 +56,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div className="border-t border-white/10 bg-zinc-950 md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col px-5 py-6">
