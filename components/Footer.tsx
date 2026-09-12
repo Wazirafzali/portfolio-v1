@@ -12,7 +12,7 @@ export default function Footer() {
               href="#"
               className="text-xl font-bold tracking-tight text-white"
             >
-              Dev<span className="text-cyan-400">Portfolio</span>
+             Wazir<span className="text-cyan-400">Afzali</span>
             </a>
 
             <p className="mt-2 text-sm text-zinc-500">
@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Social links */}
           <div className="flex flex-wrap gap-4">
             <a
-              href="https://github.com/YOUR-USERNAME"
+              href="https://github.com/Wazirafzali"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/10 px-5 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
@@ -41,7 +41,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="mailto:your@email.com"
+              href="mailto:wazirafzali57@email.com"
               className="rounded-full border border-white/10 px-5 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               Email
@@ -51,7 +51,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {currentYear} DevPortfolio. All rights reserved.
+            © {currentYear} Wazir Afzali. All rights reserved.
           </p>
 
           <a

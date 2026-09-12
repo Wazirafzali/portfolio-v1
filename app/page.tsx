@@ -68,7 +68,7 @@ export default function Home() {
 
               <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/10 pt-8">
                 <div>
-                  <p className="text-3xl font-bold">10+</p>
+                  <p className="text-3xl font-bold">3</p>
                   <p className="mt-1 text-sm text-zinc-500">Projects</p>
                 </div>
 
@@ -78,7 +78,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <p className="text-3xl font-bold">100%</p>
+                  <p className="text-3xl font-bold">24/7</p>
                   <p className="mt-1 text-sm text-zinc-500">Passion</p>
                 </div>
               </div>

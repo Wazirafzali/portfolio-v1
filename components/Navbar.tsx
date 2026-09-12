@@ -20,7 +20,7 @@ export default function Navbar() {
           href="#"
           className="text-xl font-bold tracking-tight text-white"
         >
-          Dev<span className="text-cyan-400">Portfolio</span>
+          Wazir<span className="text-cyan-400">Afzali</span>
         </a>
 
         {/* Desktop Navigation */}
