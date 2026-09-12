@@ -14,15 +14,15 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 shadow-lg shadow-black/5 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         {/* Logo */}
         <a
-          href="#"
-          className="text-xl font-bold tracking-tight text-white"
-        >
-         {profile.name}
-        </a>
+           href="#"
+           className="text-lg font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-xl"
+             >
+             {profile.name}
+            </a>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 md:flex">
@@ -66,7 +66,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="border-b border-white/5 py-4 text-base font-medium text-zinc-300 transition hover:pl-2 hover:text-cyan-400"
+               className="rounded-lg border-b border-white/5 px-2 py-4 text-base font-medium text-zinc-300 transition hover:bg-white/5 hover:pl-4 hover:text-cyan-400"
               >
                 {link.name}
               </a>

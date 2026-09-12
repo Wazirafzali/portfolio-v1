@@ -32,7 +32,7 @@ export default function Projects() {
           {projects.map((project) => (
             <article
               key={project.slug}
-              className="group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 transition duration-300 hover:-translate-y-2 hover:border-cyan-400/30"
+              className="group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 transition duration-300 hover:-translate-y-2 hover:border-cyan-400/30 hover:shadow-2xl hover:shadow-cyan-950/20"
             >
               {/* Cover */}
               <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-gradient-to-br from-cyan-400/10 to-blue-500/5">
@@ -77,14 +77,14 @@ export default function Projects() {
                   </span>
 
                  <span
-  className={`rounded-full border px-3 py-1 text-xs ${
-    project.type === "REAL PROJECT"
-      ? "border-green-400/20 bg-green-400/10 text-green-400"
-      : "border-white/10 bg-white/5 text-zinc-400"
-  }`}
+                className={`rounded-full border px-3 py-1 text-xs ${
+              project.type === "REAL PROJECT"
+                ? "border-green-400/20 bg-green-400/10 text-green-400"
+                : "border-white/10 bg-white/5 text-zinc-400"
+                  }`}
 >
-  {project.type}
-</span>
+                      {project.type}
+                  </span>
                 </div>
 
                 <h3 className="mt-7 text-2xl font-bold">
@@ -108,10 +108,10 @@ export default function Projects() {
                     ))}
                 </div>
 
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="mt-8 flex items-center justify-between rounded-xl border border-white/10 px-5 py-3.5 font-semibold transition hover:border-cyan-400 hover:text-cyan-400"
-                >
+               <Link
+  href={`/projects/${project.slug}`}
+  className="mt-8 flex items-center justify-between rounded-xl border border-white/10 px-5 py-3.5 font-semibold transition duration-300 hover:border-cyan-400 hover:bg-cyan-400/5 hover:text-cyan-400"
+>
                   View Case Study
 
                   <span>→</span>

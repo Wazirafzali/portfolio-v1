@@ -7,9 +7,9 @@ export default function Hero() {
       <div className="absolute left-1/2 top-20 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
       <div className="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-[100px]" />
 
-      <div className="relative z-10 mx-auto grid min-h-[90vh] max-w-7xl items-center gap-16 px-6 py-24 lg:grid-cols-2 lg:px-8">
+      <div className="relative z-10 mx-auto grid min-h-[90vh] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
         {/* Left */}
-        <div>
+        <div className="animate-fade-up">
           <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-300">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
@@ -22,7 +22,7 @@ export default function Hero() {
            {profile.role}
           </p>
 
-          <h1 className="text-5xl font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
             I turn ideas into
             <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
               modern web products.
@@ -65,7 +65,7 @@ export default function Hero() {
           </div>
 
           {/* Stats */}
-          <div className="mt-16 grid max-w-xl grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          <div className="mt-14 grid max-w-xl grid-cols-1 gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
             <div>
               <p className="text-3xl font-bold text-white">
                 3
@@ -96,7 +96,7 @@ export default function Hero() {
         </div>
 
         {/* Right developer card */}
-        <div className="flex justify-center lg:justify-end">
+       <div className="animate-fade-up flex justify-center lg:justify-end">
           <div className="relative w-full max-w-md">
             <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-cyan-400/20 to-blue-600/10 blur-2xl" />
 

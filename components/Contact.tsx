@@ -254,7 +254,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition duration-300 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+               className="w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-400/10 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50"
               >
                 {status === "loading"
                   ? "Sending..."

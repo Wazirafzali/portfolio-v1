@@ -21,6 +21,31 @@ const skills = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
+
+<a
+  href="#main-content"
+  className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-cyan-400 px-4 py-2 font-semibold text-zinc-950 transition focus:translate-y-0"
+>
+  Skip to content
+</a>
+
+           <Navbar />
+
+<div id="main-content">
+  <Hero />
+
+  {/* About */}
+
+  <TechStack />
+
+  <Projects />
+
+  <Contact />
+</div>
+
+<Footer />
+
+
       <Navbar />
 
       {/* Hero */}
@@ -69,41 +94,8 @@ export default function Home() {
       </section>
 
       {/* Skills */}
-      <section id="skills" className="py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="mb-4 font-medium text-cyan-400">
-              My Skills
-            </p>
 
-            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Technologies I work with
-            </h2>
-
-            <p className="mt-6 text-lg leading-8 text-zinc-400">
-              I use a modern development stack to create fast, scalable, and
-              responsive web applications.
-            </p>
-          </div>
-
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {skills.map((skill, index) => (
-              <div
-                key={skill}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:bg-white/[0.06]"
-              >
-                <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/10 font-bold text-cyan-400">
-                  {index + 1}
-                </div>
-
-                <p className="font-semibold text-zinc-200">
-                  {skill}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TechStack />
 
       {/* Temporary Projects */}
      <Projects />
