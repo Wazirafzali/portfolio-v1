@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { profile } from "@/data/profile";
 export default function Hero() {
   return (
@@ -14,7 +15,6 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-400" />
             </span>
-
            {profile.availability}
           </div>
 
@@ -45,14 +45,14 @@ export default function Hero() {
             </a>
 
           {profile.resumeUrl && (
-  <a
-    href={profile.resumeUrl}
-    download
-    className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
-  >
-    Download CV ↓
-  </a>
-)}
+     <a
+        href={profile.resumeUrl}
+        download
+         className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+        Download CV ↓
+      </a>
+        )}
 
             <a
               href={profile.github}
@@ -115,11 +115,19 @@ export default function Hero() {
               </div>
 
               {/* Avatar */}
-              <div className="mt-10 flex justify-center">
-                <div className="flex h-40 w-40 items-center justify-center rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 text-6xl font-black text-cyan-400">
-                {profile.initials}
-                </div>
-              </div>
+             <div className="mt-10 flex justify-center">
+                   <div className="relative h-40 w-40 overflow-hidden rounded-full border-2 border-cyan-400/30">
+                     <Image
+                      src="/profile.jpg"
+                         alt={`${profile.name} profile photo`}
+                           fill
+                            priority
+                             sizes="160px"
+                               className="object-cover"
+                     />
+             </div>
+                      </div>
+
 
               <div className="mt-8 text-center">
                 <h2 className="text-2xl font-bold">

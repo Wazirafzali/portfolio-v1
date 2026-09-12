@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 ),
 
   title: {
-    default: "Developer Portfolio",
-    template: "%s | Developer Portfolio",
+   default: "Wazir Afzali | Full-Stack Developer",
+    template: "%s | Wazir Afzali",
   },
 
   description:

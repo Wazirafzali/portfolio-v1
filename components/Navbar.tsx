@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { profile } from "@/data/profile";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Navbar() {
           href="#"
           className="text-xl font-bold tracking-tight text-white"
         >
-          Wazir<span className="text-cyan-400">Afzali</span>
+         {profile.name}
         </a>
 
         {/* Desktop Navigation */}
