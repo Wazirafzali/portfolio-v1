@@ -34,10 +34,10 @@ html {
   scroll-padding-top: 90px;
 }
 
+html,
 body {
-  overflow-x: hidden;
+  max-width: 100%;
 }
-
 ::selection {
   background: rgba(34, 211, 238, 0.25);
   color: white;

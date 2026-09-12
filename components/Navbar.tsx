@@ -6,15 +6,13 @@ import { profile } from "@/data/profile";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Team", href: "#team" },
-    { name: "Projects", href: "#projects" },
-    { name: "Process", href: "#process" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
-  ];
+ const links = [
+  { name: "Services", href: "#services" },
+  { name: "Team", href: "#team" },
+  { name: "Projects", href: "#projects" },
+  { name: "Process", href: "#process" },
+  { name: "Contact", href: "#contact" },
+];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 shadow-lg shadow-black/5 backdrop-blur-xl">

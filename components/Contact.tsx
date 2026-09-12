@@ -29,11 +29,9 @@ export default function Contact() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(data),
       });
 
@@ -71,7 +69,6 @@ export default function Contact() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2">
-
           {/* Left side */}
           <div>
             <p className="mb-4 font-medium text-cyan-400">
@@ -151,7 +148,6 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* Name */}
               <div>
                 <label
                   htmlFor="name"
@@ -171,7 +167,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label
                   htmlFor="email"
@@ -191,7 +186,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Service */}
               <div>
                 <label
                   htmlFor="service"
@@ -237,7 +231,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Budget */}
               <div>
                 <label
                   htmlFor="budget"
@@ -283,7 +276,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Deadline */}
               <div>
                 <label
                   htmlFor="deadline"
@@ -325,7 +317,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
@@ -345,11 +336,10 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50"
+                className="w-full rounded-xl bg-cyan-400 px-6 py-4 text-center font-bold text-zinc-950 transition duration-300 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "loading"
                   ? "Sending Request..."
@@ -369,7 +359,6 @@ export default function Contact() {
               )}
             </form>
           </div>
-
         </div>
       </div>
     </section>

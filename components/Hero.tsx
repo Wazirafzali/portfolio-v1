@@ -32,7 +32,7 @@ export default function Hero() {
           </p>
 
           {/* Heading */}
-          <h1 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             We build digital products
             <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
               that move businesses forward.
@@ -62,17 +62,17 @@ export default function Hero() {
           </div>
 
           {/* CTA */}
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10  flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
               href="#contact"
-              className="rounded-full bg-cyan-400 px-7 py-3.5 font-semibold text-zinc-950 transition hover:bg-cyan-300"
+              className="rounded-full bg-cyan-400 px-7 py-3.5 text-center font-semibold text-zinc-950 transition hover:bg-cyan-300"
             >
               Start Your Project
             </a>
 
             <a
               href="#projects"
-              className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+              className="rounded-full border border-white/15 px-7 py-3.5 text-center font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
             >
               View Our Work
             </a>
@@ -81,14 +81,14 @@ export default function Hero() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-zinc-300 transition hover:border-white/30 hover:bg-white/5 hover:text-white"
+              className="rounded-full border border-white/15 px-7 py-3.5 text-center font-semibold text-zinc-300 transition hover:border-white/30 hover:bg-white/5 hover:text-white"
             >
               GitHub ↗
             </a>
           </div>
 
           {/* Stats */}
-          <div className="mt-14 grid max-w-2xl grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-4">
+          <div className="mt-12 grid max-w-2xl grid-cols-2 gap-4 border-t border-white/10 pt-8 sm:mt-14 sm:grid-cols-4 sm:gap-6">
             <div>
               <p className="text-3xl font-bold">4</p>
               <p className="mt-1 text-sm text-zinc-500">
