@@ -1,3 +1,4 @@
+import { profile } from "@/data/profile";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -23,7 +24,7 @@ export default function Footer() {
           {/* Social links */}
           <div className="flex flex-wrap gap-4">
             <a
-              href="https://github.com/Wazirafzali"
+              href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/10 px-5 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
@@ -32,7 +33,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/YOUR-USERNAME"
+              href="https://www.linkedin.com/in/wazir-afzali"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/10 px-5 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
@@ -41,7 +42,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="mailto:wazirafzali57@email.com"
+             href={`mailto:${profile.email}`}
               className="rounded-full border border-white/10 px-5 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
             >
               Email
@@ -51,7 +52,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {currentYear} Wazir Afzali. All rights reserved.
+        © {currentYear} {profile.name}. All rights reserved.
           </p>
 
           <a

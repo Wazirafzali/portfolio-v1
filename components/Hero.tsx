@@ -1,3 +1,4 @@
+import { profile } from "@/data/profile";
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -14,11 +15,11 @@ export default function Hero() {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-400" />
             </span>
 
-            Available for freelance projects
+           {profile.availability}
           </div>
 
           <p className="mb-4 font-medium text-cyan-400">
-            Full-Stack Web Developer
+           {profile.role}
           </p>
 
           <h1 className="text-5xl font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
@@ -43,16 +44,18 @@ export default function Hero() {
               View Projects
             </a>
 
-            <a
-              href="/resume.pdf"
-              download
-              className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
-            >
-              Download CV ↓
-            </a>
+          {profile.resumeUrl && (
+  <a
+    href={profile.resumeUrl}
+    download
+    className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+  >
+    Download CV ↓
+  </a>
+)}
 
             <a
-              href="https://github.com/Wazirafzali"
+              href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-zinc-300 transition hover:border-white/30 hover:bg-white/5 hover:text-white"
@@ -114,7 +117,7 @@ export default function Hero() {
               {/* Avatar */}
               <div className="mt-10 flex justify-center">
                 <div className="flex h-40 w-40 items-center justify-center rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-500/10 text-6xl font-black text-cyan-400">
-                  WA
+                {profile.initials}
                 </div>
               </div>
 
