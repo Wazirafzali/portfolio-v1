@@ -6,8 +6,10 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+
 
 export default function Home() {
   return (
@@ -32,47 +34,45 @@ export default function Home() {
 
         {/* About */}
         <section
-          id="about"
-          className="border-t border-white/10 bg-zinc-900/30 py-28"
-        >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2">
+  id="about"
+  className="border-t border-white/10 bg-zinc-900/30 py-28"
+>
+  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="grid gap-16 lg:grid-cols-2">
+      <div>
+        <p className="mb-4 font-medium text-cyan-400">
+          About Us
+        </p>
 
-              <div>
-                <p className="mb-4 font-medium text-cyan-400">
-                  About Me
-                </p>
+        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          A focused team with
+          <span className="block text-zinc-500">
+            specialized skills.
+          </span>
+        </h2>
+      </div>
 
-                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                  Creating useful products,
+      <div className="space-y-6 text-lg leading-8 text-zinc-400">
+        <p>
+          We are a small digital team led by Wazir Afzali, a web developer
+          responsible for client communication, project coordination, and web
+          development.
+        </p>
 
-                  <span className="block text-zinc-500">
-                    not just beautiful websites.
-                  </span>
-                </h2>
-              </div>
+        <p>
+          Our team also includes dedicated specialists in Android development,
+          iOS development, and professional video editing.
+        </p>
 
-              <div className="space-y-6 text-lg leading-8 text-zinc-400">
-                <p>
-                  I&apos;m a developer focused on building clean, fast,
-                  responsive, and practical digital experiences.
-                </p>
-
-                <p>
-                  I enjoy turning ideas into real products using modern web
-                  technologies such as Next.js, React, TypeScript, and
-                  artificial intelligence.
-                </p>
-
-                <p>
-                  My goal is to create websites and applications that look
-                  professional, perform well, and solve real problems.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
+        <p>
+          Instead of one person trying to do everything, each project is handled
+          by the specialist responsible for that field while the overall process
+          stays coordinated through one team lead.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
          <Services />
           
@@ -84,8 +84,16 @@ export default function Home() {
         {/* Projects */}
         <Projects />
 
+        <Process />
+         <WhyUs />
+
+         <FAQ />
+
         {/* Contact */}
         <Contact />
+
+         
+
 
       </div>
 
