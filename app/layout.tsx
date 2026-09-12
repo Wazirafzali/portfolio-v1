@@ -2,26 +2,26 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-
   metadataBase: new URL(
-  "https://portfolio-v1-five-kappa.vercel.app"
-),
+    "https://portfolio-v1-five-kappa.vercel.app"
+  ),
 
   title: {
-   default: "Wazir Afzali | Full-Stack Developer",
+    default: "Wazir Afzali | Full-Stack Web Developer",
     template: "%s | Wazir Afzali",
   },
 
   description:
-    "Full-Stack Developer building modern, fast, responsive web applications with Next.js, React, TypeScript and AI.",
+    "Full-Stack Web Developer building modern, responsive and high-performance web applications with Next.js, React, TypeScript and AI.",
 
   keywords: [
+    "Wazir Afzali",
     "Full Stack Developer",
+    "Web Developer",
     "Next.js Developer",
     "React Developer",
     "TypeScript Developer",
-    "Web Developer",
-    "AI Developer",
+    "Frontend Developer",
     "Portfolio",
   ],
 
@@ -33,16 +33,27 @@ export const metadata: Metadata = {
 
   creator: "Wazir Afzali",
 
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
-    title: "Developer Portfolio",
+    type: "website",
+    url: "/",
+
+    title: "Wazir Afzali | Full-Stack Web Developer",
+
     description:
       "Modern web applications built with Next.js, React, TypeScript and AI.",
-    type: "website",
+
+    siteName: "Wazir Afzali Portfolio",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Developer Portfolio",
+
+    title: "Wazir Afzali | Full-Stack Web Developer",
+
     description:
       "Modern web applications built with Next.js, React, TypeScript and AI.",
   },
@@ -50,6 +61,11 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 

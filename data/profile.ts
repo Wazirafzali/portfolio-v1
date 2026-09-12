@@ -14,7 +14,9 @@ export const profile = {
 
   linkedin: "https://www.linkedin.com/in/wazir-afzali?utm_source=share_via&utm_content=profile&utm_medium=member_android",
 
-  resumeUrl: "/resume.pdf",
+resumeUrl: "/resume.pdf",
+
+siteUrl: "https://portfolio-v1-five-kappa.vercel.app",
 
   availability: "Available for freelance projects",
 };
