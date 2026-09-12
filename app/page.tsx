@@ -5,105 +5,85 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-
-
-const skills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Tailwind CSS",
-  "Git & GitHub",
-];
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
 
-<a
-  href="#main-content"
-  className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-cyan-400 px-4 py-2 font-semibold text-zinc-950 transition focus:translate-y-0"
->
-  Skip to content
-</a>
+      {/* Accessibility */}
+      <a
+        href="#main-content"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-cyan-400 px-4 py-2 font-semibold text-zinc-950 transition focus:translate-y-0"
+      >
+        Skip to content
+      </a>
 
-           <Navbar />
-
-<div id="main-content">
-  <Hero />
-
-  {/* About */}
-
-  <TechStack />
-
-  <Projects />
-
-  <Contact />
-</div>
-
-<Footer />
-
-
+      {/* Navbar */}
       <Navbar />
 
-      {/* Hero */}
-     
-     <Hero />
+      {/* Main Content */}
+      <div id="main-content">
 
-      {/* About */}
-      <section
-        id="about"
-        className="border-t border-white/10 bg-zinc-900/30 py-28"
-      >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-16 lg:grid-cols-2">
-            <div>
-              <p className="mb-4 font-medium text-cyan-400">
-                About Me
-              </p>
+        {/* Hero */}
+        <Hero />
 
-              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Creating useful products,
-                <span className="block text-zinc-500">
-                  not just beautiful websites.
-                </span>
-              </h2>
-            </div>
+        {/* About */}
+        <section
+          id="about"
+          className="border-t border-white/10 bg-zinc-900/30 py-28"
+        >
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid gap-16 lg:grid-cols-2">
 
-            <div className="space-y-6 text-lg leading-8 text-zinc-400">
-              <p>
-                I&apos;m a developer focused on building clean, fast, and
-                practical digital experiences.
-              </p>
+              <div>
+                <p className="mb-4 font-medium text-cyan-400">
+                  About Me
+                </p>
 
-              <p>
-                I enjoy turning ideas into real products using modern web
-                technologies and combining programming with artificial
-                intelligence.
-              </p>
+                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                  Creating useful products,
 
-              <p>
-                My goal is to build websites and applications that look
-                professional, perform well, and solve real problems.
-              </p>
+                  <span className="block text-zinc-500">
+                    not just beautiful websites.
+                  </span>
+                </h2>
+              </div>
+
+              <div className="space-y-6 text-lg leading-8 text-zinc-400">
+                <p>
+                  I&apos;m a developer focused on building clean, fast,
+                  responsive, and practical digital experiences.
+                </p>
+
+                <p>
+                  I enjoy turning ideas into real products using modern web
+                  technologies such as Next.js, React, TypeScript, and
+                  artificial intelligence.
+                </p>
+
+                <p>
+                  My goal is to create websites and applications that look
+                  professional, perform well, and solve real problems.
+                </p>
+              </div>
+
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Skills */}
+        {/* Technologies */}
+        <TechStack />
 
-      <TechStack />
+        {/* Projects */}
+        <Projects />
 
-      {/* Temporary Projects */}
-     <Projects />
+        {/* Contact */}
+        <Contact />
 
-      {/* Temporary Contact */}
-      <Contact />
-      {/* Temporary Footer */}
+      </div>
+
+      {/* Footer */}
       <Footer />
+
     </main>
   );
 }
