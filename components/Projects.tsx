@@ -76,9 +76,15 @@ export default function Projects() {
                     {project.number}
                   </span>
 
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400">
-                    {project.type}
-                  </span>
+                 <span
+  className={`rounded-full border px-3 py-1 text-xs ${
+    project.type === "REAL PROJECT"
+      ? "border-green-400/20 bg-green-400/10 text-green-400"
+      : "border-white/10 bg-white/5 text-zinc-400"
+  }`}
+>
+  {project.type}
+</span>
                 </div>
 
                 <h3 className="mt-7 text-2xl font-bold">
