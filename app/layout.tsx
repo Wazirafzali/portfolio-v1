@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+
+  metadataBase: new URL(
+  "https://portfolio-v1-five-kappa.vercel.app"
+),
+
   title: {
     default: "Developer Portfolio",
     template: "%s | Developer Portfolio",

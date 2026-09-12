@@ -9,55 +9,68 @@ export type Project = {
   challenge: string;
   solution: string;
   result: string;
+  coverImage?: string;
   githubUrl?: string;
   liveUrl?: string;
 };
 
 export const projects: Project[] = [
   {
-    slug: "ai-saas-dashboard",
+    slug: "developer-portfolio",
     number: "01",
-    title: "AI SaaS Dashboard",
+
+    title: "Developer Portfolio",
+
     shortDescription:
-      "A modern AI-powered dashboard with analytics, responsive layouts, and a clean SaaS interface.",
+      "A modern full-stack developer portfolio built with Next.js, TypeScript, Tailwind CSS, dynamic case studies, and a real contact API.",
 
     description:
-      "A concept SaaS dashboard designed for an AI platform. The interface focuses on usability, analytics, account management, and a modern responsive experience.",
+      "A production-ready developer portfolio designed and developed from scratch using Next.js, TypeScript, Tailwind CSS, reusable React components, dynamic routes, SEO metadata, GitHub, Vercel, and a server-side contact form.",
 
-    type: "AI PRODUCT",
+    type: "REAL PROJECT",
 
     technologies: [
       "Next.js",
       "TypeScript",
-      "Tailwind CSS",
       "React",
+      "Tailwind CSS",
+      "Vercel",
+      "Resend",
+      "Git",
+      "GitHub",
     ],
 
     challenge:
-      "The challenge was to organize a large amount of information without making the interface feel complicated or overwhelming.",
+      "The goal was to build a professional portfolio from scratch while keeping the architecture clean, responsive, maintainable, and ready for future projects.",
 
     solution:
-      "I designed a modular dashboard structure using reusable React components, responsive grids, clear visual hierarchy, and a consistent design system.",
+      "I built the website with reusable React components, responsive Tailwind layouts, dynamic project routes, server-side email handling, Git version control, GitHub integration, and production deployment on Vercel.",
 
     result:
-      "The result is a clean dashboard concept that works across desktop and mobile layouts and can be extended into a real SaaS application.",
+      "The result is a responsive live portfolio with real production deployment, GitHub source control, reusable project case studies, SEO foundations, and a working contact system.",
 
-    githubUrl: "",
-    liveUrl: "",
+    coverImage: "/projects/portfolio-cover.png",
+
+    githubUrl:
+      "https://github.com/Wazirafzali/portfolio-v1",
+
+    liveUrl:
+      "https://portfolio-v1-five-kappa.vercel.app",
   },
 
   {
     slug: "modern-business-website",
     number: "02",
+
     title: "Modern Business Website",
 
     shortDescription:
-      "A responsive business website focused on modern design, performance, and customer conversion.",
+      "A responsive business website concept focused on performance, usability, and customer conversion.",
 
     description:
-      "A modern multi-section website concept created for businesses that need a professional online presence and clear calls to action.",
+      "A modern website concept designed for businesses that need a professional online presence and clear calls to action.",
 
-    type: "BUSINESS",
+    type: "CONCEPT",
 
     technologies: [
       "Next.js",
@@ -67,14 +80,15 @@ export const projects: Project[] = [
     ],
 
     challenge:
-      "The website needed to communicate the company's services quickly while remaining visually professional and easy to navigate.",
+      "The website needed to communicate services clearly while remaining visually professional and easy to navigate.",
 
     solution:
-      "I created a clear content structure, responsive sections, strong calls to action, and reusable components for services and business information.",
+      "The interface uses clear sections, responsive layouts, strong calls to action, and reusable components.",
 
     result:
-      "The result is a fast and responsive business website structure that can easily be customized for different companies.",
+      "The result provides a strong foundation for a real business website that can later be customized for a client.",
 
+    coverImage: "",
     githubUrl: "",
     liveUrl: "",
   },
@@ -82,15 +96,16 @@ export const projects: Project[] = [
   {
     slug: "trading-analytics-dashboard",
     number: "03",
+
     title: "Trading Analytics Dashboard",
 
     shortDescription:
       "A financial dashboard concept for visualizing trading performance, portfolio statistics, and market data.",
 
     description:
-      "A dashboard designed to present financial and trading information in a structured and understandable interface.",
+      "A dashboard concept designed to organize financial and trading information into an understandable interface.",
 
-    type: "FINTECH",
+    type: "CONCEPT",
 
     technologies: [
       "Next.js",
@@ -100,14 +115,15 @@ export const projects: Project[] = [
     ],
 
     challenge:
-      "Financial dashboards often contain large amounts of data, which can quickly become difficult to understand.",
+      "Financial applications often contain large quantities of complex information.",
 
     solution:
-      "I organized the interface into clear statistics, portfolio sections, performance areas, and visual data components.",
+      "The interface organizes information into statistics, portfolio sections, performance areas, and visual components.",
 
     result:
-      "The resulting interface provides a foundation for a full trading analytics application with future API and chart integrations.",
+      "The design provides a foundation for a future full trading analytics application.",
 
+    coverImage: "",
     githubUrl: "",
     liveUrl: "",
   },

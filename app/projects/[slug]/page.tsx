@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "@/data/projects";
@@ -12,6 +14,52 @@ export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: project.title,
+
+    description: project.shortDescription,
+
+    openGraph: {
+      title: `${project.title} | Developer Portfolio`,
+      description: project.shortDescription,
+
+      images: project.coverImage
+        ? [
+            {
+              url: project.coverImage,
+              width: 1200,
+              height: 630,
+              alt: project.title,
+            },
+          ]
+        : [],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.shortDescription,
+
+      images: project.coverImage
+        ? [project.coverImage]
+        : [],
+    },
+  };
 }
 
 export default async function ProjectPage({
@@ -81,37 +129,30 @@ export default async function ProjectPage({
       </section>
 
       {/* Project visual */}
-      <section className="py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-blue-500/5 to-transparent p-6 sm:p-10">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
-              <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
-                <span className="h-3 w-3 rounded-full bg-red-400" />
-                <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                <span className="h-3 w-3 rounded-full bg-green-400" />
-
-                <div className="ml-5 h-7 flex-1 rounded-lg bg-white/5" />
-              </div>
-
-              <div className="grid min-h-[400px] grid-cols-4 gap-5 p-6">
-                <div className="rounded-xl bg-white/5" />
-
-                <div className="col-span-3 space-y-5">
-                  <div className="h-10 w-1/2 rounded-lg bg-white/10" />
-
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-24 rounded-xl bg-white/5" />
-                    <div className="h-24 rounded-xl bg-white/5" />
-                    <div className="h-24 rounded-xl bg-white/5" />
-                  </div>
-
-                  <div className="h-52 rounded-xl bg-white/5" />
-                </div>
-              </div>
-            </div>
-          </div>
+<section className="py-20">
+  <div className="mx-auto max-w-6xl px-6">
+    <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-blue-500/5 to-transparent p-4 sm:p-8">
+      {project.coverImage ? (
+        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
+          <Image
+            src={project.coverImage}
+            alt={`${project.title} project screenshot`}
+            fill
+            priority
+            sizes="(max-width: 1200px) 100vw, 1152px"
+            className="object-cover object-top"
+          />
         </div>
-      </section>
+      ) : (
+        <div className="flex aspect-[16/9] items-center justify-center rounded-2xl border border-white/10 bg-zinc-900">
+          <p className="text-zinc-500">
+            Project preview coming soon
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
 
       {/* Case study */}
       <section className="pb-28">
