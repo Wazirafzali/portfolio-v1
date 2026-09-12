@@ -2,39 +2,37 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
+
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     "https://portfolio-v1-five-kappa.vercel.app"
   ),
 
-  verification: {
-  google: "04Pp2bfp8V8DHD63yVutWGU3ykkiW_23mhmqQX5zBAQ",
-},  
-
-   
-
   title: {
-    default: "Wazir Afzali | Full-Stack Web Developer",
-    template: "%s | Wazir Afzali",
+    default:
+      "Wazir Afzali & Team | Web, Android, iOS & Video Editing",
+    template: "%s | Wazir Afzali & Team",
   },
 
   description:
-    "Full-Stack Web Developer building modern, responsive and high-performance web applications with Next.js, React, TypeScript and AI.",
+    "Wazir Afzali & Team provides professional web development, Android development, iOS development, and video editing services for businesses, startups, and online clients.",
 
   keywords: [
     "Wazir Afzali",
-    "Full Stack Developer",
-    "Web Developer",
+    "Web Development",
+    "Android Development",
+    "iOS Development",
+    "Video Editing",
     "Next.js Developer",
-    "React Developer",
-    "TypeScript Developer",
-    "Frontend Developer",
-    "Portfolio",
+    "Mobile App Development",
+    "Freelance Development Team",
+    "Remote Development Team",
   ],
 
   authors: [
     {
-      name: "Wazir Afzali",
+      name: "Wazir Afzali & Team",
     },
   ],
 
@@ -47,31 +45,39 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-
-    title: "Wazir Afzali | Full-Stack Web Developer",
-
+    title:
+      "Wazir Afzali & Team | Digital Development Team",
     description:
-      "Modern web applications built with Next.js, React, TypeScript and AI.",
-
-    siteName: "Wazir Afzali Portfolio",
+      "A specialized team for web development, Android, iOS, and professional video editing.",
+    siteName: "Wazir Afzali & Team",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Wazir Afzali & Team",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-
-    title: "Wazir Afzali | Full-Stack Web Developer",
-
+    title:
+      "Wazir Afzali & Team | Digital Development Team",
     description:
-      "Modern web applications built with Next.js, React, TypeScript and AI.",
+      "Web development, Android, iOS, and professional video editing services.",
+    images: ["/opengraph-image"],
   },
 
   robots: {
     index: true,
     follow: true,
-
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 };
