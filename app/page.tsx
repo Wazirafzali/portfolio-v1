@@ -4,6 +4,8 @@ import Services from "@/components/Services";
 import Team from "@/components/Team";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
+import Process from "@/components/Process";
+import WhyUs from "@/components/WhyUs";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
