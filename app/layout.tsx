@@ -6,6 +6,12 @@ export const metadata: Metadata = {
     "https://portfolio-v1-five-kappa.vercel.app"
   ),
 
+  verification: {
+  google: "04Pp2bfp8V8DHD63yVutWGU3ykkiW_23mhmqQX5zBAQ",
+},  
+
+   
+
   title: {
     default: "Wazir Afzali | Full-Stack Web Developer",
     template: "%s | Wazir Afzali",
