@@ -9,12 +9,12 @@ import WhyUs from "@/components/WhyUs";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-
+import StructuredData from "@/components/StructuredData";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
-
+       <StructuredData />
       {/* Accessibility */}
       <a
         href="#main-content"
