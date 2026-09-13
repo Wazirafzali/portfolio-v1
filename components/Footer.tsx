@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { profile } from "@/data/profile";
 
 export default function Footer() {
@@ -6,23 +8,35 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-zinc-950">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-3">
-          <div>
-            <a
-              href="#"
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <Link
+              href="/"
               className="text-xl font-bold tracking-tight text-white"
             >
               {profile.name}
-              <span className="text-cyan-400"> & Team</span>
-            </a>
+              <span className="text-cyan-400">
+                {" "}
+                & Team
+              </span>
+            </Link>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-zinc-500">
               A specialized digital team providing web development,
-              Android development, iOS development, and professional
-              video editing services.
+              Android development, iOS development, combined mobile
+              development, and professional video editing services.
             </p>
+
+            <a
+              href="/#contact"
+              className="mt-6 inline-flex rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-cyan-300"
+            >
+              Start a Project
+            </a>
           </div>
 
+          {/* Services */}
           <div>
             <p className="text-sm font-semibold text-white">
               Services
@@ -32,21 +46,37 @@ export default function Footer() {
               <p>Web Development</p>
               <p>Android Development</p>
               <p>iOS Development</p>
+              <p>Android & iOS</p>
               <p>Video Editing</p>
             </div>
           </div>
 
+          {/* Links */}
           <div>
             <p className="text-sm font-semibold text-white">
-             Discuss Your Project
+              Links
             </p>
 
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-col items-start gap-3 text-sm">
+              <Link
+                href="/privacy"
+                className="text-zinc-500 transition hover:text-cyan-400"
+              >
+                Privacy Policy
+              </Link>
+
+              <Link
+                href="/terms"
+                className="text-zinc-500 transition hover:text-cyan-400"
+              >
+                Terms of Service
+              </Link>
+
               <a
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
+                className="text-zinc-500 transition hover:text-cyan-400"
               >
                 GitHub ↗
               </a>
@@ -56,7 +86,7 @@ export default function Footer() {
                   href={profile.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
+                  className="text-zinc-500 transition hover:text-cyan-400"
                 >
                   LinkedIn ↗
                 </a>
@@ -64,7 +94,7 @@ export default function Footer() {
 
               <a
                 href={`mailto:${profile.email}`}
-                className="rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
+                className="text-zinc-500 transition hover:text-cyan-400"
               >
                 Email
               </a>
@@ -77,12 +107,12 @@ export default function Footer() {
             © {currentYear} {profile.name} & Team. All rights reserved.
           </p>
 
-          <a
-            href="#"
+          <Link
+            href="/"
             className="transition hover:text-cyan-400"
           >
             Back to top ↑
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
