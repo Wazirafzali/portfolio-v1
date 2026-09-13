@@ -1,12 +1,23 @@
 "use client";
 
+import Script from "next/script";
 import { FormEvent, useState } from "react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      reset: () => void;
+    };
+  }
+}
+
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [statusMessage, setStatusMessage] = useState("");
+
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -17,6 +28,20 @@ export default function Contact() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    const turnstileToken =
+      formData.get("cf-turnstile-response");
+
+    if (
+      typeof turnstileToken !== "string" ||
+      !turnstileToken
+    ) {
+      setStatus("error");
+      setStatusMessage(
+        "Please complete the security verification first."
+      );
+      return;
+    }
+
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -24,6 +49,12 @@ export default function Contact() {
       budget: formData.get("budget"),
       deadline: formData.get("deadline"),
       message: formData.get("message"),
+
+      // Honeypot
+      website: formData.get("website"),
+
+      // Turnstile token
+      turnstileToken,
     };
 
     try {
@@ -49,6 +80,10 @@ export default function Contact() {
       );
 
       form.reset();
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
     } catch (error) {
       setStatus("error");
 
@@ -59,6 +94,10 @@ export default function Contact() {
           "Something went wrong. Please try again."
         );
       }
+
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
     }
   }
 
@@ -67,9 +106,14 @@ export default function Contact() {
       id="contact"
       className="border-t border-white/10 bg-zinc-950 py-28"
     >
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="afterInteractive"
+      />
+
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left Side */}
+          {/* Left */}
           <div>
             <p className="mb-4 font-medium text-cyan-400">
               Start a Project
@@ -85,8 +129,8 @@ export default function Contact() {
             <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-400">
               Whether you need a website, Android app, iOS app,
               both Android and iOS, or professional video editing,
-              send us your requirements and we will coordinate the
-              right specialist or specialists for your project.
+              send us your requirements and we will coordinate
+              the right specialist or specialists.
             </p>
 
             <div className="mt-12 space-y-6">
@@ -117,8 +161,8 @@ export default function Contact() {
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    If your project requires Android and iOS, both mobile
-                    specialists work together while I coordinate the project.
+                    If your project needs multiple services,
+                    the required specialists work together.
                   </p>
                 </div>
               </div>
@@ -134,8 +178,8 @@ export default function Contact() {
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    Before work starts, we confirm scope, timeline,
-                    price, responsibilities, and expected delivery.
+                    We confirm scope, timeline, pricing,
+                    responsibilities, and delivery before work starts.
                   </p>
                 </div>
               </div>
@@ -148,7 +192,24 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* Name */}
+              {/* Honeypot - bots may fill this */}
+              <div
+                className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                aria-hidden="true"
+              >
+                <label htmlFor="website">
+                  Website
+                </label>
+
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div>
                 <label
                   htmlFor="name"
@@ -162,13 +223,13 @@ export default function Contact() {
                   name="name"
                   type="text"
                   required
+                  minLength={2}
                   maxLength={100}
                   placeholder="Your name"
                   className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label
                   htmlFor="email"
@@ -188,7 +249,6 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Service */}
               <div>
                 <label
                   htmlFor="service"
@@ -238,7 +298,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Budget */}
               <div>
                 <label
                   htmlFor="budget"
@@ -286,7 +345,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Timeline */}
               <div>
                 <label
                   htmlFor="deadline"
@@ -332,7 +390,6 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Details */}
               <div>
                 <label
                   htmlFor="message"
@@ -345,18 +402,35 @@ export default function Contact() {
                   id="message"
                   name="message"
                   required
-                  rows={7}
+                  minLength={20}
                   maxLength={5000}
-                  placeholder="Tell us what you want to build, which platforms you need, important features, and any other requirements..."
+                  rows={7}
+                  placeholder="Tell us what you want to build, important features, platforms, and other requirements..."
                   className="w-full resize-none rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
 
-              {/* Submit */}
+              {/* Cloudflare Turnstile */}
+              {siteKey ? (
+                <div className="overflow-hidden rounded-xl">
+                  <div
+                    className="cf-turnstile"
+                    data-sitekey={siteKey}
+                    data-theme="dark"
+                  />
+                </div>
+              ) : (
+                <div className="rounded-xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-400">
+                  Security verification is not configured.
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={status === "loading"}
-                className="w-full rounded-xl bg-cyan-400 px-6 py-4 text-center font-bold text-zinc-950 transition duration-300 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={
+                  status === "loading" || !siteKey
+                }
+                className="w-full rounded-xl bg-cyan-400 px-6 py-4 text-center font-bold text-zinc-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "loading"
                   ? "Sending Request..."
