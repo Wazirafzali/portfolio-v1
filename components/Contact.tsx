@@ -29,11 +29,9 @@ export default function Contact() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(data),
       });
 
@@ -46,7 +44,6 @@ export default function Contact() {
       }
 
       setStatus("success");
-
       setStatusMessage(
         "Your project request was sent successfully. We will review it and contact you soon."
       );
@@ -86,9 +83,10 @@ export default function Contact() {
             </h2>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-400">
-              Share your project requirements and I will review them
-              as the team lead, coordinate with the right specialist,
-              and contact you about the next steps.
+              Whether you need a website, Android app, iOS app,
+              both Android and iOS, or professional video editing,
+              send us your requirements and we will coordinate the
+              right specialist or specialists for your project.
             </p>
 
             <div className="mt-12 space-y-6">
@@ -103,8 +101,7 @@ export default function Contact() {
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    Tell us what service you need and describe your
-                    project.
+                    Choose the service you need and describe your project.
                   </p>
                 </div>
               </div>
@@ -116,12 +113,12 @@ export default function Contact() {
 
                 <div>
                   <h3 className="font-semibold">
-                    We review the project
+                    We assign the right specialists
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    I review your requirements and coordinate with the
-                    specialist responsible for your project.
+                    If your project requires Android and iOS, both mobile
+                    specialists work together while I coordinate the project.
                   </p>
                 </div>
               </div>
@@ -137,8 +134,8 @@ export default function Contact() {
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    Before work starts, we confirm the scope, timeline,
-                    price, and expected deliverables.
+                    Before work starts, we confirm scope, timeline,
+                    price, responsibilities, and expected delivery.
                   </p>
                 </div>
               </div>
@@ -223,6 +220,10 @@ export default function Contact() {
                     iOS Development
                   </option>
 
+                  <option value="Mobile App - Android & iOS">
+                    Mobile App - Android & iOS
+                  </option>
+
                   <option value="Video Editing">
                     Video Editing
                   </option>
@@ -237,7 +238,7 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Budget - Optional */}
+              {/* Budget */}
               <div>
                 <label
                   htmlFor="budget"
@@ -331,7 +332,7 @@ export default function Contact() {
                 </select>
               </div>
 
-              {/* Project Details */}
+              {/* Details */}
               <div>
                 <label
                   htmlFor="message"
@@ -346,7 +347,7 @@ export default function Contact() {
                   required
                   rows={7}
                   maxLength={5000}
-                  placeholder="Tell us what you want to build, the main features you need, and any important details..."
+                  placeholder="Tell us what you want to build, which platforms you need, important features, and any other requirements..."
                   className="w-full resize-none rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
@@ -362,14 +363,12 @@ export default function Contact() {
                   : "Submit Project Request →"}
               </button>
 
-              {/* Success */}
               {status === "success" && (
                 <div className="rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-sm leading-6 text-green-400">
                   ✓ {statusMessage}
                 </div>
               )}
 
-              {/* Error */}
               {status === "error" && (
                 <div className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm leading-6 text-red-400">
                   ✕ {statusMessage}
