@@ -29,9 +29,11 @@ export default function Contact() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(data),
       });
 
@@ -44,6 +46,7 @@ export default function Contact() {
       }
 
       setStatus("success");
+
       setStatusMessage(
         "Your project request was sent successfully. We will review it and contact you soon."
       );
@@ -69,7 +72,7 @@ export default function Contact() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left side */}
+          {/* Left Side */}
           <div>
             <p className="mb-4 font-medium text-cyan-400">
               Start a Project
@@ -84,58 +87,58 @@ export default function Contact() {
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-400">
               Share your project requirements and I will review them
-              as the team lead, assign the right specialist, and get
-              back to you with the next steps.
+              as the team lead, coordinate with the right specialist,
+              and contact you about the next steps.
             </p>
 
             <div className="mt-12 space-y-6">
               <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
                   01
                 </div>
 
                 <div>
                   <h3 className="font-semibold">
-                    Submit your project
+                    Submit your request
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    Tell us the service you need, your budget,
-                    timeline, and project requirements.
+                    Tell us what service you need and describe your
+                    project.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
                   02
                 </div>
 
                 <div>
                   <h3 className="font-semibold">
-                    We review it
+                    We review the project
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    I review the request and coordinate with the
-                    specialist responsible for that service.
+                    I review your requirements and coordinate with the
+                    specialist responsible for your project.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-cyan-400">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
                   03
                 </div>
 
                 <div>
                   <h3 className="font-semibold">
-                    We plan the project
+                    We confirm the plan
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    We confirm scope, timeline, price, and delivery
-                    requirements before development begins.
+                    Before work starts, we confirm the scope, timeline,
+                    price, and expected deliverables.
                   </p>
                 </div>
               </div>
@@ -148,6 +151,7 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
+              {/* Name */}
               <div>
                 <label
                   htmlFor="name"
@@ -167,6 +171,7 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Email */}
               <div>
                 <label
                   htmlFor="email"
@@ -186,6 +191,7 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Service */}
               <div>
                 <label
                   htmlFor="service"
@@ -231,23 +237,26 @@ export default function Contact() {
                 </select>
               </div>
 
+              {/* Budget - Optional */}
               <div>
                 <label
                   htmlFor="budget"
                   className="mb-2 block text-sm font-medium text-zinc-300"
                 >
                   Estimated Budget
+                  <span className="ml-2 text-zinc-600">
+                    (Optional)
+                  </span>
                 </label>
 
                 <select
                   id="budget"
                   name="budget"
-                  required
                   defaultValue=""
                   className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
                 >
-                  <option value="" disabled>
-                    Select your budget
+                  <option value="">
+                    Prefer not to say yet
                   </option>
 
                   <option value="Under $500">
@@ -276,12 +285,13 @@ export default function Contact() {
                 </select>
               </div>
 
+              {/* Timeline */}
               <div>
                 <label
                   htmlFor="deadline"
                   className="mb-2 block text-sm font-medium text-zinc-300"
                 >
-                  Preferred Deadline
+                  Preferred Timeline
                 </label>
 
                 <select
@@ -314,9 +324,14 @@ export default function Contact() {
                   <option value="Flexible">
                     Flexible
                   </option>
+
+                  <option value="Not sure yet">
+                    Not sure yet
+                  </option>
                 </select>
               </div>
 
+              {/* Project Details */}
               <div>
                 <label
                   htmlFor="message"
@@ -331,11 +346,12 @@ export default function Contact() {
                   required
                   rows={7}
                   maxLength={5000}
-                  placeholder="Tell us what you want to build, the main features you need, and any other important details..."
+                  placeholder="Tell us what you want to build, the main features you need, and any important details..."
                   className="w-full resize-none rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
                 />
               </div>
 
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={status === "loading"}
@@ -346,12 +362,14 @@ export default function Contact() {
                   : "Submit Project Request →"}
               </button>
 
+              {/* Success */}
               {status === "success" && (
                 <div className="rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-sm leading-6 text-green-400">
                   ✓ {statusMessage}
                 </div>
               )}
 
+              {/* Error */}
               {status === "error" && (
                 <div className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm leading-6 text-red-400">
                   ✕ {statusMessage}

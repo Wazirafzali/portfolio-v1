@@ -33,11 +33,11 @@ export default function Hero() {
 
           {/* Heading */}
           <h1 className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            We build digital products
-            <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              that move businesses forward.
-            </span>
-          </h1>
+             Web, mobile & video solutions
+              <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                 built to help your business grow.
+               </span>
+               </h1>
 
           {/* Description */}
           <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-400">

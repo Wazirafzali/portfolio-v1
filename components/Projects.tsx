@@ -54,7 +54,7 @@ export default function Projects() {
         </div>
 
         {/* Filters */}
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mt-10 flex gap-3 overflow-x-auto pb-2">
           {categories.map((category) => (
             <button
               key={category}
@@ -62,7 +62,7 @@ export default function Projects() {
               onClick={() =>
                 setActiveCategory(category)
               }
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+              className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 activeCategory === category
                   ? "bg-cyan-400 text-zinc-950"
                   : "border border-white/10 bg-white/[0.03] text-zinc-400 hover:border-cyan-400/40 hover:text-cyan-400"
@@ -126,7 +126,7 @@ export default function Projects() {
 
                     <span
                       className={`rounded-full border px-3 py-1 text-xs ${
-                        project.type === "REAL PROJECT"
+                        project.type === "LIVE PROJECT"
                           ? "border-green-400/20 bg-green-400/10 text-green-400"
                           : "border-white/10 bg-white/5 text-zinc-500"
                       }`}

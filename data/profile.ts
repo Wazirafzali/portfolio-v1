@@ -1,22 +1,33 @@
+
 export const profile = {
   name: "Wazir Afzali",
 
   initials: "WA",
 
-  role: "Full-Stack Web Developer",
+  role: "Web Developer & Team Lead",
 
   tagline:
-    "I build modern, fast, responsive web applications with Next.js, React, TypeScript and AI.",
+    "Leading a specialized digital team for web development, Android, iOS, and professional video editing.",
 
-  email: "wazirafzali57@gmail.com",
+  // مهم:
+  // ایمیل واقعی خودت را اینجا بگذار.
+  email:  "wazirafzali57@gmail.com",
 
-  github: "https://github.com/Wazirafzali",
+  github:
+    "https://github.com/Wazirafzali",
 
-  linkedin: "https://www.linkedin.com/in/wazir-afzali?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  // اگر LinkedIn داری لینک واقعی را بگذار.
+  // اگر نداری خالی بماند.
+  linkedin:"https://www.linkedin.com/in/wazir-afzali?utm_source=share_via&utm_content=profile&utm_medium=member_android",
 
-resumeUrl: "/resume.pdf",
 
-siteUrl: "https://portfolio-v1-five-kappa.vercel.app",
+  // Resume فعلاً CTA اصلی سایت نیست.
+  // اگر بعداً خواستی می‌توانی دوباره استفاده کنی.
+  resumeUrl: "",
 
-  availability: "Available for freelance projects",
+  siteUrl:
+    "https://portfolio-v1-five-kappa.vercel.app",
+
+  availability:
+    "Available for new client projects",
 };

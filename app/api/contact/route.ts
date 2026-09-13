@@ -16,18 +16,19 @@ export async function POST(request: Request) {
       message,
     } = body;
 
+    // Required fields
     if (
       !name ||
       !email ||
       !service ||
-      !budget ||
       !deadline ||
       !message
     ) {
       return NextResponse.json(
         {
           success: false,
-          message: "Please complete all required fields.",
+          message:
+            "Please complete all required fields.",
         },
         {
           status: 400,
@@ -35,18 +36,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Type validation
     if (
       typeof name !== "string" ||
       typeof email !== "string" ||
       typeof service !== "string" ||
-      typeof budget !== "string" ||
       typeof deadline !== "string" ||
-      typeof message !== "string"
+      typeof message !== "string" ||
+      (budget !== undefined &&
+        budget !== null &&
+        typeof budget !== "string")
     ) {
       return NextResponse.json(
         {
           success: false,
-          message: "Invalid project request.",
+          message:
+            "Invalid project request.",
         },
         {
           status: 400,
@@ -54,6 +59,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Email validation
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -70,6 +76,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Environment variable
     const recipientEmail =
       process.env.CONTACT_TO_EMAIL;
 
@@ -90,6 +97,12 @@ export async function POST(request: Request) {
       );
     }
 
+    const safeBudget =
+      budget && budget.trim()
+        ? budget
+        : "Not specified";
+
+    // Send email
     const { data, error } =
       await resend.emails.send({
         from:
@@ -111,8 +124,8 @@ Email: ${email}
 
 PROJECT
 Service: ${service}
-Budget: ${budget}
-Deadline: ${deadline}
+Budget: ${safeBudget}
+Preferred Timeline: ${deadline}
 
 PROJECT DETAILS
 ${message}
