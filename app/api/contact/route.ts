@@ -1,9 +1,23 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+
 const resend = new Resend(
   process.env.RESEND_API_KEY
 );
+
+const redis = Redis.fromEnv();
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(
+    5,
+    "10 m"
+  ),
+  prefix: "portfolio-contact",
+});
 
 const allowedServices = [
   "Web Development",
@@ -30,8 +44,50 @@ type TurnstileResponse = {
   "error-codes"?: string[];
 };
 
-export async function POST(request: Request) {
+export async function POST(
+  request: Request
+) {
   try {
+    /*
+      ---------------------------------
+      1. RATE LIMIT
+      ---------------------------------
+    */
+
+    const forwardedFor =
+      request.headers.get(
+        "x-forwarded-for"
+      );
+
+    const ip =
+      forwardedFor
+        ?.split(",")[0]
+        ?.trim() ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
+
+    const rateLimitResult =
+      await ratelimit.limit(ip);
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Too many requests. Please wait a few minutes and try again.",
+        },
+        {
+          status: 429,
+        }
+      );
+    }
+
+    /*
+      ---------------------------------
+      2. READ FORM DATA
+      ---------------------------------
+    */
+
     const body = await request.json();
 
     const {
@@ -45,22 +101,29 @@ export async function POST(request: Request) {
       turnstileToken,
     } = body;
 
-    // Honeypot:
-    // real visitors should never fill this field.
+    /*
+      ---------------------------------
+      3. HONEYPOT
+      ---------------------------------
+    */
+
     if (
       typeof website === "string" &&
       website.trim().length > 0
     ) {
-      return NextResponse.json(
-        {
-          success: true,
-          message:
-            "Project request received.",
-        }
-      );
+      return NextResponse.json({
+        success: true,
+        message:
+          "Project request received.",
+      });
     }
 
-    // Required fields
+    /*
+      ---------------------------------
+      4. REQUIRED FIELDS
+      ---------------------------------
+    */
+
     if (
       typeof name !== "string" ||
       typeof email !== "string" ||
@@ -81,19 +144,38 @@ export async function POST(request: Request) {
       );
     }
 
-    // Clean input
-    const cleanName = name.trim();
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanService = service.trim();
-    const cleanDeadline = deadline.trim();
-    const cleanMessage = message.trim();
+    /*
+      ---------------------------------
+      5. CLEAN INPUT
+      ---------------------------------
+    */
+
+    const cleanName =
+      name.trim();
+
+    const cleanEmail =
+      email.trim().toLowerCase();
+
+    const cleanService =
+      service.trim();
+
+    const cleanDeadline =
+      deadline.trim();
+
+    const cleanMessage =
+      message.trim();
 
     const cleanBudget =
       typeof budget === "string"
         ? budget.trim()
         : "";
 
-    // Length validation
+    /*
+      ---------------------------------
+      6. LENGTH VALIDATION
+      ---------------------------------
+    */
+
     if (
       cleanName.length < 2 ||
       cleanName.length > 100
@@ -141,11 +223,18 @@ export async function POST(request: Request) {
       );
     }
 
-    // Email validation
+    /*
+      ---------------------------------
+      7. EMAIL VALIDATION
+      ---------------------------------
+    */
+
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(cleanEmail)) {
+    if (
+      !emailPattern.test(cleanEmail)
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -158,9 +247,16 @@ export async function POST(request: Request) {
       );
     }
 
-    // Service whitelist
+    /*
+      ---------------------------------
+      8. SERVICE VALIDATION
+      ---------------------------------
+    */
+
     if (
-      !allowedServices.includes(cleanService)
+      !allowedServices.includes(
+        cleanService
+      )
     ) {
       return NextResponse.json(
         {
@@ -174,7 +270,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // Timeline whitelist
+    /*
+      ---------------------------------
+      9. TIMELINE VALIDATION
+      ---------------------------------
+    */
+
     if (
       !allowedDeadlines.includes(
         cleanDeadline
@@ -192,9 +293,15 @@ export async function POST(request: Request) {
       );
     }
 
-    // Turnstile secret
+    /*
+      ---------------------------------
+      10. TURNSTILE
+      ---------------------------------
+    */
+
     const turnstileSecret =
-      process.env.TURNSTILE_SECRET_KEY;
+      process.env
+        .TURNSTILE_SECRET_KEY;
 
     if (!turnstileSecret) {
       console.error(
@@ -213,7 +320,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Verify Turnstile token with Cloudflare
     const verificationResponse =
       await fetch(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
@@ -226,8 +332,11 @@ export async function POST(request: Request) {
           },
 
           body: new URLSearchParams({
-            secret: turnstileSecret,
-            response: turnstileToken,
+            secret:
+              turnstileSecret,
+
+            response:
+              turnstileToken,
           }),
         }
       );
@@ -238,7 +347,9 @@ export async function POST(request: Request) {
     if (!verification.success) {
       console.error(
         "Turnstile verification failed:",
-        verification["error-codes"]
+        verification[
+          "error-codes"
+        ]
       );
 
       return NextResponse.json(
@@ -253,7 +364,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // Email destination
+    /*
+      ---------------------------------
+      11. DESTINATION EMAIL
+      ---------------------------------
+    */
+
     const recipientEmail =
       process.env.CONTACT_TO_EMAIL;
 
@@ -275,7 +391,14 @@ export async function POST(request: Request) {
     }
 
     const safeBudget =
-      cleanBudget || "Not specified";
+      cleanBudget ||
+      "Not specified";
+
+    /*
+      ---------------------------------
+      12. SEND EMAIL
+      ---------------------------------
+    */
 
     const { data, error } =
       await resend.emails.send({
@@ -326,6 +449,12 @@ Submitted through Wazir Afzali & Team website.
         }
       );
     }
+
+    /*
+      ---------------------------------
+      13. SUCCESS
+      ---------------------------------
+    */
 
     return NextResponse.json({
       success: true,
