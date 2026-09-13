@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, projects } from "@/data/projects";
+
+import {
+  getProjectBySlug,
+  projects,
+} from "@/data/projects";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -31,33 +36,21 @@ export async function generateMetadata({
 
   return {
     title: project.title,
-
     description: project.shortDescription,
 
     openGraph: {
-      title: `${project.title} | Developer Portfolio`,
+      title: `${project.title} | Wazir Afzali & Team`,
       description: project.shortDescription,
+      type: "article",
 
       images: project.coverImage
         ? [
             {
               url: project.coverImage,
-              width: 1200,
-              height: 630,
               alt: project.title,
             },
           ]
-        : [],
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: project.title,
-      description: project.shortDescription,
-
-      images: project.coverImage
-        ? [project.coverImage]
-        : [],
+        : undefined,
     },
   };
 }
@@ -73,145 +66,80 @@ export default async function ProjectPage({
     notFound();
   }
 
+  const isLiveProject =
+    project.type === "LIVE PROJECT" ||
+    project.type === "REAL PROJECT";
+
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
-      {/* Top navigation */}
-      <nav className="border-b border-white/10">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+      {/* Top Navigation */}
+      <div className="border-b border-white/10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <Link
             href="/"
-            className="font-bold transition hover:text-cyan-400"
+            className="text-lg font-bold tracking-tight transition hover:text-cyan-400"
           >
-            ← Back Home
+            Wazir Afzali
+            <span className="text-cyan-400">
+              {" "}
+              & Team
+            </span>
           </Link>
 
-          <span className="text-sm text-zinc-500">
-            Case Study
-          </span>
+          <Link
+            href="/#projects"
+            className="text-sm font-medium text-zinc-400 transition hover:text-cyan-400"
+          >
+            ← Back to Projects
+          </Link>
         </div>
-      </nav>
+      </div>
 
-      {/* Hero */}
-      <section className="border-b border-white/10 py-24">
-        <div className="mx-auto max-w-6xl px-6">
+      {/* Project Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute left-1/2 top-20 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]" />
+
+        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
           <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-4">
-              <span className="text-sm font-bold tracking-widest text-cyan-400">
-                PROJECT {project.number}
+            {/* Badges */}
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-400">
+                {project.category}
               </span>
 
-              <span className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-zinc-400">
+              <span
+                className={`rounded-full border px-4 py-2 text-sm font-semibold ${
+                  isLiveProject
+                    ? "border-green-400/20 bg-green-400/10 text-green-400"
+                    : "border-white/10 bg-white/5 text-zinc-400"
+                }`}
+              >
                 {project.type}
+              </span>
+
+              <span className="text-sm text-zinc-600">
+                Project {project.number}
               </span>
             </div>
 
-            <h1 className="mt-8 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
               {project.title}
             </h1>
 
-            <p className="mt-8 max-w-3xl text-xl leading-9 text-zinc-400">
+            <p className="mt-7 max-w-3xl text-lg leading-8 text-zinc-400 sm:text-xl">
               {project.description}
             </p>
 
-            {/* Technologies */}
-            <div className="mt-10 flex flex-wrap gap-3">
-              {project.technologies.map((technology) => (
-                <span
-                  key={technology}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-zinc-300"
-                >
-                  {technology}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Project visual */}
-<section className="py-20">
-  <div className="mx-auto max-w-6xl px-6">
-    <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/10 via-blue-500/5 to-transparent p-4 sm:p-8">
-      {project.coverImage ? (
-        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
-          <Image
-            src={project.coverImage}
-            alt={`${project.title} project screenshot`}
-            fill
-            priority
-            sizes="(max-width: 1200px) 100vw, 1152px"
-            className="object-cover object-top"
-          />
-        </div>
-      ) : (
-        <div className="flex aspect-[16/9] items-center justify-center rounded-2xl border border-white/10 bg-zinc-900">
-          <p className="text-zinc-500">
-            Project preview coming soon
-          </p>
-        </div>
-      )}
-    </div>
-  </div>
-</section>
-
-      {/* Case study */}
-      <section className="pb-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <p className="font-semibold text-cyan-400">
-                01 / Challenge
-              </p>
-
-              <h2 className="mt-5 text-2xl font-bold">
-                The Problem
-              </h2>
-
-              <p className="mt-5 leading-7 text-zinc-400">
-                {project.challenge}
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <p className="font-semibold text-cyan-400">
-                02 / Solution
-              </p>
-
-              <h2 className="mt-5 text-2xl font-bold">
-                My Approach
-              </h2>
-
-              <p className="mt-5 leading-7 text-zinc-400">
-                {project.solution}
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <p className="font-semibold text-cyan-400">
-                03 / Result
-              </p>
-
-              <h2 className="mt-5 text-2xl font-bold">
-                The Outcome
-              </h2>
-
-              <p className="mt-5 leading-7 text-zinc-400">
-                {project.result}
-              </p>
-            </div>
-          </div>
-
-          {/* Links */}
-          {(project.liveUrl || project.githubUrl) && (
-            <div className="mt-12 flex flex-wrap gap-4">
+            {/* Project Actions */}
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-cyan-400 px-7 py-3 font-bold text-zinc-950 transition hover:bg-cyan-300"
+                  className="rounded-full bg-cyan-400 px-7 py-3.5 text-center font-bold text-zinc-950 transition hover:bg-cyan-300"
                 >
-                  Live Demo ↗
+                  View Live Project ↗
                 </a>
               )}
 
@@ -220,24 +148,242 @@ export default async function ProjectPage({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/15 px-7 py-3 font-bold transition hover:border-cyan-400 hover:text-cyan-400"
+                  className="rounded-full border border-white/15 px-7 py-3.5 text-center font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
                 >
                   View GitHub ↗
                 </a>
               )}
-            </div>
-          )}
 
-          <div className="mt-20 border-t border-white/10 pt-10">
-            <Link
-              href="/#projects"
-              className="font-semibold text-cyan-400 transition hover:text-cyan-300"
-            >
-              ← View all projects
-            </Link>
+              <Link
+                href="/#contact"
+                className="rounded-full border border-white/15 px-7 py-3.5 text-center font-semibold text-zinc-300 transition hover:border-cyan-400 hover:text-cyan-400"
+              >
+                Start a Similar Project
+              </Link>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Cover Image */}
+      {project.coverImage && (
+        <section className="pb-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-white/10 bg-zinc-900 shadow-2xl">
+              <Image
+                src={project.coverImage}
+                alt={`${project.title} project preview`}
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                className="object-cover object-top"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Overview */}
+      <section className="border-t border-white/10 bg-zinc-900/30 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="mb-4 font-medium text-cyan-400">
+                Project Overview
+              </p>
+
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                About this project
+              </h2>
+            </div>
+
+            <div>
+              <p className="text-lg leading-8 text-zinc-400">
+                {project.shortDescription}
+              </p>
+
+              <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
+                  <p className="text-sm text-zinc-500">
+                    Category
+                  </p>
+
+                  <p className="mt-2 font-semibold">
+                    {project.category}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6">
+                  <p className="text-sm text-zinc-500">
+                    Project Type
+                  </p>
+
+                  <p className="mt-2 font-semibold">
+                    {project.type}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Challenge / Solution / Result */}
+      <section className="border-t border-white/10 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-6 lg:grid-cols-3">
+            {/* Challenge */}
+            <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-400/10 text-sm font-bold text-red-400">
+                01
+              </div>
+
+              <p className="mt-7 text-sm font-medium text-red-400">
+                Challenge
+              </p>
+
+              <h2 className="mt-2 text-2xl font-bold">
+                The problem
+              </h2>
+
+              <p className="mt-5 leading-7 text-zinc-400">
+                {project.challenge}
+              </p>
+            </article>
+
+            {/* Solution */}
+            <article className="rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.04] p-8">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-400/10 text-sm font-bold text-cyan-400">
+                02
+              </div>
+
+              <p className="mt-7 text-sm font-medium text-cyan-400">
+                Solution
+              </p>
+
+              <h2 className="mt-2 text-2xl font-bold">
+                What we built
+              </h2>
+
+              <p className="mt-5 leading-7 text-zinc-400">
+                {project.solution}
+              </p>
+            </article>
+
+            {/* Result */}
+            <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-green-400/10 text-sm font-bold text-green-400">
+                03
+              </div>
+
+              <p className="mt-7 text-sm font-medium text-green-400">
+                Result
+              </p>
+
+              <h2 className="mt-2 text-2xl font-bold">
+                The outcome
+              </h2>
+
+              <p className="mt-5 leading-7 text-zinc-400">
+                {project.result}
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies */}
+      <section className="border-t border-white/10 bg-zinc-900/30 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+            <div>
+              <p className="mb-4 font-medium text-cyan-400">
+                Technology
+              </p>
+
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Tools used for
+                <span className="block text-zinc-500">
+                  this project.
+                </span>
+              </h2>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {project.technologies.map(
+                (technology) => (
+                  <span
+                    key={technology}
+                    className="rounded-full border border-white/10 bg-zinc-950 px-5 py-3 text-sm font-medium text-zinc-300"
+                  >
+                    {technology}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="border-t border-white/10 py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-[2rem] border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-zinc-900 to-blue-500/10 p-8 sm:p-12 lg:p-16">
+            <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-cyan-400/10 blur-[100px]" />
+
+            <div className="relative max-w-3xl">
+              <p className="font-medium text-cyan-400">
+                Have a similar idea?
+              </p>
+
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+                Let&apos;s turn your project
+                <span className="block text-zinc-400">
+                  into something real.
+                </span>
+              </h2>
+
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+                Tell us what you want to build. We&apos;ll review
+                your requirements, identify the right specialist,
+                and discuss the next steps with you.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/#contact"
+                  className="rounded-full bg-cyan-400 px-7 py-3.5 text-center font-bold text-zinc-950 transition hover:bg-cyan-300"
+                >
+                  Start Your Project
+                </Link>
+
+                <Link
+                  href="/#projects"
+                  className="rounded-full border border-white/15 px-7 py-3.5 text-center font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
+                >
+                  View More Projects
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom Footer */}
+      <footer className="border-t border-white/10 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 text-sm text-zinc-600 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <p>
+            © {new Date().getFullYear()} Wazir Afzali & Team
+          </p>
+
+          <Link
+            href="/"
+            className="transition hover:text-cyan-400"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </footer>
     </main>
   );
 }
