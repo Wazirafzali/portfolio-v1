@@ -36,7 +36,7 @@ export default function Hero() {
 
           <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-400">
             Work with one coordinated team for web development,
-            Android apps, iOS apps, cross-platform mobile projects,
+            Android apps, iOS apps, coordinated Android and iOS projects,
             and professional video editing — with clear
             communication and focused delivery.
           </p>

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "AppFolor is a specialized digital team providing web development, Android development, iOS development, cross-platform mobile project coordination, and professional video editing services.",
+    "AppFolor is a specialized digital team providing web development, Android development, iOS development,coordinated Android and iOS development, and professional video editing services.",
 
   keywords: [
     "AppFolor",
