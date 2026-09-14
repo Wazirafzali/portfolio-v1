@@ -11,7 +11,12 @@ import "./globals.css";
 export const metadata: Metadata = {
     metadataBase: new URL(
     "https://appfolor.vercel.app"
-   ),
+   ),  
+      verification: {
+  google: "04Pp2bfp8V8DHD63yVutWGU3ykkiW_23mhmqQX5zBAQ",
+},  
+  
+
   manifest: "/manifest.webmanifest",
 
   title: {
