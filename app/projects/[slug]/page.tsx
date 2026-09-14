@@ -39,7 +39,7 @@ export async function generateMetadata({
     description: project.shortDescription,
 
     openGraph: {
-      title: `${project.title} | Wazir Afzali & Team`,
+      title: `${project.title} | AppFolor`,
       description: project.shortDescription,
       type: "article",
 
@@ -79,11 +79,10 @@ export default async function ProjectPage({
             href="/"
             className="text-lg font-bold tracking-tight transition hover:text-cyan-400"
           >
-            Wazir Afzali
-            <span className="text-cyan-400">
-              {" "}
-              & Team
-            </span>
+            App
+             <span className="text-cyan-400">
+            Folor
+          </span>
           </Link>
 
           <Link
@@ -373,7 +372,7 @@ export default async function ProjectPage({
       <footer className="border-t border-white/10 py-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 text-sm text-zinc-600 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p>
-            © {new Date().getFullYear()} Wazir Afzali & Team
+            © {new Date().getFullYear()} AppFolor
           </p>
 
           <Link

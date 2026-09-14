@@ -1,16 +1,15 @@
 import { ImageResponse } from "next/og";
 
-
-
 export const alt =
-  "Wazir Afzali & Team - Web, Android, iOS and Video Editing";
+  "AppFolor - Digital Development Team";
 
 export const size = {
   width: 1200,
   height: 630,
 };
 
-export const contentType = "image/png";
+export const contentType =
+  "image/png";
 
 export default function Image() {
   return new ImageResponse(
@@ -31,9 +30,10 @@ export default function Image() {
         <div
           style={{
             display: "flex",
-            fontSize: 28,
+            fontSize: 27,
             color: "#22d3ee",
             marginBottom: 30,
+            letterSpacing: "4px",
           }}
         >
           DIGITAL DEVELOPMENT TEAM
@@ -42,34 +42,41 @@ export default function Image() {
         <div
           style={{
             display: "flex",
-            fontSize: 72,
+            fontSize: 90,
             fontWeight: 800,
-            lineHeight: 1.05,
+            lineHeight: 1,
           }}
         >
-          Wazir Afzali
+          App
+          <span
+            style={{
+              color: "#22d3ee",
+            }}
+          >
+            Folor
+          </span>
         </div>
 
         <div
           style={{
             display: "flex",
-            fontSize: 72,
-            fontWeight: 800,
-            color: "#22d3ee",
-          }}
-        >
-          & Team
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            fontSize: 30,
-            marginTop: 35,
+            fontSize: 31,
+            marginTop: 40,
             color: "#a1a1aa",
           }}
         >
           Web Development · Android · iOS · Video Editing
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            fontSize: 21,
+            marginTop: 35,
+            color: "#71717a",
+          }}
+        >
+          Led by Wazir Afzali
         </div>
       </div>
     ),

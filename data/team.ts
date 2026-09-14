@@ -12,10 +12,9 @@ export const teamMembers: TeamMember[] = [
     role: "Web Developer & Team Lead",
     specialty: "Web Development",
     description:
-      "I lead the team, communicate with clients, manage projects, and build modern websites and web applications.",
+      "Leads AppFolor, communicates with clients, coordinates projects, and develops modern websites and web applications.",
     initials: "WA",
   },
-
   {
     name: "Android Developer",
     role: "Android Developer",
@@ -24,7 +23,6 @@ export const teamMembers: TeamMember[] = [
       "Responsible for building reliable and user-friendly Android applications for businesses, startups, and custom projects.",
     initials: "AD",
   },
-
   {
     name: "iOS Developer",
     role: "iOS Developer",
@@ -33,7 +31,6 @@ export const teamMembers: TeamMember[] = [
       "Focused on developing professional iPhone and iPad applications with clean interfaces and reliable performance.",
     initials: "ID",
   },
-
   {
     name: "Video Editor",
     role: "Professional Video Editor",
@@ -45,13 +42,14 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const teamInfo = {
-  brandName: "Wazir Afzali & Team",
+  brandName: "AppFolor",
 
   tagline:
-    "A specialized digital team for web development, Android, iOS, and professional video editing.",
+    "Web, mobile, and video solutions built for modern businesses.",
 
   shortDescription:
-    "I lead a focused team where every project is handled by the right specialist — from web and mobile development to professional video editing.",
+    "AppFolor is a specialized digital team for web development, Android applications, iOS applications, and professional video editing.",
 
-  availability: "Available for new client projects",
+  availability:
+    "Available for new client projects",
 };

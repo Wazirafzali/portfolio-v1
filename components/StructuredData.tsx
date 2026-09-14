@@ -2,9 +2,14 @@ import { profile } from "@/data/profile";
 import { teamInfo } from "@/data/team";
 
 export default function StructuredData() {
-  const organizationId = `${profile.siteUrl}/#organization`;
-  const personId = `${profile.siteUrl}/#wazir-afzali`;
-  const websiteId = `${profile.siteUrl}/#website`;
+  const organizationId =
+    `${profile.siteUrl}/#organization`;
+
+  const personId =
+    `${profile.siteUrl}/#wazir-afzali`;
+
+  const websiteId =
+    `${profile.siteUrl}/#website`;
 
   const socialLinks = [
     profile.github,
@@ -12,80 +17,114 @@ export default function StructuredData() {
   ].filter(Boolean);
 
   const organizationJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": organizationId,
+    "@context":
+      "https://schema.org",
 
-    name: teamInfo.brandName,
+    "@type":
+      "Organization",
 
-    url: profile.siteUrl,
+    "@id":
+      organizationId,
+
+    name:
+      teamInfo.brandName,
+
+    url:
+      profile.siteUrl,
 
     description:
-      "A specialized digital team providing web development, Android development, iOS development, and professional video editing services.",
+      "AppFolor is a specialized digital team providing web development, Android development, iOS development, and professional video editing services.",
 
     founder: {
-      "@type": "Person",
-      "@id": personId,
-      name: profile.name,
-      jobTitle: "Web Developer & Team Lead",
-      url: profile.siteUrl,
+      "@type":
+        "Person",
+
+      "@id":
+        personId,
+
+      name:
+        profile.name,
+
+      jobTitle:
+        "Web Developer & Team Lead",
+
+      url:
+        profile.siteUrl,
     },
 
-    sameAs: socialLinks,
+    sameAs:
+      socialLinks,
   };
 
   const personJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": personId,
+    "@context":
+      "https://schema.org",
 
-    name: profile.name,
+    "@type":
+      "Person",
 
-    jobTitle: "Web Developer & Team Lead",
+    "@id":
+      personId,
 
-    url: profile.siteUrl,
+    name:
+      profile.name,
+
+    jobTitle:
+      "Web Developer & Team Lead",
+
+    url:
+      profile.siteUrl,
 
     worksFor: {
-      "@id": organizationId,
+      "@id":
+        organizationId,
     },
 
-    sameAs: socialLinks,
+    sameAs:
+      socialLinks,
   };
 
   const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": websiteId,
+    "@context":
+      "https://schema.org",
 
-    name: teamInfo.brandName,
+    "@type":
+      "WebSite",
 
-    url: profile.siteUrl,
+    "@id":
+      websiteId,
+
+    name:
+      teamInfo.brandName,
+
+    url:
+      profile.siteUrl,
 
     description:
-      "Web development, Android development, iOS development, and professional video editing services.",
+      "AppFolor provides web development, Android development, iOS development, mobile app, and video editing services.",
 
     publisher: {
-      "@id": organizationId,
+      "@id":
+        organizationId,
     },
   };
 
-  const jsonLd = [
-    organizationJsonLd,
-    personJsonLd,
-    websiteJsonLd,
-  ];
-
   return (
     <>
-      {jsonLd.map((data, index) => (
+      {[
+        organizationJsonLd,
+        personJsonLd,
+        websiteJsonLd,
+      ].map((data, index) => (
         <script
           key={index}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(data).replace(
-              /</g,
-              "\\u003c"
-            ),
+            __html:
+              JSON.stringify(data).replace(
+                /</g,
+                "\\u003c"
+              ),
           }}
         />
       ))}

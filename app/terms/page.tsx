@@ -12,9 +12,11 @@ export default function TermsPage() {
         </Link>
 
         <div className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
-            Terms of Service
-          </p>
+           <p className="mt-4 leading-8">
+             AppFolor provides information about web development,
+             Android development, iOS development, mobile app projects,
+             video editing, our team, and our project process.
+              </p>
 
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             Terms for using this website.

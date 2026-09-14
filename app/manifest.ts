@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Wazir Afzali & Team",
-    short_name: "Wazir Team",
+    name: "AppFolor",
+
+    short_name: "AppFolor",
 
     description:
       "Web development, Android development, iOS development, and professional video editing services.",

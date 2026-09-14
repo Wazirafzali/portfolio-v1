@@ -12,9 +12,12 @@ export default function PrivacyPage() {
         </Link>
 
         <div className="mt-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
-            Privacy Policy
-          </p>
+         <p className="mt-4 leading-8">
+            When you submit a project request to AppFolor through this website,
+             we may collect information such as your name, email address,
+              selected service, estimated budget, preferred timeline, and
+               project details.
+              </p>
 
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             How we handle your information.

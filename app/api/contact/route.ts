@@ -428,7 +428,7 @@ PROJECT DETAILS
 ${cleanMessage}
 
 ---
-Submitted through Wazir Afzali & Team website.
+Submitted through AppFolor website.
         `,
       });
 
