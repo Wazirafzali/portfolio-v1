@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://portfolio-v1-five-kappa.vercel.app/sitemap.xml
+Sitemap: https://appfolor.vercel.app/sitemap.xml

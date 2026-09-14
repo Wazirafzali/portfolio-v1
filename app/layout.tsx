@@ -9,10 +9,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://portfolio-v1-five-kappa.vercel.app"
-  ),
-
+    metadataBase: new URL(
+    "https://appfolor.vercel.app"
+   ),
   manifest: "/manifest.webmanifest",
 
   title: {

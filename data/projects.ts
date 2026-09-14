@@ -44,7 +44,7 @@ export const projects: Project[] = [
       "The result is a live production portfolio with reusable case studies, SEO foundations, GitHub integration, and a working contact system.",
     coverImage: "/projects/portfolio-cover.png",
     githubUrl: "https://github.com/Wazirafzali/portfolio-v1",
-    liveUrl: "https://portfolio-v1-five-kappa.vercel.app",
+      liveUrl: "https://appfolor.vercel.app",
   },
 
   {

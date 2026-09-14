@@ -26,8 +26,7 @@ export const profile = {
   resumeUrl: "",
 
   siteUrl:
-    "https://portfolio-v1-five-kappa.vercel.app",
-
+   "https://appfolor.vercel.app",
   availability:
     "Available for new client projects",
 };
