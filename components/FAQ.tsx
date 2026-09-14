@@ -95,7 +95,7 @@ export default function FAQ() {
                 </p>
 
                 <span className="sr-only">
-                  FAQ {index + 1}
+                  
                 </span>
               </details>
             ))}
