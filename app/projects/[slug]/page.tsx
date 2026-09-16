@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Image from "next/image";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 import { notFound } from "next/navigation";
 
 import {
@@ -37,11 +38,13 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.shortDescription,
+    alternates: { canonical: `/projects/${project.slug}` },
 
     openGraph: {
       title: `${project.title} | AppFolor`,
       description: project.shortDescription,
       type: "article",
+      url: `/projects/${project.slug}`,
 
       images: project.coverImage
         ? [
@@ -50,7 +53,7 @@ export async function generateMetadata({
               alt: project.title,
             },
           ]
-        : undefined,
+        : [{ url: "/opengraph-image", alt: "AppFolor Digital Development Studio" }],
     },
   };
 }
@@ -79,10 +82,7 @@ export default async function ProjectPage({
             href="/"
             className="text-lg font-bold tracking-tight transition hover:text-cyan-400"
           >
-            App
-             <span className="text-cyan-400">
-            Folor
-          </span>
+            <BrandLogo />
           </Link>
 
           <Link

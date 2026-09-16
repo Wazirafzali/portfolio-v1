@@ -19,12 +19,12 @@ export const projects: Project[] = [
   {
     slug: "developer-portfolio",
     number: "01",
-    title: "Developer Portfolio",
+    title: "AppFolor Studio Website",
     category: "Web",
     shortDescription:
-      "A modern full-stack developer portfolio built with Next.js, TypeScript, Tailwind CSS, dynamic case studies, and a real contact API.",
+      "A modern full-stack studio website built with Next.js, TypeScript, Tailwind CSS, dynamic case studies, and a real contact API.",
     description:
-      "A production-ready developer portfolio designed and developed using Next.js, TypeScript, Tailwind CSS, reusable React components, dynamic routes, SEO metadata, GitHub, Vercel, and a server-side contact form.",
+      "A production-ready studio website designed and developed using Next.js, TypeScript, Tailwind CSS, reusable React components, dynamic routes, SEO metadata, GitHub, Vercel, and a server-side contact form.",
     type: "REAL PROJECT",
     technologies: [
       "Next.js",
@@ -37,13 +37,13 @@ export const projects: Project[] = [
       "GitHub",
     ],
     challenge:
-      "The goal was to build a professional portfolio while keeping the architecture clean, responsive, maintainable, and ready for future expansion.",
+      "The goal was to build a professional studio website while keeping the architecture clean, responsive, maintainable, and ready for future expansion.",
     solution:
       "The website was built with reusable React components, responsive layouts, dynamic project routes, server-side email handling, Git version control, and Vercel deployment.",
     result:
-      "The result is a live production portfolio with reusable case studies, SEO foundations, GitHub integration, and a working contact system.",
-    coverImage: "/projects/portfolio-cover.png",
-    githubUrl: "https://github.com/Wazirafzali/portfolio-v1",
+      "The result is a live production studio website with reusable case studies, SEO foundations, GitHub integration, and a working contact system.",
+    coverImage: "",
+    githubUrl: "",
       liveUrl: "https://appfolor.vercel.app",
   },
 

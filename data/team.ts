@@ -8,15 +8,15 @@ export type TeamMember = {
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Wazir Afzali",
-    role: "Web Developer & Team Lead",
+    name: "Web Development",
+    role: "Websites & Web Applications",
     specialty: "Web Development",
     description:
-      "Leads AppFolor, communicates with clients, coordinates projects, and develops modern websites and web applications.",
-    initials: "WA",
+      "Builds modern websites and web applications with a focus on usability, responsive design, and maintainable development.",
+    initials: "WD",
   },
   {
-    name: "Android Developer",
+    name: "Android Development",
     role: "Android Developer",
     specialty: "Android Development",
     description:
@@ -24,7 +24,7 @@ export const teamMembers: TeamMember[] = [
     initials: "AD",
   },
   {
-    name: "iOS Developer",
+    name: "iOS Development",
     role: "iOS Developer",
     specialty: "iOS Development",
     description:
@@ -32,7 +32,7 @@ export const teamMembers: TeamMember[] = [
     initials: "ID",
   },
   {
-    name: "Video Editor",
+    name: "Video Editing",
     role: "Professional Video Editor",
     specialty: "Video Editing",
     description:

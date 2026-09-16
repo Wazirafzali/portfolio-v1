@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "AppFolor is a specialized digital team providing web development, Android development, iOS development,coordinated Android and iOS development, and professional video editing services.",
+    "AppFolor is a specialized digital team providing web development, Android development, iOS development, coordinated Android and iOS development, and professional video editing services.",
 
   keywords: [
     "AppFolor",
@@ -38,16 +38,13 @@ export const metadata: Metadata = {
     "Video Editing",
     "Next.js Developer",
     "Development Team",
-    "Freelance Development Team",
+    "Digital Development Studio",
     "Remote Development Team",
   ],
 
   authors: [
     {
       name: "AppFolor",
-    },
-    {
-      name: "Wazir Afzali",
     },
   ],
 
@@ -64,7 +61,7 @@ export const metadata: Metadata = {
     url: "/",
 
     title:
-      "AppFolor | Digital Development Team",
+      "AppFolor | Digital Development Studio",
 
     description:
       "Web development, Android, iOS, mobile applications, and professional video editing services.",
@@ -76,7 +73,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "AppFolor Digital Development Team",
+        alt: "AppFolor Digital Development Studio",
       },
     ],
   },
@@ -85,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "AppFolor | Digital Development Team",
+      "AppFolor | Digital Development Studio",
 
     description:
       "Web development, Android, iOS, mobile application, and professional video editing services.",

@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
+
 import { useState } from "react";
 
 import { teamInfo } from "@/data/team";
@@ -9,7 +12,7 @@ export default function Navbar() {
 
   const links = [
     { name: "Services", href: "#services" },
-    { name: "Team", href: "#team" },
+    { name: "Expertise", href: "#team" },
     { name: "Projects", href: "#projects" },
     { name: "Process", href: "#process" },
     { name: "Contact", href: "#contact" },
@@ -18,15 +21,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 shadow-lg shadow-black/5 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <a
+        <Link
           href="/"
           className="text-xl font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-2xl"
         >
-          App
-          <span className="text-cyan-400">
-            Folor
-          </span>
-        </a>
+          <BrandLogo />
+        </Link>
 
         <div className="hidden items-center gap-7 md:flex">
           {links.map((link) => (

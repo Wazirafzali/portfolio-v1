@@ -96,7 +96,7 @@ export default function Services() {
             Choose one service or combine multiple services.
             If your project requires both Android and iOS,
             both mobile specialists can work together while
-            the project stays coordinated through one team lead.
+            the project stays coordinated through one project contact.
           </p>
         </div>
 
@@ -160,7 +160,7 @@ export default function Services() {
                 You do not need to manage two separate developers.
                 Our Android and iOS specialists work on their respective
                 platforms while project communication, scope, progress,
-                and delivery are coordinated through one team lead.
+                and delivery are coordinated through one project contact.
               </p>
             </div>
 

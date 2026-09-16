@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Who will manage my project?",
     answer:
-      "Wazir Afzali manages client communication, planning, coordination, and delivery as the team lead. The specialist responsible for your service handles the technical work.",
+      "AppFolor coordinates client communication, planning, and delivery through a single project contact. The specialist responsible for your service handles the technical work.",
   },
   {
     question: "How much does a project cost?",
@@ -75,7 +75,7 @@ export default function FAQ() {
           </div>
 
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {faqs.map((faq) => (
               <details
                 key={faq.question}
                 className="group rounded-2xl border border-white/10 bg-zinc-950 p-6"

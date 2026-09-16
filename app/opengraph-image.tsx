@@ -1,7 +1,8 @@
+import LogoMark from "@/components/LogoMark";
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "AppFolor - Digital Development Team";
+  "AppFolor - Digital Development Studio";
 
 export const size = {
   width: 1200,
@@ -36,25 +37,28 @@ export default function Image() {
             letterSpacing: "4px",
           }}
         >
-          DIGITAL DEVELOPMENT TEAM
+          DIGITAL DEVELOPMENT STUDIO
         </div>
 
         <div
           style={{
             display: "flex",
             fontSize: 90,
+            alignItems: "center",
+            gap: 18,
             fontWeight: 800,
             lineHeight: 1,
           }}
         >
-          App
+          <LogoMark size={112} />
+          <span style={{ display: "flex" }}>App
           <span
             style={{
               color: "#22d3ee",
             }}
           >
             Folor
-          </span>
+          </span></span>
         </div>
 
         <div
@@ -76,7 +80,7 @@ export default function Image() {
             color: "#71717a",
           }}
         >
-          Led by Wazir Afzali
+          Clear scope · Coordinated delivery · Remote collaboration
         </div>
       </div>
     ),

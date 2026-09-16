@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
+
+export const metadata: Metadata = { title: "Privacy Policy", description: "How AppFolor handles information submitted through this website.", alternates: { canonical: "/privacy" }, openGraph: { title: "Privacy Policy | AppFolor", description: "How AppFolor handles information submitted through this website.", url: "/privacy", images: ["/opengraph-image"] } };
 
 export default function PrivacyPage() {
   return (
@@ -8,7 +12,7 @@ export default function PrivacyPage() {
           href="/"
           className="text-sm font-medium text-cyan-400 transition hover:text-cyan-300"
         >
-          ← Back to Home
+          <BrandLogo />
         </Link>
 
         <div className="mt-10">

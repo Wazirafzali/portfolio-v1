@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
+
+export const metadata: Metadata = { title: "Terms of Service", description: "Terms for using the AppFolor website and submitting project inquiries.", alternates: { canonical: "/terms" }, openGraph: { title: "Terms of Service | AppFolor", description: "Terms for using the AppFolor website and submitting project inquiries.", url: "/terms", images: ["/opengraph-image"] } };
 
 export default function TermsPage() {
   return (
@@ -8,7 +12,7 @@ export default function TermsPage() {
           href="/"
           className="text-sm font-medium text-cyan-400 transition hover:text-cyan-300"
         >
-          ← Back to Home
+          <BrandLogo />
         </Link>
 
         <div className="mt-10">

@@ -49,10 +49,7 @@ export default function Home() {
 
               <div className="space-y-6 text-lg leading-8 text-zinc-400">
                 <p>
-                  AppFolor is a digital development team led by
-                  Wazir Afzali, responsible for web development,
-                  client communication, project planning, and team
-                  coordination.
+                  AppFolor is a digital development studio for businesses and startups. We bring web development, mobile applications, and video editing into one coordinated process.
                 </p>
 
                 <p>

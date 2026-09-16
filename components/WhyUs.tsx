@@ -16,7 +16,7 @@ const reasons = [
     icon: MessageSquare,
     title: "One Point of Contact",
     description:
-      "You communicate with one team lead instead of coordinating separately with multiple people.",
+      "You communicate with one project contact instead of coordinating separately with multiple people.",
   },
   {
     icon: Layers3,

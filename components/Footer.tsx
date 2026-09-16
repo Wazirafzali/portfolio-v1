@@ -1,6 +1,7 @@
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 
-import { profile } from "@/data/profile";
+
 
 export default function Footer() {
   const currentYear =
@@ -15,14 +16,11 @@ export default function Footer() {
               href="/"
               className="text-2xl font-bold tracking-tight text-white"
             >
-              App
-              <span className="text-cyan-400">
-                Folor
-              </span>
+              <BrandLogo />
             </Link>
 
             <p className="mt-2 text-sm font-medium text-zinc-400">
-              Digital Development Team
+              Digital Development Studio
             </p>
 
             <p className="mt-4 max-w-md text-sm leading-7 text-zinc-500">
@@ -33,15 +31,15 @@ export default function Footer() {
             </p>
 
             <p className="mt-4 text-sm text-zinc-600">
-              Led by Wazir Afzali
+              Clear communication. Coordinated delivery.
             </p>
 
-            <a
+            <Link
               href="/#contact"
               className="mt-6 inline-flex rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-cyan-300"
             >
               Start a Project
-            </a>
+            </Link>
           </div>
 
           <div>
@@ -78,32 +76,7 @@ export default function Footer() {
                 Terms of Service
               </Link>
 
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 transition hover:text-cyan-400"
-              >
-                GitHub ↗
-              </a>
-
-              {profile.linkedin && (
-                <a
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 transition hover:text-cyan-400"
-                >
-                  LinkedIn ↗
-                </a>
-              )}
-
-              <a
-                href={`mailto:${profile.email}`}
-                className="text-zinc-500 transition hover:text-cyan-400"
-              >
-                Email
-              </a>
+              <Link href="/#contact" className="text-zinc-400 transition hover:text-cyan-400">Contact AppFolor</Link>
             </div>
           </div>
         </div>

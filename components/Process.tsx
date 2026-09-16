@@ -9,7 +9,7 @@ const steps = [
     number: "02",
     title: "Review & Planning",
     description:
-      "As team lead, I review the request, clarify requirements, and coordinate with the specialist responsible for the project.",
+      "We review the request, clarify requirements, and coordinate with the specialist responsible for the project.",
   },
   {
     number: "03",
@@ -21,7 +21,7 @@ const steps = [
     number: "04",
     title: "Development",
     description:
-      "The project is handled by the specialist in that field while I coordinate communication, progress, and quality.",
+      "The project is handled by the specialist in that field while we coordinate communication, progress, and quality.",
   },
   {
     number: "05",
@@ -57,7 +57,7 @@ export default function Process() {
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-zinc-400">
-            You communicate through one team lead while the right specialist
+            You communicate through one project contact while the right specialist
             handles the technical work.
           </p>
         </div>
