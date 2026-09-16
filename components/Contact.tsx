@@ -1,201 +1,671 @@
 "use client";
 
 import Script from "next/script";
-import { FormEvent, useState } from "react";
-
-type FormStatus = "idle" | "loading" | "success" | "error";
+import {
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 declare global {
   interface Window {
     turnstile?: {
-      reset: () => void;
+      render: (
+        container: HTMLElement,
+        options: {
+          sitekey: string;
+          theme?: "light" | "dark" | "auto";
+          size?: "normal" | "compact" | "flexible";
+          retry?: "auto" | "never";
+          "retry-interval"?: number;
+          callback?: (token: string) => void;
+          "error-callback"?: (
+            errorCode: string
+          ) => void;
+          "expired-callback"?: () => void;
+          "timeout-callback"?: () => void;
+          "unsupported-callback"?: () => void;
+        }
+      ) => string;
+
+      reset: (
+        widgetId?: string
+      ) => void;
+
+      remove: (
+        widgetId: string
+      ) => void;
     };
   }
 }
 
+type FormDataState = {
+  name: string;
+  email: string;
+  service: string;
+  budget: string;
+  deadline: string;
+  message: string;
+  website: string;
+};
+
+const initialFormData: FormDataState = {
+  name: "",
+  email: "",
+  service: "",
+  budget: "",
+  deadline: "",
+  message: "",
+  website: "",
+};
+
 export default function Contact() {
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [statusMessage, setStatusMessage] = useState("");
+  const siteKey =
+    process.env
+      .NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const turnstileContainerRef =
+    useRef<HTMLDivElement | null>(null);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const widgetIdRef =
+    useRef<string | null>(null);
 
-    setStatus("loading");
-    setStatusMessage("");
+  const [turnstileReady, setTurnstileReady] =
+    useState(false);
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
+  const [
+    turnstileToken,
+    setTurnstileToken,
+  ] = useState("");
 
-    const turnstileToken =
-      formData.get("cf-turnstile-response");
+  const [
+    securityMessage,
+    setSecurityMessage,
+  ] = useState("");
 
+  const [formData, setFormData] =
+    useState<FormDataState>(
+      initialFormData
+    );
+
+  const [status, setStatus] =
+    useState<
+      | "idle"
+      | "loading"
+      | "success"
+      | "error"
+    >("idle");
+
+  const [message, setMessage] =
+    useState("");
+
+  // --------------------------------------------
+  // Render Cloudflare Turnstile explicitly
+  // --------------------------------------------
+
+  useEffect(() => {
     if (
-      typeof turnstileToken !== "string" ||
-      !turnstileToken
+      !turnstileReady ||
+      !siteKey ||
+      !window.turnstile ||
+      !turnstileContainerRef.current ||
+      widgetIdRef.current
     ) {
-      setStatus("error");
-      setStatusMessage(
-        "Please complete the security verification first."
-      );
       return;
     }
 
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      service: formData.get("service"),
-      budget: formData.get("budget"),
-      deadline: formData.get("deadline"),
-      message: formData.get("message"),
-
-      // Honeypot
-      website: formData.get("website"),
-
-      // Turnstile token
-      turnstileToken,
-    };
-
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      widgetIdRef.current =
+        window.turnstile.render(
+          turnstileContainerRef.current,
+          {
+            sitekey: siteKey,
 
-      const result = await response.json();
+            theme: "dark",
 
-      if (!response.ok) {
-        throw new Error(
-          result.message || "Project request could not be sent."
+            size: "flexible",
+
+            retry: "auto",
+
+            "retry-interval": 8000,
+
+            callback: (token) => {
+              console.log(
+                "Turnstile verification successful."
+              );
+
+              setTurnstileToken(token);
+
+              setSecurityMessage(
+                "Security verification completed."
+              );
+            },
+
+            "error-callback": (
+              errorCode
+            ) => {
+              console.error(
+                "Turnstile error:",
+                errorCode
+              );
+
+              setTurnstileToken("");
+
+              setSecurityMessage(
+                `Security verification error: ${errorCode}`
+              );
+            },
+
+            "expired-callback": () => {
+              console.warn(
+                "Turnstile token expired."
+              );
+
+              setTurnstileToken("");
+
+              setSecurityMessage(
+                "Security verification expired. Please complete it again."
+              );
+            },
+
+            "timeout-callback": () => {
+              console.warn(
+                "Turnstile verification timed out."
+              );
+
+              setTurnstileToken("");
+
+              setSecurityMessage(
+                "Security verification timed out. Please try again."
+              );
+            },
+
+            "unsupported-callback": () => {
+              console.error(
+                "Turnstile browser unsupported."
+              );
+
+              setTurnstileToken("");
+
+              setSecurityMessage(
+                "This browser could not complete the security verification."
+              );
+            },
+          }
         );
-      }
-
-      setStatus("success");
-      setStatusMessage(
-        "Your project request was sent successfully. We will review it and contact you soon."
+    } catch (error) {
+      console.error(
+        "Turnstile render error:",
+        error
       );
 
-      form.reset();
+      setSecurityMessage(
+        "Security verification could not be loaded."
+      );
+    }
 
-      if (window.turnstile) {
-        window.turnstile.reset();
+    return () => {
+      if (
+        widgetIdRef.current &&
+        window.turnstile
+      ) {
+        try {
+          window.turnstile.remove(
+            widgetIdRef.current
+          );
+        } catch {
+          // Ignore cleanup errors
+        }
+
+        widgetIdRef.current =
+          null;
       }
-    } catch (error) {
-      setStatus("error");
+    };
+  }, [
+    turnstileReady,
+    siteKey,
+  ]);
 
-      if (error instanceof Error) {
-        setStatusMessage(error.message);
-      } else {
-        setStatusMessage(
-          "Something went wrong. Please try again."
+  function handleChange(
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) {
+    const {
+      name,
+      value,
+    } = event.target;
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  function resetTurnstile() {
+    setTurnstileToken("");
+
+    setSecurityMessage("");
+
+    if (
+      widgetIdRef.current &&
+      window.turnstile
+    ) {
+      try {
+        window.turnstile.reset(
+          widgetIdRef.current
         );
-      }
-
-      if (window.turnstile) {
-        window.turnstile.reset();
+      } catch (error) {
+        console.error(
+          "Turnstile reset error:",
+          error
+        );
       }
     }
   }
 
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ) {
+    event.preventDefault();
+
+    setStatus("idle");
+    setMessage("");
+
+    // --------------------------------------------
+    // Validate Turnstile before API request
+    // --------------------------------------------
+
+    if (!siteKey) {
+      setStatus("error");
+
+      setMessage(
+        "Security verification is not configured."
+      );
+
+      return;
+    }
+
+    if (!turnstileToken) {
+      setStatus("error");
+
+      setMessage(
+        "Please complete the security verification first."
+      );
+
+      return;
+    }
+
+    setStatus("loading");
+
+    try {
+      const response = await fetch(
+        "/api/contact",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body: JSON.stringify({
+            name:
+              formData.name,
+
+            email:
+              formData.email,
+
+            service:
+              formData.service,
+
+            budget:
+              formData.budget,
+
+            deadline:
+              formData.deadline,
+
+            message:
+              formData.message,
+
+            website:
+              formData.website,
+
+            turnstileToken,
+          }),
+        }
+      );
+
+      let data: {
+        success?: boolean;
+        message?: string;
+        error?: string;
+      } = {};
+
+      try {
+        data =
+          await response.json();
+      } catch {
+        // Response was not JSON
+      }
+
+      console.log(
+        "Contact API status:",
+        response.status
+      );
+
+      console.log(
+        "Contact API response:",
+        data
+      );
+
+      if (!response.ok) {
+        setStatus("error");
+
+        setMessage(
+          data.error ||
+            `Request failed with HTTP ${response.status}.`
+        );
+
+        resetTurnstile();
+
+        return;
+      }
+
+      setStatus("success");
+
+      setMessage(
+        data.message ||
+          "Your project request has been sent successfully."
+      );
+
+      setFormData(
+        initialFormData
+      );
+
+      resetTurnstile();
+    } catch (error) {
+      console.error(
+        "Contact submit error:",
+        error
+      );
+
+      setStatus("error");
+
+      setMessage(
+        "The request could not reach the server. Please check your connection and try again."
+      );
+
+      resetTurnstile();
+    }
+  }
+
   return (
-    <section
-      id="contact"
-      className="border-t border-white/10 bg-zinc-950 py-28"
-    >
-      
+    <>
       <Script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  strategy="afterInteractive"
-/>
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        onReady={() => {
+          console.log(
+            "Turnstile script ready."
+          );
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left */}
-          <div>
-            <p className="mb-4 font-medium text-cyan-400">
-              Start a Project
-            </p>
+          setTurnstileReady(
+            true
+          );
+        }}
+        onError={() => {
+          console.error(
+            "Turnstile script failed to load."
+          );
 
-            <h2 className="max-w-xl text-4xl font-bold tracking-tight sm:text-5xl">
-              Tell us what you
-              <span className="block text-zinc-500">
-                want to build.
-              </span>
-            </h2>
+          setSecurityMessage(
+            "Cloudflare security verification failed to load."
+          );
+        }}
+      />
 
-            <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-400">
-              Whether you need a website, Android app, iOS app,
-              both Android and iOS, or professional video editing,
-              send us your requirements and we will coordinate
-              the right specialist or specialists.
-            </p>
+      <section
+        id="contact"
+        className="border-t border-white/10 bg-zinc-900/30 py-28"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-12 text-center">
+              <p className="mb-4 font-medium text-cyan-400">
+                Start a Project
+              </p>
 
-            <div className="mt-12 space-y-6">
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
-                  01
-                </div>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                Tell us about your
+                project.
+              </h2>
 
-                <div>
-                  <h3 className="font-semibold">
-                    Submit your request
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    Choose the service you need and describe your project.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
-                  02
-                </div>
-
-                <div>
-                  <h3 className="font-semibold">
-                    We assign the right specialists
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    If your project needs multiple services,
-                    the required specialists work together.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-bold text-cyan-400">
-                  03
-                </div>
-
-                <div>
-                  <h3 className="font-semibold">
-                    We confirm the plan
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-zinc-500">
-                    We confirm scope, timeline, pricing,
-                    responsibilities, and delivery before work starts.
-                  </p>
-                </div>
-              </div>
+              <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-zinc-400">
+                Tell AppFolor what you
+                need and we will review
+                your project request.
+              </p>
             </div>
-          </div>
 
-          {/* Form */}
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 lg:p-10">
             <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
+              onSubmit={
+                handleSubmit
+              }
+              className="rounded-3xl border border-white/10 bg-zinc-950/70 p-6 shadow-2xl sm:p-8"
             >
-              {/* Honeypot - bots may fill this */}
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Name *
+                  </label>
+
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    minLength={2}
+                    maxLength={100}
+                    value={
+                      formData.name
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Email *
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    maxLength={150}
+                    value={
+                      formData.email
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="service"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Service *
+                  </label>
+
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    value={
+                      formData.service
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none transition focus:border-cyan-400"
+                  >
+                    <option value="">
+                      Select a service
+                    </option>
+
+                    <option value="Web Development">
+                      Web Development
+                    </option>
+
+                    <option value="Android Development">
+                      Android Development
+                    </option>
+
+                    <option value="iOS Development">
+                      iOS Development
+                    </option>
+
+                    <option value="Mobile App - Android & iOS">
+                      Mobile App -
+                      Android & iOS
+                    </option>
+
+                    <option value="Video Editing">
+                      Video Editing
+                    </option>
+
+                    <option value="Multiple Services">
+                      Multiple Services
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="budget"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Budget
+                  </label>
+
+                  <input
+                    id="budget"
+                    name="budget"
+                    type="text"
+                    value={
+                      formData.budget
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
+                    placeholder="Optional"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="deadline"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Timeline *
+                  </label>
+
+                  <select
+                    id="deadline"
+                    name="deadline"
+                    required
+                    value={
+                      formData.deadline
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3 text-white outline-none transition focus:border-cyan-400"
+                  >
+                    <option value="">
+                      Select a timeline
+                    </option>
+
+                    <option value="ASAP">
+                      ASAP
+                    </option>
+
+                    <option value="1-2 weeks">
+                      1-2 weeks
+                    </option>
+
+                    <option value="2-4 weeks">
+                      2-4 weeks
+                    </option>
+
+                    <option value="1-3 months">
+                      1-3 months
+                    </option>
+
+                    <option value="Flexible">
+                      Flexible
+                    </option>
+
+                    <option value="Not sure yet">
+                      Not sure yet
+                    </option>
+                  </select>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="message"
+                    className="mb-2 block text-sm font-medium text-zinc-300"
+                  >
+                    Project details *
+                  </label>
+
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    minLength={20}
+                    maxLength={5000}
+                    rows={7}
+                    value={
+                      formData.message
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
+                    placeholder="Tell us what you would like to build..."
+                  />
+                </div>
+              </div>
+
+              {/* Honeypot field */}
               <div
-                className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                className="hidden"
                 aria-hidden="true"
               >
                 <label htmlFor="website">
@@ -208,251 +678,87 @@ export default function Contact() {
                   type="text"
                   tabIndex={-1}
                   autoComplete="off"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Your Name
-                </label>
-
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  minLength={2}
-                  maxLength={100}
-                  placeholder="Your name"
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Email Address
-                </label>
-
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  maxLength={150}
-                  placeholder="you@example.com"
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="service"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Service Needed
-                </label>
-
-                <select
-                  id="service"
-                  name="service"
-                  required
-                  defaultValue=""
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
-                >
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-
-                  <option value="Web Development">
-                    Web Development
-                  </option>
-
-                  <option value="Android Development">
-                    Android Development
-                  </option>
-
-                  <option value="iOS Development">
-                    iOS Development
-                  </option>
-
-                  <option value="Mobile App - Android & iOS">
-                    Mobile App - Android & iOS
-                  </option>
-
-                  <option value="Video Editing">
-                    Video Editing
-                  </option>
-
-                  <option value="Multiple Services">
-                    Multiple Services
-                  </option>
-
-                  <option value="Other">
-                    Other
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="budget"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Estimated Budget
-                  <span className="ml-2 text-zinc-600">
-                    (Optional)
-                  </span>
-                </label>
-
-                <select
-                  id="budget"
-                  name="budget"
-                  defaultValue=""
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
-                >
-                  <option value="">
-                    Prefer not to say yet
-                  </option>
-
-                  <option value="Under $500">
-                    Under $500
-                  </option>
-
-                  <option value="$500 - $1,000">
-                    $500 - $1,000
-                  </option>
-
-                  <option value="$1,000 - $3,000">
-                    $1,000 - $3,000
-                  </option>
-
-                  <option value="$3,000 - $5,000">
-                    $3,000 - $5,000
-                  </option>
-
-                  <option value="$5,000+">
-                    $5,000+
-                  </option>
-
-                  <option value="Not sure yet">
-                    Not sure yet
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="deadline"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Preferred Timeline
-                </label>
-
-                <select
-                  id="deadline"
-                  name="deadline"
-                  required
-                  defaultValue=""
-                  className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-zinc-300 outline-none transition focus:border-cyan-400"
-                >
-                  <option value="" disabled>
-                    Select a timeline
-                  </option>
-
-                  <option value="As soon as possible">
-                    As soon as possible
-                  </option>
-
-                  <option value="1 - 2 weeks">
-                    1 - 2 weeks
-                  </option>
-
-                  <option value="2 - 4 weeks">
-                    2 - 4 weeks
-                  </option>
-
-                  <option value="1 - 3 months">
-                    1 - 3 months
-                  </option>
-
-                  <option value="Flexible">
-                    Flexible
-                  </option>
-
-                  <option value="Not sure yet">
-                    Not sure yet
-                  </option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block text-sm font-medium text-zinc-300"
-                >
-                  Project Details
-                </label>
-
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  minLength={20}
-                  maxLength={5000}
-                  rows={7}
-                  placeholder="Tell us what you want to build, important features, platforms, and other requirements..."
-                  className="w-full resize-none rounded-xl border border-white/10 bg-zinc-900 px-4 py-3.5 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
+                  value={
+                    formData.website
+                  }
+                  onChange={
+                    handleChange
+                  }
                 />
               </div>
 
               {/* Cloudflare Turnstile */}
-              {siteKey ? (
-                <div className="overflow-hidden rounded-xl">
+              <div className="mt-7">
+                <p className="mb-3 text-sm font-medium text-zinc-300">
+                  Security
+                  verification *
+                </p>
+
+                {!siteKey ? (
+                  <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-300">
+                    Security
+                    verification is not
+                    configured.
+                  </div>
+                ) : (
                   <div
-                    className="cf-turnstile"
-                    data-sitekey={siteKey}
-                    data-theme="dark"
+                    ref={
+                      turnstileContainerRef
+                    }
+                    className="min-h-[70px]"
                   />
-                </div>
-              ) : (
-                <div className="rounded-xl border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-400">
-                  Security verification is not configured.
+                )}
+
+                {securityMessage && (
+                  <p
+                    className={`mt-3 text-sm ${
+                      turnstileToken
+                        ? "text-green-400"
+                        : "text-amber-400"
+                    }`}
+                  >
+                    {
+                      securityMessage
+                    }
+                  </p>
+                )}
+              </div>
+
+              {message && (
+                <div
+                  className={`mt-6 rounded-xl border p-4 text-sm ${
+                    status ===
+                    "success"
+                      ? "border-green-500/30 bg-green-500/10 text-green-300"
+                      : "border-red-500/30 bg-red-500/10 text-red-300"
+                  }`}
+                >
+                  {status ===
+                  "success"
+                    ? "✓ "
+                    : "✕ "}
+
+                  {message}
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={
-                  status === "loading" || !siteKey
+                  status ===
+                  "loading"
                 }
-                className="w-full rounded-xl bg-cyan-400 px-6 py-4 text-center font-bold text-zinc-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-7 w-full rounded-xl bg-cyan-400 px-6 py-4 font-bold text-zinc-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {status === "loading"
-                  ? "Sending Request..."
-                  : "Submit Project Request →"}
+                {status ===
+                "loading"
+                  ? "Sending..."
+                  : "Submit Project Request"}
               </button>
-
-              {status === "success" && (
-                <div className="rounded-xl border border-green-400/20 bg-green-400/10 px-4 py-3 text-sm leading-6 text-green-400">
-                  ✓ {statusMessage}
-                </div>
-              )}
-
-              {status === "error" && (
-                <div className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm leading-6 text-red-400">
-                  ✕ {statusMessage}
-                </div>
-              )}
             </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
