@@ -1,23 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-
-const resend = new Resend(
-  process.env.RESEND_API_KEY
-);
-
-const redis = Redis.fromEnv();
-
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(
-    5,
-    "10 m"
-  ),
-  prefix: "portfolio-contact",
-});
 
 const allowedServices = [
   "Web Development",
@@ -30,29 +14,77 @@ const allowedServices = [
 ];
 
 const allowedDeadlines = [
-  "As soon as possible",
-  "1 - 2 weeks",
-  "2 - 4 weeks",
-  "1 - 3 months",
+  "ASAP",
+  "1-2 weeks",
+  "2-4 weeks",
+  "1-3 months",
   "Flexible",
   "Not sure yet",
 ];
 
 type TurnstileResponse = {
   success: boolean;
-  hostname?: string;
   "error-codes"?: string[];
 };
 
-export async function POST(
-  request: Request
-) {
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+export async function POST(request: Request) {
   try {
-    /*
-      ---------------------------------
-      1. RATE LIMIT
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 1. CHECK UPSTASH CONFIGURATION
+    // --------------------------------------------------
+
+    const upstashUrl =
+      process.env.UPSTASH_REDIS_REST_URL;
+
+    const upstashToken =
+      process.env.UPSTASH_REDIS_REST_TOKEN;
+
+    if (!upstashUrl || !upstashToken) {
+      console.error(
+        "Upstash environment variables are missing."
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "Server security configuration is incomplete.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    // --------------------------------------------------
+    // 2. CREATE REDIS + RATE LIMITER
+    // --------------------------------------------------
+
+    const redis = new Redis({
+      url: upstashUrl,
+      token: upstashToken,
+    });
+
+    const ratelimit = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(
+        5,
+        "10 m"
+      ),
+      prefix: "appfolor-contact",
+    });
+
+    // --------------------------------------------------
+    // 3. GET VISITOR IP
+    // --------------------------------------------------
 
     const forwardedFor =
       request.headers.get(
@@ -63,8 +95,14 @@ export async function POST(
       forwardedFor
         ?.split(",")[0]
         ?.trim() ||
-      request.headers.get("x-real-ip") ||
+      request.headers.get(
+        "x-real-ip"
+      ) ||
       "unknown";
+
+    // --------------------------------------------------
+    // 4. RATE LIMIT
+    // --------------------------------------------------
 
     const rateLimitResult =
       await ratelimit.limit(ip);
@@ -72,8 +110,7 @@ export async function POST(
     if (!rateLimitResult.success) {
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Too many requests. Please wait a few minutes and try again.",
         },
         {
@@ -82,11 +119,9 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      2. READ FORM DATA
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 5. READ FORM DATA
+    // --------------------------------------------------
 
     const body = await request.json();
 
@@ -101,28 +136,23 @@ export async function POST(
       turnstileToken,
     } = body;
 
-    /*
-      ---------------------------------
-      3. HONEYPOT
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 6. HONEYPOT ANTI-SPAM
+    // --------------------------------------------------
 
     if (
       typeof website === "string" &&
-      website.trim().length > 0
+      website.trim() !== ""
     ) {
+      // Fake success for bots.
       return NextResponse.json({
         success: true,
-        message:
-          "Project request received.",
       });
     }
 
-    /*
-      ---------------------------------
-      4. REQUIRED FIELDS
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 7. REQUIRED FIELD VALIDATION
+    // --------------------------------------------------
 
     if (
       typeof name !== "string" ||
@@ -134,8 +164,7 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Please complete all required fields.",
         },
         {
@@ -144,14 +173,7 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      5. CLEAN INPUT
-      ---------------------------------
-    */
-
-    const cleanName =
-      name.trim();
+    const cleanName = name.trim();
 
     const cleanEmail =
       email.trim().toLowerCase();
@@ -159,22 +181,20 @@ export async function POST(
     const cleanService =
       service.trim();
 
+    const cleanBudget =
+      typeof budget === "string"
+        ? budget.trim()
+        : "";
+
     const cleanDeadline =
       deadline.trim();
 
     const cleanMessage =
       message.trim();
 
-    const cleanBudget =
-      typeof budget === "string"
-        ? budget.trim()
-        : "";
-
-    /*
-      ---------------------------------
-      6. LENGTH VALIDATION
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 8. FIELD LENGTH VALIDATION
+    // --------------------------------------------------
 
     if (
       cleanName.length < 2 ||
@@ -182,8 +202,7 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Please enter a valid name.",
         },
         {
@@ -193,13 +212,13 @@ export async function POST(
     }
 
     if (
+      cleanEmail.length < 5 ||
       cleanEmail.length > 150
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Email address is too long.",
+          error:
+            "Please enter a valid email address.",
         },
         {
           status: 400,
@@ -213,9 +232,8 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Project details must be between 20 and 5000 characters.",
+          error:
+            "Message must be between 20 and 5000 characters.",
         },
         {
           status: 400,
@@ -223,11 +241,9 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      7. EMAIL VALIDATION
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 9. EMAIL VALIDATION
+    // --------------------------------------------------
 
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -237,8 +253,7 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Please enter a valid email address.",
         },
         {
@@ -247,11 +262,9 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      8. SERVICE VALIDATION
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 10. SERVICE WHITELIST
+    // --------------------------------------------------
 
     if (
       !allowedServices.includes(
@@ -260,9 +273,8 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Invalid service selection.",
+          error:
+            "Invalid service selected.",
         },
         {
           status: 400,
@@ -270,11 +282,9 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      9. TIMELINE VALIDATION
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 11. DEADLINE WHITELIST
+    // --------------------------------------------------
 
     if (
       !allowedDeadlines.includes(
@@ -283,9 +293,8 @@ export async function POST(
     ) {
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Invalid timeline selection.",
+          error:
+            "Invalid timeline selected.",
         },
         {
           status: 400,
@@ -293,15 +302,12 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      10. TURNSTILE
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 12. CHECK TURNSTILE SECRET
+    // --------------------------------------------------
 
     const turnstileSecret =
-      process.env
-        .TURNSTILE_SECRET_KEY;
+      process.env.TURNSTILE_SECRET_KEY;
 
     if (!turnstileSecret) {
       console.error(
@@ -310,8 +316,7 @@ export async function POST(
 
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Security verification is not configured.",
         },
         {
@@ -320,7 +325,11 @@ export async function POST(
       );
     }
 
-    const verificationResponse =
+    // --------------------------------------------------
+    // 13. VERIFY CLOUDFLARE TURNSTILE
+    // --------------------------------------------------
+
+    const verifyResponse =
       await fetch(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         {
@@ -341,21 +350,20 @@ export async function POST(
         }
       );
 
-    const verification =
-      (await verificationResponse.json()) as TurnstileResponse;
+    const turnstileResult =
+      (await verifyResponse.json()) as TurnstileResponse;
 
-    if (!verification.success) {
+    if (!turnstileResult.success) {
       console.error(
         "Turnstile verification failed:",
-        verification[
+        turnstileResult[
           "error-codes"
         ]
       );
 
       return NextResponse.json(
         {
-          success: false,
-          message:
+          error:
             "Security verification failed. Please try again.",
         },
         {
@@ -364,25 +372,45 @@ export async function POST(
       );
     }
 
-    /*
-      ---------------------------------
-      11. DESTINATION EMAIL
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 14. CHECK RESEND API KEY
+    // --------------------------------------------------
 
-    const recipientEmail =
+    const resendApiKey =
+      process.env.RESEND_API_KEY;
+
+    if (!resendApiKey) {
+      console.error(
+        "RESEND_API_KEY is missing."
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "Email service is not configured.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    // --------------------------------------------------
+    // 15. CHECK DESTINATION EMAIL
+    // --------------------------------------------------
+
+    const contactToEmail =
       process.env.CONTACT_TO_EMAIL;
 
-    if (!recipientEmail) {
+    if (!contactToEmail) {
       console.error(
         "CONTACT_TO_EMAIL is missing."
       );
 
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Server configuration error.",
+          error:
+            "Destination email is not configured.",
         },
         {
           status: 500,
@@ -390,59 +418,133 @@ export async function POST(
       );
     }
 
+    // --------------------------------------------------
+    // 16. CREATE RESEND
+    // THIS IS WHERE RESEND IS CREATED
+    // --------------------------------------------------
+
+    const resend =
+      new Resend(resendApiKey);
+
+    // --------------------------------------------------
+    // 17. ESCAPE USER CONTENT
+    // --------------------------------------------------
+
+    const safeName =
+      escapeHtml(cleanName);
+
+    const safeEmail =
+      escapeHtml(cleanEmail);
+
+    const safeService =
+      escapeHtml(cleanService);
+
     const safeBudget =
-      cleanBudget ||
-      "Not specified";
+      escapeHtml(
+        cleanBudget ||
+          "Not specified"
+      );
 
-    /*
-      ---------------------------------
-      12. SEND EMAIL
-      ---------------------------------
-    */
+    const safeDeadline =
+      escapeHtml(cleanDeadline);
 
-    const { data, error } =
+    const safeMessage =
+      escapeHtml(cleanMessage).replaceAll(
+        "\n",
+        "<br />"
+      );
+
+    // --------------------------------------------------
+    // 18. SEND EMAIL THROUGH RESEND
+    // --------------------------------------------------
+
+    const { error: resendError } =
       await resend.emails.send({
         from:
-          "Project Inquiry <onboarding@resend.dev>",
+          "AppFolor <onboarding@resend.dev>",
 
-        to: [recipientEmail],
+        to: [
+          contactToEmail,
+        ],
 
-        replyTo: cleanEmail,
+        replyTo:
+          cleanEmail,
 
         subject:
-          `New Project Request: ${cleanService}`,
+          `New AppFolor project inquiry from ${cleanName}`,
 
-        text: `
-NEW PROJECT REQUEST
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; color: #18181b;">
 
-CLIENT
-Name: ${cleanName}
-Email: ${cleanEmail}
+            <h1 style="margin-bottom: 8px;">
+              New AppFolor Project Inquiry
+            </h1>
 
-PROJECT
-Service: ${cleanService}
-Budget: ${safeBudget}
-Preferred Timeline: ${cleanDeadline}
+            <p style="color: #71717a;">
+              A visitor submitted the project form on AppFolor.
+            </p>
 
-PROJECT DETAILS
-${cleanMessage}
+            <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e4e4e7;" />
 
----
-Submitted through AppFolor website.
+            <p>
+              <strong>Name:</strong>
+              ${safeName}
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+              ${safeEmail}
+            </p>
+
+            <p>
+              <strong>Service:</strong>
+              ${safeService}
+            </p>
+
+            <p>
+              <strong>Budget:</strong>
+              ${safeBudget}
+            </p>
+
+            <p>
+              <strong>Timeline:</strong>
+              ${safeDeadline}
+            </p>
+
+            <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e4e4e7;" />
+
+            <h2>
+              Project Message
+            </h2>
+
+            <p style="line-height: 1.7;">
+              ${safeMessage}
+            </p>
+
+            <hr style="margin: 24px 0; border: 0; border-top: 1px solid #e4e4e7;" />
+
+            <p style="font-size: 12px; color: #a1a1aa;">
+              Submitted through AppFolor website.
+            </p>
+
+          </div>
         `,
       });
 
-    if (error) {
+    // --------------------------------------------------
+    // 19. HANDLE RESEND ERROR
+    // --------------------------------------------------
+
+    if (resendError) {
       console.error(
         "Resend error:",
-        error
+        resendError
       );
 
       return NextResponse.json(
         {
-          success: false,
-          message:
-            "Project request could not be sent.",
+          error:
+            "We could not send your message. Please try again.",
         },
         {
           status: 500,
@@ -450,28 +552,25 @@ Submitted through AppFolor website.
       );
     }
 
-    /*
-      ---------------------------------
-      13. SUCCESS
-      ---------------------------------
-    */
+    // --------------------------------------------------
+    // 20. SUCCESS
+    // --------------------------------------------------
 
     return NextResponse.json({
       success: true,
+
       message:
-        "Project request sent successfully.",
-      id: data?.id,
+        "Your project request has been sent successfully.",
     });
   } catch (error) {
     console.error(
-      "Project inquiry API error:",
+      "Contact API error:",
       error
     );
 
     return NextResponse.json(
       {
-        success: false,
-        message:
+        error:
           "Something went wrong. Please try again.",
       },
       {

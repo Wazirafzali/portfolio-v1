@@ -106,10 +106,11 @@ export default function Contact() {
       id="contact"
       className="border-t border-white/10 bg-zinc-950 py-28"
     >
+      
       <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        strategy="afterInteractive"
-      />
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  strategy="afterInteractive"
+/>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2">
