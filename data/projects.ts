@@ -22,9 +22,9 @@ export const projects: Project[] = [
     title: "AppFolor Studio Website",
     category: "Web",
     shortDescription:
-      "A modern full-stack studio website built with Next.js, TypeScript, Tailwind CSS, dynamic case studies, and a real contact API.",
+      "A focused digital home for AppFolor, bringing services, project explorations, and secure inquiries into one experience.",
     description:
-      "A production-ready studio website designed and developed using Next.js, TypeScript, Tailwind CSS, reusable React components, dynamic routes, SEO metadata, GitHub, Vercel, and a server-side contact form.",
+      "A studio website that brings AppFolor’s services and project explorations together, with responsive layouts, clear navigation, and a secure path to start a project.",
     type: "REAL PROJECT",
     technologies: [
       "Next.js",

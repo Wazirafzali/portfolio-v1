@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import {
   FormEvent,
   useEffect,
@@ -466,6 +467,7 @@ export default function Contact() {
                   </label>
 
                   <input
+                    autoComplete="name"
                     id="name"
                     name="name"
                     type="text"
@@ -492,6 +494,7 @@ export default function Contact() {
                   </label>
 
                   <input
+                    autoComplete="email"
                     id="email"
                     name="email"
                     type="email"
@@ -645,6 +648,7 @@ export default function Contact() {
                   </label>
 
                   <textarea
+                    aria-describedby="project-details-hint"
                     id="message"
                     name="message"
                     required
@@ -658,8 +662,9 @@ export default function Contact() {
                       handleChange
                     }
                     className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
-                    placeholder="Tell us what you would like to build..."
+                    placeholder="What are you building, who is it for, and what would success look like?"
                   />
+                  <p id="project-details-hint" className="mt-2 text-xs text-zinc-400">A few sentences are enough to start. Minimum 20 characters.</p>
                 </div>
               </div>
 
@@ -726,6 +731,8 @@ export default function Contact() {
 
               {message && (
                 <div
+                  role="status"
+                  aria-live="polite"
                   className={`mt-6 rounded-xl border p-4 text-sm ${
                     status ===
                     "success"
@@ -755,6 +762,7 @@ export default function Contact() {
                   ? "Sending..."
                   : "Submit Project Request"}
               </button>
+              <p className="contact-privacy">Your details are used to respond to your inquiry. <Link href="/privacy">Read our privacy policy</Link>.</p>
             </form>
           </div>
         </div>

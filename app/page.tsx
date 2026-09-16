@@ -1,91 +1,18 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import Team from "@/components/Team";
-import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Process from "@/components/Process";
-import WhyUs from "@/components/WhyUs";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
+import LogoMark from "@/components/LogoMark";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-zinc-950 text-white">
-      <StructuredData />
-
-      <a
-        href="#main-content"
-        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-cyan-400 px-4 py-2 font-semibold text-zinc-950 transition focus:translate-y-0"
-      >
-        Skip to content
-      </a>
-
-      <Navbar />
-
-      <div id="main-content">
-        <Hero />
-
-        <section
-          id="about"
-          className="border-t border-white/10 bg-zinc-900/30 py-28"
-        >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2">
-              <div>
-                <p className="mb-4 font-medium text-cyan-400">
-                  About AppFolor
-                </p>
-
-                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                  Specialized people.
-                  <span className="block text-zinc-500">
-                    One digital team.
-                  </span>
-                </h2>
-              </div>
-
-              <div className="space-y-6 text-lg leading-8 text-zinc-400">
-                <p>
-                  AppFolor is a digital development studio for businesses and startups. We bring web development, mobile applications, and video editing into one coordinated process.
-                </p>
-
-                <p>
-                  The team includes dedicated specialists in Android
-                  development, iOS development, and professional
-                  video editing.
-                </p>
-
-                <p>
-                  When a project requires multiple services, the
-                  required specialists work together while the client
-                  communicates through one coordinated project process.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Services />
-
-        <Team />
-
-        <TechStack />
-
-        <Projects />
-
-        <Process />
-
-        <WhyUs />
-
-        <FAQ />
-
-        <Contact />
-      </div>
-
-      <Footer />
-    </main>
-  );
+  return <div id="top" className="studio-site"><StructuredData /><a href="#main-content" className="skip-link">Skip to content</a><Navbar /><main id="main-content"><Hero /><Projects /><Services /><Process />
+    <section id="about" className="studio-section about-section"><div className="studio-container about-layout"><div className="about-art" aria-hidden="true"><span>APPFOLOR / THE STUDIO</span><LogoMark size={180} /><div className="about-art-bottom"><span>Different disciplines.</span><span>A shared direction. ↗</span></div></div><div><p className="eyebrow">04 / MEET THE STUDIO</p><h2>Different skills.<br /><em>One shared focus.</em></h2><p className="about-lead">Making digital experiences that feel right — for your business and the people who use them.</p><p className="about-body">AppFolor brings web development, Android, iOS, and video editing into one coordinated studio. We combine specialist expertise with clear communication, practical planning, and attention to the details.</p><div className="studio-values"><div><strong>Built around you</strong><span>Scope shaped by your goals.</span></div><div><strong>Connected expertise</strong><span>The right skills, working together.</span></div></div><a href="#contact" className="text-link">Tell us what you’re thinking <ArrowUpRight size={17} /></a></div></div></section>
+    <FAQ /><div className="contact-layout studio-container"><aside className="contact-intro"><p className="eyebrow">YOUR NEXT CHAPTER</p><h2>Something <br />in mind?<br /><em>Let’s make <br />it happen.</em></h2><p>A new idea, a better website, or a product ready for its next step. Tell us where you want to go.</p><div className="contact-expectations"><h3>What happens next</h3><ol><li>We review your project details.</li><li>We discuss your goals and questions.</li><li>We agree on a clear way forward.</li></ol></div><span className="contact-small">No commitment until we agree on the scope.</span></aside><Contact /></div>
+  </main><Footer /></div>;
 }

@@ -1,101 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
 
-import { useState } from "react";
-
-import { teamInfo } from "@/data/team";
+const links = [{name:"Work",href:"/#projects"},{name:"Services",href:"/#services"},{name:"Our approach",href:"/#process"},{name:"Studio",href:"/#about"}];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const links = [
-    { name: "Services", href: "#services" },
-    { name: "Expertise", href: "#team" },
-    { name: "Projects", href: "#projects" },
-    { name: "Process", href: "#process" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 shadow-lg shadow-black/5 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <Link
-          href="/"
-          className="text-xl font-bold tracking-tight text-white transition hover:text-cyan-400 sm:text-2xl"
-        >
-          <BrandLogo />
-        </Link>
-
-        <div className="hidden items-center gap-7 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-zinc-300 transition hover:text-cyan-400"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-
-        <a
-          href="#contact"
-          className="hidden rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-cyan-300 md:inline-flex"
-        >
-          Start a Project
-        </a>
-
-        <button
-          type="button"
-          onClick={() =>
-            setMenuOpen((previous) => !previous)
-          }
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-2xl text-white transition hover:border-cyan-400 hover:text-cyan-400 md:hidden"
-          aria-label={
-            menuOpen
-              ? "Close navigation menu"
-              : "Open navigation menu"
-          }
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? "✕" : "☰"}
-        </button>
-      </nav>
-
-      {menuOpen && (
-        <div className="border-t border-white/10 bg-zinc-950 md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col px-5 py-6">
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() =>
-                  setMenuOpen(false)
-                }
-                className="rounded-lg border-b border-white/5 px-2 py-4 text-base font-medium text-zinc-300 transition hover:bg-white/5 hover:pl-4 hover:text-cyan-400"
-              >
-                {link.name}
-              </a>
-            ))}
-
-            <a
-              href="#contact"
-              onClick={() =>
-                setMenuOpen(false)
-              }
-              className="mt-6 rounded-xl bg-cyan-400 px-5 py-3 text-center font-bold text-zinc-950 transition hover:bg-cyan-300"
-            >
-              Start a Project
-            </a>
-
-            <p className="mt-6 text-center text-xs text-zinc-600">
-              {teamInfo.tagline}
-            </p>
-          </div>
-        </div>
-      )}
-    </header>
-  );
+  const [open,setOpen] = useState(false);
+  return <header className="studio-header"><nav className="studio-container studio-nav" aria-label="Main navigation">
+    <Link href="/" className="studio-brand" aria-label="AppFolor home"><BrandLogo /></Link>
+    <div className="desktop-links">{links.map(link=><Link key={link.href} href={link.href}>{link.name}</Link>)}</div>
+    <Link href="/#contact" className="nav-contact">Let’s talk <ArrowUpRight size={17} /></Link>
+    <button className="menu-toggle" aria-label={open?"Close navigation menu":"Open navigation menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X />:<Menu />}</button>
+  </nav>{open&&<nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation" onKeyDown={event=>{if(event.key==="Escape"){setOpen(false);document.querySelector<HTMLButtonElement>(".menu-toggle")?.focus();}}}>{links.map(link=><Link key={link.href} href={link.href} onClick={()=>setOpen(false)}>{link.name}<ArrowUpRight size={18} /></Link>)}<Link href="/#contact" onClick={()=>setOpen(false)}>Start a project<ArrowUpRight size={18} /></Link></nav>}</header>;
 }

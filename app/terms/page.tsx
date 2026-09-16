@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Terms of Service", description: "Ter
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
+    <main className="studio-site legal-page min-h-screen">
       <div className="mx-auto max-w-4xl px-6 py-20 lg:px-8">
         <Link
           href="/"
