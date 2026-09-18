@@ -1,3 +1,4 @@
+import CodeAtmosphere from "@/components/CodeAtmosphere";
 import { ArrowUpRight, Code2, Smartphone, Apple, Layers3, Film } from "lucide-react";
 
 const services = [
@@ -9,7 +10,7 @@ const services = [
 ];
 
 export default function Services() {
-  return <section id="services" className="studio-section services-section"><div className="studio-container">
+  return <section id="services" className="studio-section motion-section services-section"><CodeAtmosphere /><div className="studio-container">
     <div className="section-heading"><div><p className="eyebrow">02 / WHAT WE DO</p><h2>The right expertise.<br /><em>All in one place.</em></h2></div><p>Start with one service, or bring them together. We build a clear plan around what your project actually needs.</p></div>
     <div className="service-list">{services.map(({number,title,icon:Icon,description,tags})=><article key={number} className="service-row"><span className="service-number">{number}</span><div className="service-title"><Icon size={23} aria-hidden="true" /><h3>{title}</h3></div><div className="service-description"><p>{description}</p><div className="service-tags">{tags.map(tag=><span key={tag}>{tag}</span>)}</div></div><a href="#contact" className="service-arrow" aria-label={`Discuss ${title}`}><ArrowUpRight size={22} /></a></article>)}</div>
   </div></section>;

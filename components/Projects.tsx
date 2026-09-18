@@ -1,4 +1,6 @@
 "use client";
+import CodeAtmosphere from "@/components/CodeAtmosphere";
+
 
 import { useState } from "react";
 import Link from "next/link";
@@ -14,7 +16,7 @@ export default function Projects() {
   const [expanded,setExpanded] = useState(false);
   const filtered = projects.filter(project=>category==="All"||project.category===category);
   const shown = category==="All"&&!expanded ? [projects[0],projects[3],projects[5]] : filtered;
-  return <section id="projects" className="studio-section work-section"><div className="studio-container">
+  return <section id="projects" className="studio-section motion-section work-section"><CodeAtmosphere /><div className="studio-container">
     <div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK &amp; EXPLORATIONS</p><h2>A little of<br /><em>what’s possible.</em></h2></div><p>Our studio website, alongside concepts exploring web, mobile, and video. Concept projects are clearly labeled.</p></div>
     <div className="project-toolbar"><div className="project-filters" role="group" aria-label="Filter projects">{categories.map(item=><button key={item} type="button" aria-pressed={category===item} onClick={()=>{setCategory(item);setExpanded(false);}}>{item}</button>)}</div><span className="project-count" role="status">{shown.length} {shown.length===1?"project":"projects"}</span></div>
     <div className={`work-grid ${category==="All"&&!expanded?"curated-grid":""}`}>
