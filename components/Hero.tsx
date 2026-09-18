@@ -1,8 +1,10 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import ProductVisual from "@/components/ProductVisual";
+import CodeAtmosphere from "@/components/CodeAtmosphere";
 
 export default function Hero() {
   return <section className="studio-hero" aria-labelledby="hero-heading">
+    <CodeAtmosphere />
     <div className="studio-container hero-layout">
       <div className="hero-copy">
         <span className="availability"><span /> Open for new projects</span>
