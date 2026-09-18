@@ -1,3 +1,4 @@
+import CodeAtmosphere from "@/components/CodeAtmosphere";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
@@ -6,7 +7,8 @@ export const metadata: Metadata = { title: "Privacy Policy", description: "How A
 
 export default function PrivacyPage() {
   return (
-    <main className="studio-site legal-page min-h-screen">
+    <main className="studio-site legal-page min-h-screen legal-motion">
+      <CodeAtmosphere />
       <div className="mx-auto max-w-4xl px-6 py-20 lg:px-8">
         <Link
           href="/"
