@@ -271,6 +271,7 @@ export default function Contact() {
     event: FormEvent<HTMLFormElement>
   ) {
     event.preventDefault();
+    if (status === "loading") return;
 
     setStatus("idle");
     setMessage("");
@@ -306,6 +307,7 @@ export default function Contact() {
         "/api/contact",
         {
           method: "POST",
+          signal: AbortSignal.timeout(35_000),
 
           headers: {
             "Content-Type":
@@ -362,7 +364,7 @@ export default function Contact() {
         data
       );
 
-      if (!response.ok) {
+      if (!response.ok || data.success !== true) {
         setStatus("error");
 
         setMessage(
@@ -396,7 +398,9 @@ export default function Contact() {
       setStatus("error");
 
       setMessage(
-        "The request could not reach the server. Please check your connection and try again."
+        error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")
+          ? "We could not confirm delivery in time. Your details are still here. Please wait before trying again to avoid a duplicate request."
+          : "We could not confirm delivery. Please check your connection before trying again. Your details are still here."
       );
 
       resetTurnstile();
@@ -577,6 +581,7 @@ export default function Contact() {
                   <input
                     id="budget"
                     name="budget"
+                    maxLength={100}
                     type="text"
                     value={
                       formData.budget

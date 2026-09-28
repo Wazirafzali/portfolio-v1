@@ -1,3 +1,4 @@
+import { ContactInputError, readContactBody } from "@/lib/contact-input";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -38,6 +39,7 @@ function escapeHtml(value: string) {
 
 export async function POST(request: Request) {
   try {
+    const body = await readContactBody(request);
     // --------------------------------------------------
     // 1. CHECK UPSTASH CONFIGURATION
     // --------------------------------------------------
@@ -71,6 +73,7 @@ export async function POST(request: Request) {
     const redis = new Redis({
       url: upstashUrl,
       token: upstashToken,
+      signal: () => AbortSignal.timeout(5_000),
     });
 
     const ratelimit = new Ratelimit({
@@ -115,15 +118,16 @@ export async function POST(request: Request) {
         },
         {
           status: 429,
+          headers: { "Retry-After": String(Math.max(1, Math.ceil((rateLimitResult.reset - Date.now()) / 1000))) },
         }
       );
     }
 
     // --------------------------------------------------
-    // 5. READ FORM DATA
+    // 5. USE THE SIZE-LIMITED FORM DATA
     // --------------------------------------------------
 
-    const body = await request.json();
+
 
     const {
       name,
@@ -334,6 +338,7 @@ export async function POST(request: Request) {
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         {
           method: "POST",
+          signal: AbortSignal.timeout(8_000),
 
           headers: {
             "Content-Type":
@@ -349,6 +354,10 @@ export async function POST(request: Request) {
           }),
         }
       );
+
+    if (!verifyResponse.ok) {
+      return NextResponse.json({ error: "Security verification is temporarily unavailable. Please try again." }, { status: 503 });
+    }
 
     const turnstileResult =
       (await verifyResponse.json()) as TurnstileResponse;
@@ -461,7 +470,7 @@ export async function POST(request: Request) {
     const { error: resendError } =
       await resend.emails.send({
         from:
-          "AppFolor <onboarding@resend.dev>",
+          process.env.CONTACT_FROM_EMAIL || "AppFolor <onboarding@resend.dev>",
 
         to: [
           contactToEmail,
@@ -563,6 +572,12 @@ export async function POST(request: Request) {
         "Your project request has been sent successfully.",
     });
   } catch (error) {
+    if (error instanceof ContactInputError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
+    if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
+      return NextResponse.json({ error: "The service took too long to respond. Please try again." }, { status: 503 });
+    }
     console.error(
       "Contact API error:",
       error
