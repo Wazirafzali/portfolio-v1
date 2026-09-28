@@ -1,0 +1,34 @@
+html{color-scheme:dark}
+.theme-toggle{position:fixed;bottom:max(18px,env(safe-area-inset-bottom));right:18px;z-index:60;display:flex;align-items:center;gap:9px;min-height:46px;padding:11px 16px;border:1px solid #53777b;border-radius:50px;background:#132e34;color:#d9efec;box-shadow:0 4px 20px #0003;font:600 12px Arial,sans-serif;cursor:pointer}
+.theme-toggle:focus-visible{outline:3px solid #1bafa5;outline-offset:4px}
+html[data-theme=light]{color-scheme:light;background:#eaf1eb}
+html[data-theme=light] body{background:#eaf1eb}
+html[data-theme=light] .studio-site{--ink:#183638;--paper:#e1ebe5;--muted:#48646a;--line:#afc7c2;background:#eaf1eb;color:#183638}
+html[data-theme=light] :is(.studio-header,.mobile-navigation){background:#eaf1ebf5;color:#183638}
+html[data-theme=light] .studio-hero{background:radial-gradient(ellipse at 80% 40%,#c5e3d9,transparent 55%),#eaf1eb}
+html[data-theme=light] :is(.services-section,.faq-section,.legal-page){background:#eaf1eb!important;color:#183638}
+html[data-theme=light] :is(.work-section,.process-section,.about-section,.case-story,.studio-footer){background:#dce9e2;color:#183638}
+html[data-theme=light] :is(.work-card,.service-row,.process-grid article){background:#edf4ef;border-color:#adc7bf;color:#183638}
+html[data-theme=light] :is(.studio-brand,.nav-contact,.desktop-links,.menu-toggle,.about-lead,.contact-privacy a,.legal-page .text-white){color:#183638}
+html[data-theme=light] .studio-site em,html[data-theme=light] .studio-brand .text-cyan-400{color:#08766f}
+html[data-theme=light] :is(.eyebrow,.hero-description,.hero-note,.section-heading>p,.work-card>p,.work-meta,.project-count,.project-badge,.work-more p,.service-description>p,.service-number,.service-tags,.process-grid p,.process-output,.about-body,.studio-values span,.faq-items p,.contact-intro>p,.contact-expectations li,.contact-small,.contact-privacy,.footer-top>div>p,.footer-bottom,.case-heading>p,.case-cover>p,.case-story-grid article>p:last-child,.legal-page .text-zinc-400,.legal-page .text-zinc-500){color:#48646a}
+html[data-theme=light] :is(.availability,.project-filters,.motion-toggle,.theme-toggle){background:#eaf1eb;color:#214b4c;border-color:#8cafa7}
+html[data-theme=light] .discipline-strip{background:#dce9e2!important;color:#365d5e}
+html[data-theme=light] :is(.outline-button,.case-tools>div>span){color:#234c4c;border-color:#87a99e}
+html[data-theme=light] .project-filters button{color:#365d5e}
+html[data-theme=light] .project-filters button[aria-pressed=true]{background:#176e68;color:#f0faf5}
+html[data-theme=light] :is(.primary-button,.studio-site #contact button[type=submit]){background:#176e68;color:#f0faf5}
+html[data-theme=light] .studio-site #contact form{background:#edf4ef;border-color:#a6c1b9}
+html[data-theme=light] .studio-site #contact :is(label,.text-zinc-300){color:#234c4c}
+html[data-theme=light] .studio-site #contact :is(input,select,textarea){background:#e1ebe5;color:#183638;border-color:#86a99e}
+html[data-theme=light] .studio-site #contact :is(input,textarea)::placeholder{color:#506c67}
+html[data-theme=light] .studio-site #contact .mb-12>p{color:#48646a}
+html[data-theme=light] .studio-site #contact :is(.text-zinc-400,.text-zinc-500){color:#48646a}
+html[data-theme=light] .studio-site #contact .text-red-400{color:#a62336}
+html[data-theme=light] .studio-site #contact .text-emerald-400{color:#176b4a}
+html[data-theme=light] .hero-composition em{color:#6ae4e1}
+html[data-theme=light] :is(.studio-site a:hover,.faq-items details[open] summary){color:#08766f}
+html[data-theme=light] .studio-site .primary-button:hover{color:#f0faf5;background:#105c58}
+html[data-theme=light] .legal-page .text-cyan-400{color:#08766f}
+.studio-footer{padding-bottom:68px}.legal-page{padding-bottom:68px}
+

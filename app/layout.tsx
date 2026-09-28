@@ -9,6 +9,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import "./studio.css";
 import "./studio-refinement.css";
+import "./theme.css";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
     metadataBase: new URL(
@@ -123,6 +125,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         {children}
+        <ThemeToggle />
 
         <Analytics />
 
