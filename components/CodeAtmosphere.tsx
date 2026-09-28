@@ -17,9 +17,14 @@ export default function CodeAtmosphere() {
   useEffect(() => {
     const element = root.current;
     if (!element) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
+    let intersects = false;
+    const updateVisibility = () => setVisible(intersects && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      intersects = entry.isIntersecting;
+      updateVisibility();
+    });
     observer.observe(element);
-    const onVisibility = () => setVisible(!document.hidden);
+    const onVisibility = updateVisibility;
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       observer.disconnect();

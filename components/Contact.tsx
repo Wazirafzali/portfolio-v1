@@ -116,97 +116,103 @@ export default function Contact() {
       return;
     }
 
-    try {
-      widgetIdRef.current =
-        window.turnstile.render(
-          turnstileContainerRef.current,
-          {
-            sitekey: siteKey,
+    // Mount the external widget after layout, and cancel if the component unmounts.
+    const frame = requestAnimationFrame(() => {
+      if (!window.turnstile || !turnstileContainerRef.current || widgetIdRef.current) return;
+      try {
+        widgetIdRef.current =
+          window.turnstile.render(
+            turnstileContainerRef.current,
+            {
+              sitekey: siteKey,
 
-            theme: "dark",
+              theme: "dark",
 
-            size: "flexible",
+              size: "flexible",
 
-            retry: "auto",
+              retry: "auto",
 
-            "retry-interval": 8000,
+              "retry-interval": 8000,
 
-            callback: (token) => {
-              console.log(
-                "Turnstile verification successful."
-              );
+              callback: (token) => {
+                console.log(
+                  "Turnstile verification successful."
+                );
 
-              setTurnstileToken(token);
+                setTurnstileToken(token);
 
-              setSecurityMessage(
-                "Security verification completed."
-              );
-            },
+                setSecurityMessage(
+                  "Security verification completed."
+                );
+              },
 
-            "error-callback": (
-              errorCode
-            ) => {
-              console.error(
-                "Turnstile error:",
+              "error-callback": (
                 errorCode
-              );
+              ) => {
+                console.error(
+                  "Turnstile error:",
+                  errorCode
+                );
 
-              setTurnstileToken("");
+                setTurnstileToken("");
 
-              setSecurityMessage(
-                `Security verification error: ${errorCode}`
-              );
-            },
+                setSecurityMessage(
+                  `Security verification error: ${errorCode}`
+                );
+              },
 
-            "expired-callback": () => {
-              console.warn(
-                "Turnstile token expired."
-              );
+              "expired-callback": () => {
+                console.warn(
+                  "Turnstile token expired."
+                );
 
-              setTurnstileToken("");
+                setTurnstileToken("");
 
-              setSecurityMessage(
-                "Security verification expired. Please complete it again."
-              );
-            },
+                setSecurityMessage(
+                  "Security verification expired. Please complete it again."
+                );
+              },
 
-            "timeout-callback": () => {
-              console.warn(
-                "Turnstile verification timed out."
-              );
+              "timeout-callback": () => {
+                console.warn(
+                  "Turnstile verification timed out."
+                );
 
-              setTurnstileToken("");
+                setTurnstileToken("");
 
-              setSecurityMessage(
-                "Security verification timed out. Please try again."
-              );
-            },
+                setSecurityMessage(
+                  "Security verification timed out. Please try again."
+                );
+              },
 
-            "unsupported-callback": () => {
-              console.error(
-                "Turnstile browser unsupported."
-              );
+              "unsupported-callback": () => {
+                console.error(
+                  "Turnstile browser unsupported."
+                );
 
-              setTurnstileToken("");
+                setTurnstileToken("");
 
-              setSecurityMessage(
-                "This browser could not complete the security verification."
-              );
-            },
-          }
+                setSecurityMessage(
+                  "This browser could not complete the security verification."
+                );
+              },
+            }
+          );
+      } catch (error) {
+        console.error(
+          "Turnstile render error:",
+          error
         );
-    } catch (error) {
-      console.error(
-        "Turnstile render error:",
-        error
-      );
 
-      setSecurityMessage(
-        "Security verification could not be loaded."
-      );
-    }
+        setSecurityMessage(
+          "Security verification could not be loaded."
+        );
+      }
+
+    });
 
     return () => {
+      cancelAnimationFrame(frame);
       if (
         widgetIdRef.current &&
         window.turnstile
