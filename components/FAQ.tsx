@@ -2,7 +2,7 @@ import CodeAtmosphere from "@/components/CodeAtmosphere";
 const faqs = [
   ["What does a project cost?","Every project has a different scope. Share your goals, requirements, and an optional budget range. We’ll discuss a project estimate and agree on scope and pricing before work starts."],
   ["Can you build for both Android and iOS?","Yes. We coordinate Android and iOS as one project, aligning requirements, design direction, and milestones while addressing each platform’s needs."],
-  ["How will we work together?","You’ll have a single project contact for planning, updates, and reviews. Our workflow supports remote collaboration, including clients in different countries."],
+  ["How will we work together?","You’ll have a single project contact for planning, updates, and reviews. We coordinate remotely, with communication channels and review times agreed at the start."],
   ["How long will it take?","Timing depends on the features, complexity, content, and review process. We’ll agree on milestones and a delivery schedule after reviewing your requirements."],
   ["What if the scope changes?","We can discuss changes throughout the project. If they affect the agreed scope, we explain the impact on time and cost before continuing."],
   ["What happens after delivery?","We hand over the files, access, or deployment agreed for your project. Maintenance, updates, and post-delivery support can be included in your agreement."],

@@ -5,7 +5,7 @@ export type Project = {
   category: "Web" | "Android" | "iOS" | "Video";
   shortDescription: string;
   description: string;
-  type: string;
+  type: "REAL PROJECT" | "CONCEPT PROJECT";
   technologies: string[];
   challenge: string;
   solution: string;
@@ -53,17 +53,17 @@ export const projects: Project[] = [
     title: "Modern Business Website",
     category: "Web",
     shortDescription:
-      "A responsive business website concept focused on performance, usability, and customer conversion.",
+      "A business website concept exploring service presentation, clear navigation, and inquiry flows.",
     description:
       "A modern business website concept designed for companies that need a professional online presence and clear calls to action.",
     type: "CONCEPT PROJECT",
     technologies: ["Next.js", "React", "Tailwind CSS", "SEO"],
     challenge:
-      "The website needed to communicate services clearly while remaining visually professional and easy to navigate.",
+      "This exploration considers how a business could explain its services and guide visitors toward an inquiry.",
     solution:
-      "The interface uses clear sections, responsive layouts, strong calls to action, and reusable components.",
+      "The proposed approach groups services into clear sections and gives visitors a direct path to make an inquiry.",
     result:
-      "The result provides a strong foundation for a real business website that can later be customized for a client.",
+      "A visual direction for discussion. Implementation, usability testing, and performance measurement would be separate project steps.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",
@@ -83,9 +83,9 @@ export const projects: Project[] = [
     challenge:
       "Financial applications often contain large amounts of information that can become difficult to understand.",
     solution:
-      "The interface organizes information into statistics, portfolio sections, performance areas, and visual components.",
+      "The proposed interface groups summary figures, portfolio information, and charts. The illustration uses sample data.",
     result:
-      "The design provides a foundation for a future trading analytics application.",
+      "A dashboard layout exploration. Live data integrations and trading functionality are not part of this concept.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",
@@ -99,15 +99,15 @@ export const projects: Project[] = [
     shortDescription:
       "A mobile application concept designed for business operations and customer interaction.",
     description:
-      "A concept Android application focused on clean navigation, business workflows, and API-ready architecture.",
+      "An Android interface concept exploring navigation, service discovery, and everyday business tasks.",
     type: "CONCEPT PROJECT",
     technologies: ["Android", "Kotlin", "API", "Firebase"],
     challenge:
       "The challenge was to organize business features into a simple mobile experience.",
     solution:
-      "The app concept uses clear navigation, modular screens, reusable components, and API-ready data flows.",
+      "The proposed approach separates service discovery and customer actions into focused screens. Backend connections would be defined during development.",
     result:
-      "A scalable foundation for a real Android business application.",
+      "An illustrative mobile direction for further design and validation. No released Android application is presented here.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",
@@ -127,9 +127,9 @@ export const projects: Project[] = [
     challenge:
       "The product needed a simple mobile flow while supporting multiple customer actions.",
     solution:
-      "The interface separates booking, profile, notifications, and service management into focused screens.",
+      "The proposed flow separates service selection, booking, and account tasks to explore a simpler customer journey.",
     result:
-      "A professional iOS app structure ready for full product development.",
+      "An iOS experience concept for discussion. Development, device testing, and App Store release would be separate stages.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
     shortDescription:
       "A short-form video editing concept for social media campaigns, ads, and creator content.",
     description:
-      "A video editing project concept focused on fast pacing, clean cuts, subtitles, transitions, and platform-ready exports.",
+      "A visual direction for short-form video, exploring pacing, captions, and a consistent campaign style.",
     type: "CONCEPT PROJECT",
     technologies: [
       "Premiere Pro",
@@ -154,9 +154,9 @@ export const projects: Project[] = [
     challenge:
       "Short-form content must capture attention quickly while keeping the message clear.",
     solution:
-      "The editing workflow combines strong hooks, clean cuts, captions, sound design, and platform-specific formatting.",
+      "The proposed editing approach combines an opening hook, concise cuts, captions, and sound design tailored to the intended platform.",
     result:
-      "A repeatable video production workflow for creators, brands, and advertising campaigns.",
+      "A storyboard-style visual and proposed editing approach. The illustration is not a playable video or a completed client campaign.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",
