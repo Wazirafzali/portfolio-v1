@@ -128,9 +128,9 @@ export default function RootLayout({
         {children}
         <ThemeToggle />
 
-        <Analytics />
+        {process.env.APPFOLOR_HOST !== "cloudflare" && <Analytics />}
 
-        <SpeedInsights />
+        {process.env.APPFOLOR_HOST !== "cloudflare" && <SpeedInsights />}
       </body>
     </html>
   );

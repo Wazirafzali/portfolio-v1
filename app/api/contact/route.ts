@@ -95,6 +95,9 @@ export async function POST(request: Request) {
       );
 
     const ip =
+      process.env.APPFOLOR_HOST === "cloudflare"
+        ? request.headers.get("cf-connecting-ip") || "unknown"
+        :
       forwardedFor
         ?.split(",")[0]
         ?.trim() ||

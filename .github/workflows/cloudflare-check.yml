@@ -1,0 +1,27 @@
+name: Cloudflare compatibility check
+on:
+  push:
+    branches: [codex/cloudflare-preparation]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      WRANGLER_SEND_METRICS: "false"
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Public Cloudflare test key, only for this unpublished build check.
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: node --test tests/contact-input.test.mjs
+      - run: npm run build:cloudflare
+      - run: npx wrangler deploy --dry-run --outdir .worker-check
