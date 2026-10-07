@@ -2,7 +2,7 @@ export type Project = {
   slug: string;
   number: string;
   title: string;
-  category: "Web" | "Android" | "iOS" | "Video";
+  category: "Web" | "Android" | "iOS" | "Android & iOS" | "Video";
   shortDescription: string;
   description: string;
   type: "REAL PROJECT" | "CONCEPT PROJECT";
@@ -16,6 +16,19 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "meadlearna",
+    number: "07",
+    title: "Meadlearna",
+    category: "Android & iOS",
+    shortDescription: "Meadlearna — an application built for both Android and iOS.",
+    description: "Meadlearna is a real AppFolor mobile application project built for Android and iOS. One product, with versions for both platforms.",
+    type: "REAL PROJECT",
+    technologies: ["Android", "iOS"],
+    challenge: "The project called for an application for both Android and iOS.",
+    solution: "Meadlearna was developed for both mobile platforms as one project.",
+    result: "An application built for Android and iOS. Store links and product screenshots are not included in this portfolio entry yet.",
+  },
   {
     slug: "developer-portfolio",
     number: "01",

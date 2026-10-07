@@ -1,7 +1,14 @@
 import LogoMark from "@/components/LogoMark";
 import { ArrowUpRight, Check, Play, Plus } from "lucide-react";
 
-export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" }) {
+export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" | "meadlearna" }) {
+  if (variant === "meadlearna") return (
+    <div className="product-visual visual-mobile" aria-hidden="true">
+      <div className="mobile-orbit" />
+      <div className="studio-preview"><span className="preview-eyebrow">APPFOLOR / MOBILE APPLICATION</span><strong>Meadlearna</strong><div className="preview-lines"><span>ANDROID</span><span>iOS</span></div></div>
+      <span className="visual-caption">PROJECT COVER ARTWORK · NOT AN APP SCREENSHOT</span>
+    </div>
+  );
   if (variant === "mobile") return (
     <div className="product-visual visual-mobile" aria-hidden="true">
       <div className="mobile-orbit" />
