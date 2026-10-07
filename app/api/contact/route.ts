@@ -39,8 +39,10 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
+  let failureCode = "CT01";
   try {
     const body = await readContactBody(request);
+    failureCode = "CT02";
     const env = getContactEnv();
     // --------------------------------------------------
     // 1. CHECK UPSTASH CONFIGURATION
@@ -73,12 +75,14 @@ export async function POST(request: Request) {
     // 2. CREATE REDIS + RATE LIMITER
     // --------------------------------------------------
 
+    failureCode = "CT03";
     const redis = new Redis({
       url: upstashUrl,
       token: upstashToken,
       signal: () => AbortSignal.timeout(5_000),
     });
 
+    failureCode = "CT04";
     const ratelimit = new Ratelimit({
       redis,
       limiter: Ratelimit.slidingWindow(
@@ -113,6 +117,7 @@ export async function POST(request: Request) {
     // 4. RATE LIMIT
     // --------------------------------------------------
 
+    failureCode = "CT05";
     const rateLimitResult =
       await ratelimit.limit(ip);
 
@@ -135,6 +140,7 @@ export async function POST(request: Request) {
 
 
 
+    failureCode = "CT06";
     const {
       name,
       email,
@@ -339,6 +345,7 @@ export async function POST(request: Request) {
     // 13. VERIFY CLOUDFLARE TURNSTILE
     // --------------------------------------------------
 
+    failureCode = "CT07";
     const verifyResponse =
       await fetch(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
@@ -438,6 +445,7 @@ export async function POST(request: Request) {
     // THIS IS WHERE RESEND IS CREATED
     // --------------------------------------------------
 
+    failureCode = "CT08";
     const resend =
       new Resend(resendApiKey);
 
@@ -581,18 +589,20 @@ export async function POST(request: Request) {
     if (error instanceof ContactInputError) {
       return NextResponse.json({ error: error.message }, { status: error.status });
     }
-    if (error instanceof Error && (error.name === "TimeoutError" || error.name === "AbortError")) {
-      return NextResponse.json({ error: "The service took too long to respond. Please try again." }, { status: 503 });
+    // Never log raw provider errors: they can contain credentials or form data.
+    const errorName = error instanceof Error ? error.name : "Unknown";
+    if (errorName === "UrlError") failureCode += "-URL";
+    if (errorName === "UpstashError") failureCode += "-REDIS";
+    if (errorName === "TypeError") failureCode += "-TYPE";
+    console.error("Contact API failure:", failureCode);
+    if (errorName === "TimeoutError" || errorName === "AbortError") {
+      return NextResponse.json({ error: `The service took too long to respond. Please try again. Reference: ${failureCode}-TIMEOUT` }, { status: 503 });
     }
-    console.error(
-      "Contact API error:",
-      error
-    );
 
     return NextResponse.json(
       {
         error:
-          "Something went wrong. Please try again.",
+          `Something went wrong. Please try again. Reference: ${failureCode}`,
       },
       {
         status: 500,

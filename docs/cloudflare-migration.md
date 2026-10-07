@@ -63,3 +63,16 @@ Normal Next.js 16.3.8 production build: passed (19 routes). ESLint: passed. The 
 
 ## Dependency follow-up (2026-10-07)
 Linux build and dry-run deployment passed at commit 8895767 (GitHub run 37646896873). Updated lockfile fixes source-map-js, brace-expansion, undici and sharp findings. Wrangler is now 4.148.0. Miniflare is pinned through an override to the patched sharp 0.35.5; remove the override once upstream uses that version. Online npm audit --omit=dev: zero findings. Full audit: five high findings, all the single unpatched braces issue propagated through the ESLint dependency chain; this tool processes repository file patterns, not contact input. Local lint, Next build and 13 contact tests passed. The updated Linux workflow additionally checks Worker page responses and rejection of malformed contact JSON; that updated run is pending. No deployment or login has been completed.
+
+## Contact diagnostics (2026-10-08)
+The user deployed the preview successfully, but real contact delivery is not yet verified.
+Runtime bindings are read through OpenNext; dashboard text variables are preserved with keep_vars.
+Unexpected failures now include a safe reference in the response and server log:
+CT01 input parsing, CT02 runtime configuration, CT03 Redis client construction,
+CT04 limiter construction, CT05 Redis rate-limit request, CT06 field processing,
+CT07 Turnstile request/response, CT08 email preparation/delivery.
+Suffixes identify known error classes: URL, REDIS, TYPE or TIMEOUT. These codes
+identify a failure stage, not necessarily its root cause. Raw caught exceptions
+are not logged because provider messages may include configuration values.
+Local production smoke test with a deliberately invalid Redis URL confirmed
+HTTP 500 / CT03-URL without returning the URL or token. No email was sent.
