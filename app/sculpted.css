@@ -1,0 +1,37 @@
+/* Matte surfaces and CSS sculptures stay crisp at any screen resolution. */
+.studio-site{--clay-surface:#192b32;--clay-shadow:#030b1266;--glass:#223940a8;--glass-edge:#c5e7e52b;--sculpt-text:#dceeea;--sculpt-muted:#a5c2c2}
+html[data-theme=light] .studio-site{--clay-surface:#e6eee8;--clay-shadow:#486a6326;--glass:#f0f6f0b8;--glass-edge:#fff9;--sculpt-text:#203c3c;--sculpt-muted:#4a6967}
+.studio-site .studio-header{background:#12262dcc;backdrop-filter:blur(22px);box-shadow:inset 0 1px #ffffff12;border-bottom:1px solid var(--glass-edge)}
+html[data-theme=light] .studio-header{background:#eaf1ebc9;box-shadow:inset 0 1px #fff9}
+.studio-site .sculpted-hero{background:radial-gradient(ellipse at 78% 43%,#28494d55,transparent 55%),#101f27}
+html[data-theme=light] .studio-site .sculpted-hero{background:radial-gradient(ellipse at 78% 43%,#cadfd899,transparent 55%),#eaf1eb}
+.sculpted-hero .hero-layout{padding-block:82px 70px;gap:55px;min-height:680px}
+.sculpted-hero h1{font-size:clamp(60px,6.7vw,94px);letter-spacing:-.07em;line-height:1.015}
+.sculpted-hero .hero-description{max-width:370px;font-size:16px;line-height:1.8}
+.sculpted-hero .hero-copy>.eyebrow{font-size:9px;letter-spacing:.2em}
+.sculpted-hero .availability{background:transparent;border-color:var(--glass-edge);color:var(--sculpt-muted)}
+.sculpted-hero .hero-actions{gap:22px}.sculpted-hero .hero-actions .studio-button{font-size:12px;gap:20px}
+.sculpture-stage{height:510px;position:relative;isolation:isolate;min-width:0;color:var(--sculpt-text)}
+.sculpture-orbit{position:absolute;inset:28px 10px 35px;border:1px solid var(--glass-edge);border-radius:50%;transform:rotate(-25deg)}
+.sculpture-orbit:after{content:'';position:absolute;inset:38px -22px;border:1px solid var(--glass-edge);border-radius:50%;transform:rotate(50deg)}
+.clay-sphere{position:absolute;right:8%;top:26px;width:160px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 23%,#ddf1da,#92b9aa 40%,#446e6e 77%,#28434a);box-shadow:inset -12px -18px 25px #263e4c44,16px 30px 35px var(--clay-shadow)}
+.clay-ring{position:absolute;left:3%;bottom:60px;width:170px;height:170px;border:39px solid #98a1cb;border-radius:50%;transform:rotate(-28deg) scaleY(.74);box-shadow:inset 9px 9px 15px #20244088,inset -8px -9px 12px #e5e7ff88,12px 24px 25px var(--clay-shadow),inset 0 0 0 2px #cdd1f055;background:transparent}
+.clay-brand{position:absolute;top:100px;left:25%;width:225px;height:245px;display:flex;flex-direction:column;gap:24px;align-items:center;justify-content:center;background:linear-gradient(145deg,#8eaaa044,var(--clay-surface));border:1px solid var(--glass-edge);border-radius:52px;transform:rotate(-9deg);box-shadow:inset 3px 3px 10px #fff2,inset -5px -5px 12px #0002,24px 32px 45px var(--clay-shadow)}
+.clay-brand>span{font-size:12px;letter-spacing:-.01em;color:var(--sculpt-text)}
+.floating-service{position:absolute;z-index:2;display:flex;align-items:center;gap:14px;padding:17px 20px;background:var(--glass);border:1px solid var(--glass-edge);border-radius:22px;backdrop-filter:blur(20px);box-shadow:inset 0 1px 2px #ffffff24,0 15px 35px var(--clay-shadow);transition:transform .25s,box-shadow .25s;color:var(--sculpt-text)}
+.floating-service:hover,.floating-service:focus-visible{transform:translateY(-6px);box-shadow:inset 0 1px 2px #ffffff30,0 22px 42px var(--clay-shadow);color:var(--sculpt-text)!important}
+.floating-service small{display:block;font-size:8px;letter-spacing:.12em;color:var(--sculpt-muted);margin-bottom:6px}.floating-service strong{display:block;font-size:14px;font-weight:500;letter-spacing:-.02em}.floating-service>svg{margin-left:5px;color:var(--sculpt-muted)}
+.clay-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#97c8bc,#568e85);color:#143f3c;box-shadow:inset 2px 2px 4px #ffffff70,inset -3px -3px 5px #254e5644,4px 6px 12px #0001;flex-shrink:0}
+.floating-web{top:57px;left:0;transform:rotate(-3deg)}.floating-mobile{right:-5px;top:275px;transform:rotate(4deg)}.floating-mobile .clay-icon{background:linear-gradient(145deg,#d4d7ef,#9a9cbf);color:#434765}.floating-video{bottom:13px;left:14%;transform:rotate(-3deg)}.floating-video .clay-icon{background:linear-gradient(145deg,#e8d3b4,#bdaa92);color:#5f4b38}
+.sculpture-caption{position:absolute;bottom:-28px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.2em;color:var(--sculpt-muted)}
+.studio-site :is(.work-card,.service-row,.process-grid article){border-radius:25px;box-shadow:inset 1px 1px 1px #ffffff13,0 12px 26px var(--clay-shadow);border-color:var(--glass-edge)}
+.studio-site .work-visual-link{border-radius:18px}.studio-site .service-row{transition:transform .2s,box-shadow .2s}.studio-site .service-row:hover{transform:translateY(-3px)}
+html[data-theme=light] .service-row:hover{background:#e6efe8}
+.studio-site .primary-button{box-shadow:inset 0 2px 2px #ffffff40,0 8px 20px var(--clay-shadow)}
+.studio-site .motion-section .code-scenery{opacity:.2}
+@media(max-width:1100px){.sculpted-hero .hero-layout{gap:25px}.sculpture-stage{transform:scale(.9);transform-origin:center}.floating-mobile{right:-15px}.clay-brand{left:20%}}
+@media(max-width:800px){.sculpted-hero .hero-layout{padding-block:50px 65px;gap:35px;min-height:0}.sculpture-stage{width:min(100%,500px);margin:auto;transform:none}.sculpted-hero h1{font-size:clamp(60px,10vw,80px)}.clay-brand{left:25%}}
+@media(max-width:480px){.sculpture-stage{height:410px}.clay-brand{width:180px;height:200px;left:24%;top:85px;border-radius:40px}.clay-brand svg{width:82px;height:82px}.clay-sphere{width:120px;right:2%;top:25px}.clay-ring{width:130px;height:130px;border-width:30px;left:0;bottom:52px}.floating-service{padding:13px 14px;gap:10px;border-radius:18px}.floating-service strong{font-size:12px}.floating-service small{font-size:7px}.clay-icon{width:38px;height:38px;border-radius:12px}.floating-web{top:30px}.floating-mobile{top:225px;right:0}.floating-video{bottom:0;left:7%}.sculpted-hero h1{font-size:clamp(54px,14vw,68px)}.sculpted-hero .hero-actions{gap:13px}.sculpted-hero .hero-actions .text-link{font-size:11px}.sculpted-hero .hero-note{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.floating-service,.studio-site .service-row{transition:none}.floating-service:hover,.floating-service:focus-visible,.studio-site .service-row:hover{transform:none}}
+
+.sculpted-hero{overflow:clip}

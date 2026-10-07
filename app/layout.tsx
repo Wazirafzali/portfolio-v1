@@ -10,6 +10,7 @@ import "./globals.css";
 import "./studio.css";
 import "./studio-refinement.css";
 import "./theme.css";
+import "./sculpted.css";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
