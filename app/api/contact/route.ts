@@ -1,4 +1,5 @@
 import { ContactInputError, readContactBody } from "@/lib/contact-input";
+import { getContactEnv } from "@/lib/contact-env";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -40,19 +41,21 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   try {
     const body = await readContactBody(request);
+    const env = getContactEnv();
     // --------------------------------------------------
     // 1. CHECK UPSTASH CONFIGURATION
     // --------------------------------------------------
 
     const upstashUrl =
-      process.env.UPSTASH_REDIS_REST_URL;
+      env.UPSTASH_REDIS_REST_URL;
 
     const upstashToken =
-      process.env.UPSTASH_REDIS_REST_TOKEN;
+      env.UPSTASH_REDIS_REST_TOKEN;
 
     if (!upstashUrl || !upstashToken) {
       console.error(
-        "Upstash environment variables are missing."
+        "Missing contact bindings:",
+        [!upstashUrl && "UPSTASH_REDIS_REST_URL", !upstashToken && "UPSTASH_REDIS_REST_TOKEN"].filter(Boolean)
       );
 
       return NextResponse.json(
@@ -95,7 +98,7 @@ export async function POST(request: Request) {
       );
 
     const ip =
-      process.env.APPFOLOR_HOST === "cloudflare"
+      env.APPFOLOR_HOST === "cloudflare"
         ? request.headers.get("cf-connecting-ip") || "unknown"
         :
       forwardedFor
@@ -314,7 +317,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const turnstileSecret =
-      process.env.TURNSTILE_SECRET_KEY;
+      env.TURNSTILE_SECRET_KEY;
 
     if (!turnstileSecret) {
       console.error(
@@ -389,7 +392,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const resendApiKey =
-      process.env.RESEND_API_KEY;
+      env.RESEND_API_KEY;
 
     if (!resendApiKey) {
       console.error(
@@ -412,7 +415,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const contactToEmail =
-      process.env.CONTACT_TO_EMAIL;
+      env.CONTACT_TO_EMAIL;
 
     if (!contactToEmail) {
       console.error(
@@ -473,7 +476,7 @@ export async function POST(request: Request) {
     const { error: resendError } =
       await resend.emails.send({
         from:
-          process.env.CONTACT_FROM_EMAIL || "AppFolor <onboarding@resend.dev>",
+          env.CONTACT_FROM_EMAIL || "AppFolor <onboarding@resend.dev>",
 
         to: [
           contactToEmail,
