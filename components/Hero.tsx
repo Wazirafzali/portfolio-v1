@@ -7,10 +7,10 @@ export default function Hero() {
       <div className="hero-copy">
         <span className="availability"><span /> Available for new projects</span>
         <p className="eyebrow">APPFOLOR / DIGITAL STUDIO</p>
-        <h1 id="hero-heading">Great ideas.<br /><em>Simply</em><br />beautiful.</h1>
-        <p className="hero-description">Websites, mobile apps, and video.<br />Made with purpose. Refined to the essentials.</p>
+        <h1 id="hero-heading">Your next idea.<br /><em>Beautifully</em><br />built.</h1>
+        <p className="hero-description">Websites, Android and iOS apps, and video editing—brought together by AppFolor. Thoughtful design, clear communication, and a plan shaped around your goals.</p>
         <div className="hero-actions">
-          <a className="studio-button primary-button" href="#contact">Let’s create something <ArrowUpRight size={18} /></a>
+          <a className="studio-button primary-button" href="#contact">Let’s Build Your Idea <ArrowUpRight size={18} /></a>
           <a className="text-link" href="#projects">Discover our work <ArrowDown size={16} /></a>
         </div>
         <div className="hero-note"><span>Clear scope</span><span>Thoughtful design</span><span>Careful delivery</span></div>

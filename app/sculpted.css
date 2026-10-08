@@ -35,3 +35,7 @@ html[data-theme=light] .service-row:hover{background:#e6efe8}
 @media(prefers-reduced-motion:reduce){.floating-service,.studio-site .service-row{transition:none}.floating-service:hover,.floating-service:focus-visible,.studio-site .service-row:hover{transform:none}}
 
 .sculpted-hero{overflow:clip}
+.studio-values.copy-benefits{grid-template-columns:1fr;gap:22px}
+.studio-values.copy-benefits strong{line-height:1.5}
+.studio-values.copy-benefits span{line-height:1.7}
+@media(max-width:480px){.studio-site{overflow-x:clip}}
