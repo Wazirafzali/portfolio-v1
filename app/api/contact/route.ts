@@ -1,5 +1,6 @@
 import { ContactInputError, readContactBody } from "@/lib/contact-input";
 import { getContactEnv } from "@/lib/contact-env";
+import { cleanContactSetting, resendFailureCode } from "@/lib/contact-config";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
@@ -49,10 +50,10 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const upstashUrl =
-      env.UPSTASH_REDIS_REST_URL;
+      cleanContactSetting("UPSTASH_REDIS_REST_URL", env.UPSTASH_REDIS_REST_URL);
 
     const upstashToken =
-      env.UPSTASH_REDIS_REST_TOKEN;
+      cleanContactSetting("UPSTASH_REDIS_REST_TOKEN", env.UPSTASH_REDIS_REST_TOKEN);
 
     if (!upstashUrl || !upstashToken) {
       console.error(
@@ -323,7 +324,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const turnstileSecret =
-      env.TURNSTILE_SECRET_KEY;
+      cleanContactSetting("TURNSTILE_SECRET_KEY", env.TURNSTILE_SECRET_KEY);
 
     if (!turnstileSecret) {
       console.error(
@@ -399,7 +400,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const resendApiKey =
-      env.RESEND_API_KEY;
+      cleanContactSetting("RESEND_API_KEY", env.RESEND_API_KEY);
 
     if (!resendApiKey) {
       console.error(
@@ -422,7 +423,7 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     const contactToEmail =
-      env.CONTACT_TO_EMAIL;
+      cleanContactSetting("CONTACT_TO_EMAIL", env.CONTACT_TO_EMAIL);
 
     if (!contactToEmail) {
       console.error(
@@ -484,7 +485,7 @@ export async function POST(request: Request) {
     const { error: resendError } =
       await resend.emails.send({
         from:
-          env.CONTACT_FROM_EMAIL || "AppFolor <onboarding@resend.dev>",
+          cleanContactSetting("CONTACT_FROM_EMAIL", env.CONTACT_FROM_EMAIL) || "AppFolor <onboarding@resend.dev>",
 
         to: [
           contactToEmail,
@@ -559,15 +560,13 @@ export async function POST(request: Request) {
     // --------------------------------------------------
 
     if (resendError) {
-      console.error(
-        "Resend error:",
-        resendError
-      );
+      const code = resendFailureCode(resendError);
+      console.error("Contact email failure:", code);
 
       return NextResponse.json(
         {
           error:
-            "We could not send your message. Please try again.",
+            `We could not send your message. Please contact appfolor.info@gmail.com. Reference: ${code}`,
         },
         {
           status: 500,
