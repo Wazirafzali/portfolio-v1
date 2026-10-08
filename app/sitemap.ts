@@ -20,5 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     ...projectPages,
+    ...["privacy", "terms"].map((page) => ({
+      url: `${profile.siteUrl}/${page}`,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 }

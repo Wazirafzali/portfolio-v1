@@ -31,4 +31,7 @@ html[data-theme=light] :is(.studio-site a:hover,.faq-items details[open] summary
 html[data-theme=light] .studio-site .primary-button:hover{color:#f0faf5;background:#105c58}
 html[data-theme=light] .legal-page .text-cyan-400{color:#08766f}
 .studio-footer{padding-bottom:68px}.legal-page{padding-bottom:68px}
+html[data-theme=light] .studio-site #contact :is(.text-green-300,.text-green-400){color:#176b4a}
+html[data-theme=light] .studio-site #contact :is(.text-red-300,.text-red-400){color:#a62336}
+html[data-theme=light] .studio-site #contact .text-amber-400{color:#77500d}
 

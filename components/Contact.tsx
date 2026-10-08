@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { profile } from "@/data/profile";
 import {
   FormEvent,
   useEffect,
@@ -458,6 +459,9 @@ export default function Contact() {
                 Tell AppFolor what you
                 need and we will review
                 your project request.
+              </p>
+              <p className="contact-privacy mt-4">
+                Prefer email? <a href={`mailto:${profile.email}`}>{profile.email}</a>
               </p>
             </div>
 

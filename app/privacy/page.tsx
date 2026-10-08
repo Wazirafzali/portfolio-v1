@@ -2,6 +2,7 @@ import CodeAtmosphere from "@/components/CodeAtmosphere";
 import type { Metadata } from "next";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
+import { profile } from "@/data/profile";
 
 export const metadata: Metadata = { title: "Privacy Policy", description: "How AppFolor handles information submitted through this website.", alternates: { canonical: "/privacy" }, openGraph: { title: "Privacy Policy | AppFolor", description: "How AppFolor handles information submitted through this website.", url: "/privacy", images: ["/opengraph-image"] } };
 
@@ -118,8 +119,8 @@ export default function PrivacyPage() {
 
             <p className="mt-4 leading-8">
               If you have submitted information through this website and want
-              to ask about correcting or deleting it, you can contact us using
-              the contact information provided on the website.
+              to ask about correcting or deleting it, you can email us at{" "}
+              <a className="underline underline-offset-4" href={`mailto:${profile.email}`}>{profile.email}</a>.
             </p>
           </section>
 
