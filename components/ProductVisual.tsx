@@ -1,12 +1,12 @@
 import LogoMark from "@/components/LogoMark";
+import Image from "next/image";
 import { ArrowUpRight, Check, Play, Plus } from "lucide-react";
 
 export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" | "meadlearna" }) {
   if (variant === "meadlearna") return (
     <div className="product-visual visual-mobile" aria-hidden="true">
-      <div className="mobile-orbit" />
-      <div className="studio-preview"><span className="preview-eyebrow">APPFOLOR / MOBILE APPLICATION</span><strong>Meadlearna</strong><div className="preview-lines"><span>ANDROID</span><span>iOS</span></div></div>
-      <span className="visual-caption">PROJECT COVER ARTWORK · NOT AN APP SCREENSHOT</span>
+      <div className="medlearna-card-screens"><Image src="/projects/medlearna/home.jpg" alt="" width={1078} height={2054} sizes="(max-width: 640px) 38vw, 230px" /><Image src="/projects/medlearna/learning.jpg" alt="" width={1076} height={1913} sizes="(max-width: 640px) 38vw, 230px" /></div>
+      <span className="visual-caption">MEDLEARNA · ANDROID & iOS · APP SCREENS</span>
     </div>
   );
   if (variant === "mobile") return (
