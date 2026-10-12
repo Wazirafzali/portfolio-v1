@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-6 text-white">
+    <main className="studio-site status-page flex min-h-screen items-center justify-center bg-zinc-950 px-6 text-white">
       <div className="max-w-2xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
           404 Error
@@ -22,14 +22,14 @@ export default function NotFound() {
             href="/"
             className="rounded-full bg-cyan-400 px-7 py-3.5 font-bold text-zinc-950 transition hover:bg-cyan-300"
           >
-            Back to Home
+            Back to home
           </Link>
 
           <Link
             href="/#projects"
             className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-400"
           >
-            View Projects
+            View projects
           </Link>
         </div>
       </div>

@@ -18,15 +18,14 @@ export default function TermsPage() {
         </Link>
 
         <div className="mt-10">
-           <p className="mt-4 leading-8">
-             AppFolor provides information about web development,
-             Android development, iOS development, mobile app projects,
-             video editing, our team, and our project process.
-              </p>
-
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             Terms for using this website.
           </h1>
+          <p className="mt-4 leading-8">
+             AppFolor provides information about web development,
+             Android development, iOS development, desktop app projects,
+             video editing, our team, and our project process.
+              </p>
 
           <p className="mt-6 text-zinc-500">
             Last updated: September 2026
@@ -42,7 +41,7 @@ export default function TermsPage() {
             <p className="mt-4 leading-8">
               This website presents information about our services, team,
               projects, and availability for web development, Android
-              development, iOS development, mobile projects, and video
+              development, iOS development, desktop applications, and video
               editing.
             </p>
           </section>
@@ -151,7 +150,7 @@ export default function TermsPage() {
             href="/#contact"
             className="rounded-full bg-cyan-400 px-6 py-3 font-bold text-zinc-950 transition hover:bg-cyan-300"
           >
-            Start a Project
+            Discuss a project
           </Link>
         </div>
       </div>

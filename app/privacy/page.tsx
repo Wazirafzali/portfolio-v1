@@ -19,16 +19,13 @@ export default function PrivacyPage() {
         </Link>
 
         <div className="mt-10">
-         <p className="mt-4 leading-8">
-            When you submit a project request to AppFolor through this website,
-             we may collect information such as your name, email address,
-              selected service, estimated budget, preferred timeline, and
-               project details.
-              </p>
-
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             How we handle your information.
           </h1>
+          <p className="mt-4 leading-8">
+            This policy explains how AppFolor handles project inquiries,
+            website analytics, and requests about your information.
+              </p>
 
           <p className="mt-6 text-zinc-500">
             Last updated: September 2026
@@ -154,7 +151,7 @@ export default function PrivacyPage() {
             href="/#contact"
             className="rounded-full bg-cyan-400 px-6 py-3 font-bold text-zinc-950 transition hover:bg-cyan-300"
           >
-            Contact Us
+            Contact us
           </Link>
         </div>
       </div>

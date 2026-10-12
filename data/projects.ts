@@ -35,9 +35,9 @@ export const projects: Project[] = [
     title: "AppFolor Studio Website",
     category: "Web",
     shortDescription:
-      "A focused digital home for AppFolor, bringing services, project explorations, and secure inquiries into one experience.",
+      "The AppFolor website: service pages, project case studies, and a working contact form.",
     description:
-      "A studio website that brings AppFolor’s services and project explorations together, with responsive layouts, clear navigation, and a secure path to start a project.",
+      "Our studio website presents services and project case studies, with mobile layouts and a contact form protected by Turnstile and rate limiting.",
     type: "REAL PROJECT",
     technologies: [
       "Next.js",
@@ -134,7 +134,7 @@ export const projects: Project[] = [
     shortDescription:
       "An iOS application concept for service booking, account management, and customer communication.",
     description:
-      "A clean iPhone application concept designed around fast service access and a polished user experience.",
+      "An iPhone interface concept for choosing a service, making a booking, and managing an account.",
     type: "CONCEPT PROJECT",
     technologies: ["iOS", "Swift", "API", "Firebase"],
     challenge:

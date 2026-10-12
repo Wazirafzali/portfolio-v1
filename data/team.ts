@@ -48,7 +48,7 @@ export const teamInfo = {
     "Web, mobile, desktop, and video solutions built for modern businesses.",
 
   shortDescription:
-    "AppFolor is a specialized digital team for web development, Android applications, iOS applications, desktop applications, and professional video editing.",
+    "AppFolor is a digital services team offering web, Android, iOS, and desktop development, alongside video editing.",
 
   availability:
     "Available for new client projects",

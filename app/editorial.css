@@ -143,3 +143,37 @@ html[data-theme=light] .studio-site .sculpted-hero { background: var(--editorial
   .studio-brand { font-size: 20px; letter-spacing: -.04em; }
   .nav-contact { padding-inline: 10px; gap: 5px; }
 }
+
+/* Content-specific measures keep the shared type scale useful on every route. */
+.studio-site .sculpted-hero h1 {
+  font-size: clamp(2.5rem, 1.55rem + 3.4vw, 4.75rem);
+  max-width: 14ch;
+  overflow-wrap: normal;
+}
+.studio-site .sculpted-hero .hero-description { max-width: 43ch; }
+.studio-site .section-heading h2 { max-width: 20ch; }
+.studio-site .contact-intro h2 { max-width: 15ch; }
+.studio-site.legal-page h2 {
+  font-size: var(--type-title);
+  line-height: 1.35;
+  letter-spacing: -.02em;
+}
+.studio-site .case-story-grid .eyebrow { margin-bottom: .75rem; }
+.studio-site .case-story-grid h3 { margin-bottom: 1rem; }
+.studio-site.status-page { padding-block: 4rem; }
+.studio-site.status-page h1 { font-size: var(--type-heading); }
+.studio-site.status-page p { font-size: var(--type-body); line-height: 1.75; }
+.studio-site.status-page>div { text-align: left; }
+.studio-site.status-page p { margin-inline: 0; }
+html[data-theme=light] .status-page .text-zinc-400 { color: #48646a; }
+html[data-theme=light] .status-page a.text-white { color: #183638; border-color: #86a99e; }
+.studio-site .hero-actions :is(a,button) { min-height: 48px; }
+.studio-site .floating-service { transform: none; }
+.studio-site .floating-service:hover { transform: translateY(-3px); }
+@media(prefers-reduced-motion:reduce) {
+  .studio-site .floating-service:hover { transform: none; }
+}
+
+html[data-theme=light] .studio-site :is(.service-title>svg,.service-arrow,.process-number) { color: #08766f; }
+html[data-theme=light] .legal-page .text-cyan-400 { color: #08766f; }
+html[data-theme=light] .legal-page .text-cyan-400 span { color: inherit; }

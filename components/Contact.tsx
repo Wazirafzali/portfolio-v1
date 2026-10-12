@@ -376,7 +376,7 @@ export default function Contact() {
 
         setMessage(
           data.error ||
-            `Request failed with HTTP ${response.status}.`
+            `We couldn’t send your request. Please try again or email ${profile.email}.`
         );
 
         resetTurnstile();
@@ -388,7 +388,7 @@ export default function Contact() {
 
       setMessage(
         data.message ||
-          "Your project request has been sent successfully."
+          "Your request has been sent. We’ll reply to the email address you provided."
       );
 
       setFormData(
@@ -447,7 +447,7 @@ export default function Contact() {
           <div className="mx-auto max-w-3xl">
             <div className="mb-12 text-center">
               <p className="mb-4 font-medium text-cyan-400">
-                Start a Project
+                CONTACT APPFOLOR
               </p>
 
               <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -456,9 +456,7 @@ export default function Contact() {
               </h2>
 
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-zinc-400">
-                Tell AppFolor what you
-                need and we will review
-                your project request.
+                Required fields are marked *. Budget is optional.
               </p>
               <p className="contact-privacy mt-4">
                 Prefer email? <a href={`mailto:${profile.email}`}>{profile.email}</a>
@@ -680,7 +678,7 @@ export default function Contact() {
                       handleChange
                     }
                     className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-400"
-                    placeholder="What are you building, who is it for, and what would success look like?"
+                    placeholder="What do you need, who will use it, and what should it help them do?"
                   />
                   <p id="project-details-hint" className="mt-2 text-xs text-zinc-400">A few sentences are enough to start. Minimum 20 characters.</p>
                 </div>
@@ -778,7 +776,7 @@ export default function Contact() {
                 {status ===
                 "loading"
                   ? "Sending..."
-                  : "Submit Project Request"}
+                  : "Send project request"}
               </button>
               <p className="contact-privacy">Your details are used to respond to your inquiry. <Link href="/privacy">Read our privacy policy</Link>.</p>
             </form>
