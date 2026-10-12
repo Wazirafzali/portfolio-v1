@@ -39,3 +39,8 @@ html[data-theme=light] .service-row:hover{background:#e6efe8}
 .studio-values.copy-benefits strong{line-height:1.5}
 .studio-values.copy-benefits span{line-height:1.7}
 @media(max-width:480px){.studio-site{overflow-x:clip}}
+.sculpture-stage{height:590px}
+.floating-desktop{top:385px;left:0;transform:rotate(-3deg)}
+.floating-desktop .clay-icon{background:linear-gradient(145deg,#b8d7eb,#7bacc6);color:#244b62}
+#desktop-app-development{scroll-margin-top:110px}
+@media(max-width:480px){.sculpture-stage{height:560px}.floating-desktop{top:350px;left:0;max-width:100%}.floating-desktop strong{font-size:11px}}
