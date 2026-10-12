@@ -20,10 +20,10 @@ export default function Hero() {
         <div className="clay-sphere" aria-hidden="true" />
         <div className="clay-ring" aria-hidden="true" />
         <div className="clay-brand" aria-hidden="true"><LogoMark size={105} /><span>Ideas take shape.</span></div>
-        <a href="#services" className="floating-service floating-web"><span className="clay-icon"><Code2 size={24} /></span><span><small>01 / WEB</small><strong>Built to connect.</strong></span><ArrowUpRight size={17} /></a>
-        <a href="#services" className="floating-service floating-mobile"><span className="clay-icon"><Smartphone size={24} /></span><span><small>02 / ANDROID &amp; iOS</small><strong>Made to move.</strong></span><ArrowUpRight size={17} /></a>
+        <a href="#web-development" className="floating-service floating-web"><span className="clay-icon"><Code2 size={24} /></span><span><small>01 / WEB</small><strong>Built to connect.</strong></span><ArrowUpRight size={17} /></a>
+        <a href="#android-development" className="floating-service floating-mobile"><span className="clay-icon"><Smartphone size={24} /></span><span><small>02 / ANDROID &amp; iOS</small><strong>Made to move.</strong></span><ArrowUpRight size={17} /></a>
         <a href="#desktop-app-development" className="floating-service floating-desktop"><span className="clay-icon"><Monitor size={24} /></span><span><small>03 / DESKTOP APPS</small><strong>Built for your workflow.</strong></span><ArrowUpRight size={17} /></a>
-        <a href="#services" className="floating-service floating-video"><span className="clay-icon"><Film size={24} /></span><span><small>04 / VIDEO</small><strong>Stories that stay.</strong></span><ArrowUpRight size={17} /></a>
+        <a href="#video-editing" className="floating-service floating-video"><span className="clay-icon"><Film size={24} /></span><span><small>04 / VIDEO</small><strong>Stories that stay.</strong></span><ArrowUpRight size={17} /></a>
         <span className="sculpture-caption">LESS NOISE. MORE POSSIBILITY.</span>
       </div>
     </div>
