@@ -180,6 +180,14 @@ html[data-theme=light] .legal-page .text-cyan-400 span { color: inherit; }
 
 .visual-farm-pro { display: grid; place-items: center; padding: clamp(10px, 2vw, 24px); background: #152e38; }
 .visual-farm-pro img { display: block; width: 100%; height: auto; border-radius: 4px; }
-.farm-pro-cover { margin-block: 2rem 4rem; }
-.farm-pro-cover img { width: 100%; height: auto; border-radius: 8px; }
-.farm-pro-cover figcaption { margin-top: 1rem; font-size: var(--type-small); line-height: 1.7; color: var(--muted); }
+.farm-screens { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); align-items: center; gap: clamp(12px, 3vw, 32px); }
+.farm-screens figure { min-width: 0; margin: 0; }
+.farm-screens img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.farm-screens figcaption { margin-top: .75rem; font-size: .8125rem; line-height: 1.6; }
+.farm-screens-detail { margin-block: 2rem 4rem; align-items: start; }
+.visual-farm-pro .farm-screens-compact { width: 100%; }
+@media(max-width:700px) {
+  .farm-screens-detail { grid-template-columns: 1fr; gap: 2rem; }
+  .farm-screens-detail figure:last-child { width: min(100%, 320px); margin-inline: auto; }
+}
+.farm-screens-compact img { max-height: clamp(140px, 24vw, 300px); object-fit: contain; }

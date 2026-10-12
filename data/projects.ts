@@ -27,8 +27,8 @@ export const projects: Project[] = [
     technologies: ["Flutter", "Dart", "GetX", "Hive", "Firebase"],
     challenge: "Manage farm operations and financial records from both an office computer and a phone, including locations with unreliable internet. The product supports Pashto and English, right-to-left layouts, and the Afghan Solar Hijri calendar.",
     solution: "The application groups farms and flocks, feed and medicine stock, sales, worker ledgers, treasury, and reporting. The project showcase describes offline records with synchronization, admin and viewer roles, PDF reports, and local and Google Drive backups.",
-    result: "A licensed commercial product for Windows and Android. The screenshot shows the desktop dashboard; displayed figures are interface content, not measured client results. Installation, customization, and demos are available by inquiry. Source code remains private.",
-    coverImage: "/projects/farm-pro/desktop.png",
+    result: "A licensed commercial product for Windows and Android. The screenshots show the Windows and Android dashboards; displayed figures are interface content, not measured client results. Installation, customization, and demos are available by inquiry. Source code remains private.",
+    coverImage: "/projects/farm-pro/desktop.jpg",
     githubUrl: "https://github.com/Hikmat4855/farm-pro-showcase",
   },
   {
