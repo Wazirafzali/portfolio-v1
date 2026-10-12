@@ -130,3 +130,16 @@ html[data-theme=light] .studio-site .sculpted-hero { background: var(--editorial
   .studio-site .project-filters button { flex: 1 0 auto; }
   .studio-site .contact-intro h2 { font-size: var(--type-heading); }
 }
+
+/* Keep the mobile header on one line without reducing touch targets. */
+@media(max-width: 600px) {
+  .sculpted-hero .hero-layout { padding-top: 2.5rem; }
+  .studio-nav { gap: .75rem; }
+  .nav-contact { white-space: nowrap; flex-shrink: 0; }
+  .menu-toggle { flex-shrink: 0; }
+}
+@media(max-width: 360px) {
+  .studio-nav { gap: .5rem; }
+  .studio-brand { font-size: 20px; letter-spacing: -.04em; }
+  .nav-contact { padding-inline: 10px; gap: 5px; }
+}
