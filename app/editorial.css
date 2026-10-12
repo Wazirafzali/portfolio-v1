@@ -177,3 +177,9 @@ html[data-theme=light] .status-page a.text-white { color: #183638; border-color:
 html[data-theme=light] .studio-site :is(.service-title>svg,.service-arrow,.process-number) { color: #08766f; }
 html[data-theme=light] .legal-page .text-cyan-400 { color: #08766f; }
 html[data-theme=light] .legal-page .text-cyan-400 span { color: inherit; }
+
+.visual-farm-pro { display: grid; place-items: center; padding: clamp(10px, 2vw, 24px); background: #152e38; }
+.visual-farm-pro img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.farm-pro-cover { margin-block: 2rem 4rem; }
+.farm-pro-cover img { width: 100%; height: auto; border-radius: 8px; }
+.farm-pro-cover figcaption { margin-top: 1rem; font-size: var(--type-small); line-height: 1.7; color: var(--muted); }

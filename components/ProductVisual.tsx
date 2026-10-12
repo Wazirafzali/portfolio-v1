@@ -2,7 +2,8 @@ import LogoMark from "@/components/LogoMark";
 import Image from "next/image";
 import { ArrowUpRight, Check, Play, Plus } from "lucide-react";
 
-export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" | "meadlearna" }) {
+export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" | "farm-pro" | "meadlearna" }) {
+  if (variant === "farm-pro") return <div className="product-visual visual-farm-pro" aria-hidden="true"><Image src="/projects/farm-pro/desktop.png" alt="" width={1366} height={768} sizes="(max-width: 800px) 90vw, 850px" /></div>;
   if (variant === "meadlearna") return (
     <div className="product-visual visual-mobile" aria-hidden="true">
       <div className="medlearna-card-screens"><Image src="/projects/medlearna/home.jpg" alt="" width={1078} height={2054} sizes="(max-width: 640px) 38vw, 230px" /><Image src="/projects/medlearna/learning.jpg" alt="" width={1076} height={1913} sizes="(max-width: 640px) 38vw, 230px" /></div>

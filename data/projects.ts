@@ -2,7 +2,7 @@ export type Project = {
   slug: string;
   number: string;
   title: string;
-  category: "Web" | "Android" | "iOS" | "Android & iOS" | "Video";
+  category: "Web" | "Android" | "iOS" | "Android & iOS" | "Desktop" | "Video";
   shortDescription: string;
   description: string;
   type: "REAL PROJECT" | "CONCEPT PROJECT";
@@ -16,6 +16,21 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "farm-pro",
+    number: "08",
+    title: "Farm Pro",
+    category: "Desktop",
+    shortDescription: "Poultry farm management for Windows and Android, built by a member of the AppFolor team.",
+    description: "Farm Pro brings flock records, stock, sales, worker accounts, and cash movements into one application for poultry businesses in Afghanistan. Built by a member of the AppFolor team, it supports Windows and Android.",
+    type: "REAL PROJECT",
+    technologies: ["Flutter", "Dart", "GetX", "Hive", "Firebase"],
+    challenge: "Manage farm operations and financial records from both an office computer and a phone, including locations with unreliable internet. The product supports Pashto and English, right-to-left layouts, and the Afghan Solar Hijri calendar.",
+    solution: "The application groups farms and flocks, feed and medicine stock, sales, worker ledgers, treasury, and reporting. The project showcase describes offline records with synchronization, admin and viewer roles, PDF reports, and local and Google Drive backups.",
+    result: "A licensed commercial product for Windows and Android. The screenshot shows the desktop dashboard; displayed figures are interface content, not measured client results. Installation, customization, and demos are available by inquiry. Source code remains private.",
+    coverImage: "/projects/farm-pro/desktop.png",
+    githubUrl: "https://github.com/Hikmat4855/farm-pro-showcase",
+  },
   {
     slug: "meadlearna",
     number: "07",
