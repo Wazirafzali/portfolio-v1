@@ -12,6 +12,7 @@ const allowedServices = [
   "iOS Development",
   "Mobile App - Android & iOS",
   "Video Editing",
+  "Desktop App Development",
   "Multiple Services",
   "Other",
 ];

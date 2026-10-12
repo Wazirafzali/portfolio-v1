@@ -1,5 +1,5 @@
 import CodeAtmosphere from "@/components/CodeAtmosphere";
-import { ArrowUpRight, Code2, Smartphone, Apple, Layers3, Film } from "lucide-react";
+import { ArrowUpRight, Code2, Smartphone, Apple, Layers3, Film, Monitor } from "lucide-react";
 
 const services = [
   {number:"01",title:"Web Development",icon:Code2,description:"A better home for your business online. From focused landing pages to custom web applications.",tags:["Business websites","Web applications","Landing pages"]},
@@ -7,6 +7,7 @@ const services = [
   {number:"03",title:"iOS Development",icon:Apple,description:"Considered iPhone and iPad applications with clear navigation and a polished experience.",tags:["iPhone & iPad","Service platforms","API integration"]},
   {number:"04",title:"Android & iOS, together",icon:Layers3,description:"Two platforms. One coordinated project. Shared planning with development tailored to each platform.",tags:["Aligned design","Shared milestones","Coordinated delivery"]},
   {number:"05",title:"Video Editing",icon:Film,description:"Turn your footage into a story worth watching. Clear cuts, thoughtful pacing, and platform-ready delivery.",tags:["Social content","Brand videos","Promotional campaigns"]},
+  {number:"06",title:"Desktop App Development",icon:Monitor,description:"Turn everyday tasks into a smoother workflow. Custom desktop applications designed around your team and the way you work.",tags:["Business tools","Workflow automation","API integration"]},
 ];
 
 export default function Services() {

@@ -69,7 +69,7 @@ export default function Image() {
             color: "#a1a1aa",
           }}
         >
-          Web Development · Android · iOS · Video Editing
+          Web · Android · iOS · Desktop Apps · Video Editing
         </div>
 
         <div

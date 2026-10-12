@@ -8,7 +8,7 @@ export default function Hero() {
         <span className="availability"><span /> Available for new projects</span>
         <p className="eyebrow">APPFOLOR / DIGITAL STUDIO</p>
         <h1 id="hero-heading">Your next idea.<br /><em>Beautifully</em><br />built.</h1>
-        <p className="hero-description">Websites, Android and iOS apps, and video editing—brought together by AppFolor. Thoughtful design, clear communication, and a plan shaped around your goals.</p>
+        <p className="hero-description">Websites, Android and iOS apps, desktop applications, and video editing—brought together by AppFolor. Thoughtful design, clear communication, and a plan shaped around your goals.</p>
         <div className="hero-actions">
           <a className="studio-button primary-button" href="#contact">Let’s Build Your Idea <ArrowUpRight size={18} /></a>
           <a className="text-link" href="#projects">Discover our work <ArrowDown size={16} /></a>
@@ -26,6 +26,6 @@ export default function Hero() {
         <span className="sculpture-caption">LESS NOISE. MORE POSSIBILITY.</span>
       </div>
     </div>
-    <div className="discipline-strip"><div className="studio-container"><span>WEB EXPERIENCES</span><i>·</i><span>ANDROID &amp; iOS</span><i>·</i><span>VIDEO EDITING</span><i>·</i><span>ONE CONNECTED STUDIO</span></div></div>
+    <div className="discipline-strip"><div className="studio-container"><span>WEB EXPERIENCES</span><i>·</i><span>ANDROID &amp; iOS</span><i>·</i><span>DESKTOP APPS</span><i>·</i><span>VIDEO EDITING</span><i>·</i><span>ONE CONNECTED STUDIO</span></div></div>
   </section>;
 }

@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "AppFolor",
 
     description:
-      "Web development, Android development, iOS development, and professional video editing services.",
+      "Web development, Android development, iOS development, desktop applications, and professional video editing services.",
 
     start_url: "/",
 

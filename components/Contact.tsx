@@ -566,6 +566,9 @@ export default function Contact() {
                       Android & iOS
                     </option>
 
+                    <option value="Desktop App Development">
+                      Desktop App Development
+                    </option>
                     <option value="Video Editing">
                       Video Editing
                     </option>
