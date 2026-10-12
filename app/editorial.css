@@ -1,0 +1,132 @@
+/* Shared editorial system. Display and reading faces are hosted with the app. */
+:root {
+  --type-display: clamp(2.75rem, 1.8rem + 4vw, 5.75rem);
+  --type-heading: clamp(2rem, 1.4rem + 2.4vw, 3.75rem);
+  --type-title: clamp(1.25rem, 1.05rem + .65vw, 1.75rem);
+  --type-body: clamp(1rem, .95rem + .2vw, 1.125rem);
+  --type-small: .8125rem;
+  --section-space: clamp(4rem, 7vw, 7.5rem);
+}
+body, .studio-site, .theme-toggle {
+  font-family: var(--font-body), sans-serif;
+  font-optical-sizing: auto;
+}
+.studio-site { --editorial-surface: #10232a; --editorial-edge: #426068; }
+html[data-theme=light] .studio-site {
+  --editorial-surface: #eaf1eb;
+  --editorial-edge: #adc7bf;
+}
+.studio-site :is(h1,h2,h3) {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 650;
+  text-wrap: balance;
+}
+.studio-site h1 {
+  font-size: var(--type-display);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
+}
+.studio-site h2 {
+  font-size: var(--type-heading);
+  line-height: 1.14;
+  letter-spacing: -.035em;
+}
+.studio-site :is(h3,.service-title h3,.work-card h3,.process-grid h3) {
+  font-size: var(--type-title);
+  line-height: 1.3;
+  letter-spacing: -.025em;
+}
+.studio-site :is(.hero-description,.section-heading>p,.work-card>p,
+.service-description>p,.process-grid p,.about-body,.faq-items details p,
+.contact-intro>p,.case-heading>p:not(.eyebrow),.case-story-grid article>p:last-child) {
+  font-size: var(--type-body);
+  line-height: 1.75;
+  letter-spacing: .002em;
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.studio-site .eyebrow, .sculpted-hero .hero-copy>.eyebrow {
+  font-size: .6875rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .15em;
+}
+.studio-section { padding-block: var(--section-space); }
+.sculpted-hero .hero-layout { padding-block: var(--section-space); }
+.sculpted-hero .hero-description { max-width: 40ch; margin-top: 1.75rem; }
+.studio-site :is(.sculpted-hero,.about-art,.clay-brand) {
+  background: var(--editorial-surface);
+}
+html[data-theme=light] .studio-site .sculpted-hero { background: var(--editorial-surface); }
+.studio-site :is(.work-card,.service-row,.process-grid article,.primary-button),
+.studio-site .studio-header, .theme-toggle { box-shadow: none; }
+.studio-site :is(.work-card,.service-row,.process-grid article) {
+  border-radius: 8px;
+  border-color: var(--editorial-edge);
+}
+.studio-site .work-card {
+  background: transparent;
+  border: 0;
+  padding: 0 0 1.75rem;
+  border-bottom: 1px solid var(--editorial-edge);
+}
+.studio-site :is(.work-meta,.work-card h3,.work-card>p) { margin-inline: 0; }
+.studio-site .work-visual-link { border-radius: 8px; }
+.studio-site .service-row { padding: clamp(1.125rem, 2.5vw, 2rem); }
+.studio-site .service-row:hover { transform: none; }
+.service-row:last-child { grid-column: auto; }
+.service-number { font-variant-numeric: tabular-nums; font-size: var(--type-small); }
+.studio-site :is(.service-tags,.work-meta,.process-output,.contact-small,.contact-expectations li,
+.studio-values span,.footer-top>div>p,.footer-bottom,.case-cover>p,.case-tools) {
+  font-size: var(--type-small);
+  line-height: 1.7;
+}
+.studio-site .about-lead { font-size: clamp(1.25rem, 1rem + .8vw, 1.625rem); line-height: 1.6; max-width: 35ch; }
+.studio-values.copy-benefits { gap: 1.5rem; }
+.studio-values.copy-benefits>div { padding-top: 1.125rem; border-top: 1px solid var(--editorial-edge); }
+.studio-values.copy-benefits strong { font-size: 1rem; font-weight: 600; line-height: 1.6; }
+.studio-site .process-grid article { background: transparent; border: 0; border-top: 1px solid var(--editorial-edge); border-radius: 0; padding: 1.5rem 0; }
+.studio-site .faq-items summary { font-size: clamp(1rem, .9rem + .4vw, 1.25rem); line-height: 1.5; }
+.studio-site :is(.hero-actions,.case-actions) { flex-wrap: wrap; }
+.studio-site :is(.hero-note,.availability) { font-size: .75rem; line-height: 1.6; }
+.studio-site .hero-note { flex-wrap: wrap; row-gap: .5rem; }
+.studio-site .hero-actions :is(.studio-button,.text-link) { font-size: .875rem; }
+.studio-site #contact :is(input,select,textarea) { font-family: inherit; font-size: 1rem; line-height: 1.6; }
+.studio-site #contact :is(label,.text-sm) { font-size: .875rem; line-height: 1.6; }
+.studio-site #contact form { box-shadow: none; border-radius: 8px; }
+.studio-site #contact h2 { font-size: var(--type-title); line-height: 1.3; }
+.floating-service { border-radius: 10px; box-shadow: none; backdrop-filter: blur(12px); }
+.floating-service:hover,.floating-service:focus-visible { box-shadow: none; }
+.floating-service small { font-size: .625rem; line-height: 1.5; letter-spacing: .08em; }
+.floating-service strong { font-size: .875rem; line-height: 1.4; letter-spacing: -.01em; }
+.clay-brand { box-shadow: 0 8px 18px #00000014; border-radius: 24px; }
+.clay-icon { background: #9bc2b8; box-shadow: none; border-radius: 10px; }
+.floating-mobile .clay-icon { background: #c0c3dc; }
+.floating-video .clay-icon { background: #d6c4aa; }
+.floating-desktop .clay-icon { background: #accddd; }
+.studio-site .motion-section .code-scenery { opacity: .08; }
+.studio-site .case-heading h1 { max-width: 18ch; }
+.studio-site .case-heading>p:not(.eyebrow) { margin-top: 1.75rem; }
+.studio-site.legal-page h1 { font-size: var(--type-heading); max-width: 22ch; }
+.studio-site.legal-page :is(p,li) { font-size: var(--type-body); line-height: 1.8; max-width: 65ch; }
+@media(min-width: 1000px) {
+  .section-heading { grid-template-columns: 1.35fr 1fr; gap: 4rem; align-items: end; }
+  .section-heading>p { padding-bottom: .25rem; }
+  .about-layout { grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 7vw, 7rem); }
+  .about-layout>div:last-child { padding-top: 3rem; }
+  .process-grid { gap: 2.5rem; }
+}
+@media(max-width: 600px) {
+  .studio-site .hero-actions { align-items: flex-start; gap: 1rem; }
+  .studio-site .hero-actions .text-link { min-height: 48px; }
+  .studio-site .service-row { grid-template-columns: 1.25rem minmax(0,1fr) 2.5rem; }
+  .studio-site .service-title { flex-wrap: wrap; }
+  .studio-site .service-description { grid-column: 1 / -1; }
+  .floating-service { padding: 12px; gap: 8px; max-width: 100%; }
+  .floating-service strong,.floating-desktop strong { font-size: .75rem; }
+  .floating-service small { font-size: .5625rem; }
+  .studio-site .project-filters { flex-wrap: wrap; border-radius: 8px; }
+  .studio-site .project-filters button { flex: 1 0 auto; }
+  .studio-site .contact-intro h2 { font-size: var(--type-heading); }
+}

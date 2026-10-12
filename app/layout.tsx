@@ -1,3 +1,4 @@
+import localFont from "next/font/local";
 import type {
   Metadata,
   Viewport,
@@ -11,7 +12,11 @@ import "./studio.css";
 import "./studio-refinement.css";
 import "./theme.css";
 import "./sculpted.css";
+import "./editorial.css";
 import ThemeToggle from "@/components/ThemeToggle";
+
+const displayFont = localFont({ src: "./fonts/manrope.ttf", variable: "--font-display", display: "swap", weight: "200 800" });
+const bodyFont = localFont({ src: "./fonts/dm-sans.ttf", variable: "--font-body", display: "swap", weight: "100 1000" });
 
 export const metadata: Metadata = {
     metadataBase: new URL(
@@ -125,7 +130,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
+      <body className={`${displayFont.variable} ${bodyFont.variable}`}>
         {children}
         <ThemeToggle />
 
