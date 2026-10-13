@@ -1,3 +1,4 @@
+import { escapeHtml, hasControlCharacters, rateLimitUnavailable } from "@/lib/contact-security";
 import { ContactInputError, readContactBody } from "@/lib/contact-input";
 import { getContactEnv } from "@/lib/contact-env";
 import { cleanContactSetting, resendFailureCode } from "@/lib/contact-config";
@@ -31,14 +32,7 @@ type TurnstileResponse = {
   "error-codes"?: string[];
 };
 
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+
 
 export async function POST(request: Request) {
   let failureCode = "CT01";
@@ -123,6 +117,10 @@ export async function POST(request: Request) {
     const rateLimitResult =
       await ratelimit.limit(ip);
 
+    if (rateLimitUnavailable(rateLimitResult)) {
+      return NextResponse.json({ error: "Security checks are temporarily unavailable. Please try again." }, { status: 503 });
+    }
+
     if (!rateLimitResult.success) {
       return NextResponse.json(
         {
@@ -189,6 +187,10 @@ export async function POST(request: Request) {
           status: 400,
         }
       );
+    }
+
+    if (hasControlCharacters(name) || hasControlCharacters(email)) {
+      return NextResponse.json({ error: "Please enter a valid name and email address." }, { status: 400 });
     }
 
     const cleanName = name.trim();
