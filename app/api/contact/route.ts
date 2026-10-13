@@ -1,4 +1,4 @@
-import { escapeHtml, hasControlCharacters, rateLimitUnavailable } from "@/lib/contact-security";
+import { escapeHtml, hasControlCharacters, rateLimitUnavailable, validTurnstileResult } from "@/lib/contact-security";
 import { ContactInputError, readContactBody } from "@/lib/contact-input";
 import { getContactEnv } from "@/lib/contact-env";
 import { cleanContactSetting, resendFailureCode } from "@/lib/contact-config";
@@ -27,10 +27,7 @@ const allowedDeadlines = [
   "Not sure yet",
 ];
 
-type TurnstileResponse = {
-  success: boolean;
-  "error-codes"?: string[];
-};
+
 
 
 
@@ -377,15 +374,10 @@ export async function POST(request: Request) {
     }
 
     const turnstileResult =
-      (await verifyResponse.json()) as TurnstileResponse;
+      await verifyResponse.json();
 
-    if (!turnstileResult.success) {
-      console.error(
-        "Turnstile verification failed:",
-        turnstileResult[
-          "error-codes"
-        ]
-      );
+    if (!validTurnstileResult(turnstileResult)) {
+      console.error("Turnstile verification rejected: invalid result or hostname.");
 
       return NextResponse.json(
         {

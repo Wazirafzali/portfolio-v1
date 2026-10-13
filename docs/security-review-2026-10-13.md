@@ -27,3 +27,9 @@ Scope: current source, tracked files, dependency audit and low-impact public end
 - No live flooding, successful email send, forged valid Turnstile token, credential rotation, or production outage simulation was performed.
 - Account MFA, collaborator permissions, secret scopes, Git history, cloud logs, backups and Cloudflare widget settings need owner/account access.
 - Dependency advisories and toolchain exposure remain an open finding. Existing Node module-format warning is unrelated to the tested security controls.
+
+## Follow-up: Turnstile hostname validation
+The contact route now accepts only strict success=true and an exact approved hostname returned by Cloudflare Siteverify. Approved: appfolor.vercel.app and appfolor-preview.wazirafzali57.workers.dev. Unrelated hosts, lookalike suffixes, missing hostnames and malformed results are rejected. The check does not trust request Host or Origin headers. Localhost and arbitrary Vercel preview domains cannot submit mail through this configuration; no production bypass exists.
+When adding a custom domain, update contactHostnames in lib/contact-security.ts and the Cloudflare widget hostname configuration before enabling contact there.
+29 tests pass. Live successful delivery still needs a real user Turnstile interaction after deployment.
+Reference: https://developers.cloudflare.com/turnstile/get-started/server-side-validation/

@@ -19,3 +19,17 @@ test("rate limiter timeout fails closed even when provider says success", () => 
   assert.equal(rateLimitUnavailable({ success: true }), false);
   assert.equal(rateLimitUnavailable({ success: false }), false);
 });
+
+test("Turnstile requires success and an explicitly approved hostname", async () => {
+  const { validTurnstileResult } = await import("../lib/contact-security.ts");
+  for (const hostname of ["appfolor.vercel.app", "appfolor-preview.wazirafzali57.workers.dev"]) {
+    assert.equal(validTurnstileResult({ success: true, hostname }), true);
+    assert.equal(validTurnstileResult({ success: false, hostname }), false);
+  }
+  for (const hostname of ["evil.example", "appfolor.vercel.app.evil.example", "other.vercel.app", "localhost", "appfolor.vercel.app:443", "https://appfolor.vercel.app", ""]) {
+    assert.equal(validTurnstileResult({ success: true, hostname }), false);
+  }
+  for (const result of [null, {}, [], { success: "true", hostname: "appfolor.vercel.app" }, { success: true }]) {
+    assert.equal(validTurnstileResult(result), false);
+  }
+});
