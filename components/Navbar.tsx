@@ -12,7 +12,7 @@ export default function Navbar() {
   return <header className="studio-header"><nav className="studio-container studio-nav" aria-label="Main navigation">
     <Link href="/" className="studio-brand" aria-label="AppFolor home"><BrandLogo /></Link>
     <div className="desktop-links">{links.map(link=><Link key={link.href} href={link.href}>{link.name}</Link>)}</div>
-    <Link href="/#contact" className="nav-contact">Let’s talk <ArrowUpRight size={17} /></Link>
+    <a href="#contact" className="nav-contact" onClick={() => setOpen(false)}>Let’s talk <ArrowUpRight size={17} /></a>
     <button className="menu-toggle" aria-label={open?"Close navigation menu":"Open navigation menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={()=>setOpen(!open)}>{open?<X />:<Menu />}</button>
-  </nav>{open&&<nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation" onKeyDown={event=>{if(event.key==="Escape"){setOpen(false);document.querySelector<HTMLButtonElement>(".menu-toggle")?.focus();}}}>{links.map(link=><Link key={link.href} href={link.href} onClick={()=>setOpen(false)}>{link.name}<ArrowUpRight size={18} /></Link>)}<Link href="/#contact" onClick={()=>setOpen(false)}>Start a project<ArrowUpRight size={18} /></Link></nav>}</header>;
+  </nav>{open&&<nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation" onKeyDown={event=>{if(event.key==="Escape"){setOpen(false);document.querySelector<HTMLButtonElement>(".menu-toggle")?.focus();}}}>{links.map(link=><Link key={link.href} href={link.href} onClick={()=>setOpen(false)}>{link.name}<ArrowUpRight size={18} /></Link>)}<a href="#contact" onClick={()=>setOpen(false)}>Start a project<ArrowUpRight size={18} /></a></nav>}</header>;
 }
