@@ -11,7 +11,7 @@ import {
   SiFirebase,
 } from "react-icons/si";
 
-import { Film } from "lucide-react";
+
 
 const webTechnologies = [
   { name: "JavaScript", icon: SiJavascript },
@@ -29,9 +29,7 @@ const mobileTechnologies = [
   { name: "Firebase", icon: SiFirebase },
 ];
 
-const editingTechnologies = [
-  { name: "Video Editing", icon: Film },
-];
+
 
 type Technology = {
   name: string;
@@ -112,15 +110,7 @@ export default function TechStack() {
           />
         </div>
 
-        <div className="mt-16">
-          <h3 className="text-xl font-bold">
-            Video Editing
-          </h3>
 
-          <TechnologyGrid
-            technologies={editingTechnologies}
-          />
-        </div>
       </div>
     </section>
   );

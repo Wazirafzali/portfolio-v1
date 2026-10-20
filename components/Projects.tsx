@@ -8,21 +8,21 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import ProductVisual from "@/components/ProductVisual";
 
-const categories = ["All","Web","Android","iOS","Desktop","Video"] as const;
+const categories = ["All","Web","Android","iOS","Desktop"] as const;
 type Category = typeof categories[number];
 
 export default function Projects() {
   const [category,setCategory] = useState<Category>("All");
   const [expanded,setExpanded] = useState(false);
   const filtered = projects.filter(project=>category==="All"||project.category===category||(project.slug==="farm-pro"&&category==="Android")||(project.category==="Android & iOS"&&(category==="Android"||category==="iOS")));
-  const shown = category==="All"&&!expanded ? projects.filter(project=>["farm-pro","meadlearna","developer-portfolio","social-video-editing"].includes(project.slug)) : filtered;
+  const shown = category==="All"&&!expanded ? projects.filter(project=>["farm-pro","meadlearna","developer-portfolio"].includes(project.slug)) : filtered;
   return <section id="projects" className="studio-section motion-section work-section"><CodeAtmosphere /><div className="studio-container">
     <div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK &amp; EXPLORATIONS</p><h2>Built work.<br /><em>Ideas in progress.</em></h2></div><p>Explore Farm Pro, Medlearna, the AppFolor website, and concepts for future projects. Each case study identifies what was built and what remains a proposal.</p></div>
     <div className="project-toolbar"><div className="project-filters" role="group" aria-label="Filter projects">{categories.map(item=><button key={item} type="button" aria-pressed={category===item} onClick={()=>{setCategory(item);setExpanded(false);}}>{item}</button>)}</div><span className="project-count" role="status">{shown.length} {shown.length===1?"project":"projects"}</span></div>
     <div className={`work-grid ${category==="All"&&!expanded?"curated-grid":""}`}>
       {shown.map((project,index)=><article key={project.slug} className={`work-card ${index===0&&category==="All"&&!expanded?"featured-work":""}`}>
-        <Link href={`/projects/${project.slug}`} className="work-visual-link" tabIndex={-1} aria-hidden="true"><ProductVisual variant={project.slug==="farm-pro"?"farm-pro":project.slug==="meadlearna"?"meadlearna":project.category==="Video"?"video":project.category==="Android"||project.category==="iOS"?"mobile":project.slug==="developer-portfolio"?"studio":"dashboard"} /></Link>
-        <div className="work-meta"><span>{project.category=== "Desktop"?"WINDOWS & ANDROID":project.category=== "Web"?"WEB EXPERIENCE":project.category=== "Video"?"VIDEO EDITING":project.category==="Android & iOS"?"ANDROID & iOS":"MOBILE EXPERIENCE"}</span><span className={project.type==="REAL PROJECT"?"project-badge live-badge":"project-badge"}>{project.type==="REAL PROJECT"?"Built project":"Concept exploration"}</span></div>
+        <Link href={`/projects/${project.slug}`} className="work-visual-link" tabIndex={-1} aria-hidden="true"><ProductVisual variant={project.slug==="farm-pro"?"farm-pro":project.slug==="meadlearna"?"meadlearna":project.category==="Android"||project.category==="iOS"?"mobile":project.slug==="developer-portfolio"?"studio":"dashboard"} /></Link>
+        <div className="work-meta"><span>{project.category=== "Desktop"?"WINDOWS & ANDROID":project.category=== "Web"?"WEB EXPERIENCE":project.category==="Android & iOS"?"ANDROID & iOS":"MOBILE EXPERIENCE"}</span><span className={project.type==="REAL PROJECT"?"project-badge live-badge":"project-badge"}>{project.type==="REAL PROJECT"?"Built project":"Concept exploration"}</span></div>
         <h3><Link href={`/projects/${project.slug}`}>{project.title}<ArrowUpRight size={23} aria-hidden="true" /></Link></h3><p>{project.shortDescription}</p>
       </article>)}
     </div>

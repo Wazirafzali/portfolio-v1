@@ -23,8 +23,7 @@ export default function TermsPage() {
           </h1>
           <p className="mt-4 leading-8">
              AppFolor provides information about web development,
-             Android development, iOS development, desktop app projects,
-             video editing, our team, and our project process.
+             Android development, iOS development, desktop app projects, our team, and our project process.
               </p>
 
           <p className="mt-6 text-zinc-500">
@@ -41,8 +40,7 @@ export default function TermsPage() {
             <p className="mt-4 leading-8">
               This website presents information about our services, team,
               projects, and availability for web development, Android
-              development, iOS development, desktop applications, and video
-              editing.
+              development, iOS development, and desktop applications.
             </p>
           </section>
 
@@ -90,7 +88,7 @@ export default function TermsPage() {
 
             <p className="mt-4 leading-8">
               Ownership and usage rights for project files, code, designs,
-              videos, assets, and other deliverables will be determined by the
+              assets, and other deliverables will be determined by the
               specific project agreement.
             </p>
           </section>

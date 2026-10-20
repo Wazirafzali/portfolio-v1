@@ -10,7 +10,7 @@ const reasons = [
     icon: Users,
     title: "Specialists, Not Generalists",
     description:
-      "Each service is handled by the team member who specializes in that field: web, Android, iOS, or video editing.",
+      "Each service is handled by the team member who specializes in that field: web, Android, iOS, or desktop development.",
   },
   {
     icon: MessageSquare,
@@ -22,7 +22,7 @@ const reasons = [
     icon: Layers3,
     title: "Multi-Service Capability",
     description:
-      "A project can include multiple services, such as a website, mobile app, and promotional video, handled within one team.",
+      "A project can include multiple services, such as a website, mobile app, and desktop tool, handled within one team.",
   },
   {
     icon: CheckCircle2,

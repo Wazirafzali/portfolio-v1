@@ -12,7 +12,6 @@ const allowedServices = [
   "Android Development",
   "iOS Development",
   "Mobile App - Android & iOS",
-  "Video Editing",
   "Desktop App Development",
   "Multiple Services",
   "Other",

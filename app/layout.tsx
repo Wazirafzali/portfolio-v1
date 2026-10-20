@@ -31,13 +31,13 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "AppFolor | Web, Mobile, Desktop & Video",
+      "AppFolor | Web, Mobile & Desktop",
     template:
       "%s | AppFolor",
   },
 
   description:
-    "AppFolor builds websites, Android and iOS apps, desktop tools, and edits video for businesses, teams, and creators. Explore our work and discuss your project.",
+    "AppFolor builds websites, Android and iOS apps, and desktop tools for businesses, teams, and creators. Explore our work and discuss your project.",
 
   keywords: [
     "AppFolor",
@@ -46,7 +46,6 @@ export const metadata: Metadata = {
     "iOS Development",
     "Mobile App Development",
     "Desktop App Development",
-    "Video Editing",
     "Next.js Developer",
     "Development Team",
     "Digital Development Studio",
@@ -75,7 +74,7 @@ export const metadata: Metadata = {
       "AppFolor | Digital Development Studio",
 
     description:
-      "Web development, Android, iOS, desktop applications, and professional video editing services.",
+      "Web development, Android, iOS, and desktop application development.",
 
     siteName: "AppFolor",
 
@@ -96,7 +95,7 @@ export const metadata: Metadata = {
       "AppFolor | Digital Development Studio",
 
     description:
-      "Web development, Android, iOS, desktop applications, and professional video editing services.",
+      "Web development, Android, iOS, and desktop application development.",
 
     images: [
       "/opengraph-image",

@@ -1,9 +1,9 @@
 import FarmProScreens from "@/components/FarmProScreens";
 import LogoMark from "@/components/LogoMark";
 import Image from "next/image";
-import { ArrowUpRight, Check, Play, Plus } from "lucide-react";
+import { ArrowUpRight, Check, Plus } from "lucide-react";
 
-export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "video" | "dashboard" | "farm-pro" | "meadlearna" }) {
+export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "dashboard" | "farm-pro" | "meadlearna" }) {
   if (variant === "farm-pro") return <div className="product-visual visual-farm-pro" aria-hidden="true"><FarmProScreens compact /></div>;
   if (variant === "meadlearna") return (
     <div className="product-visual visual-mobile" aria-hidden="true">
@@ -19,9 +19,7 @@ export default function ProductVisual({ variant = "studio" }: { variant?: "studi
       <span className="visual-caption">MOBILE INTERFACE CONCEPT</span>
     </div>
   );
-  if (variant === "video") return (
-    <div className="product-visual visual-video" aria-hidden="true"><div className="video-poster"><span>FRAME / 001</span><strong>Make<br />your<br /><em>move.</em></strong><div className="poster-orbit" /><div className="play-disc"><Play fill="currentColor" size={20} /></div></div><div className="edit-timeline"><span>00:00:12:08</span><div className="timeline-track"><i /><i /><i /><i /></div><div className="audio-track" /></div><span className="visual-caption">VIDEO DIRECTION CONCEPT</span></div>
-  );
+
   if (variant === "dashboard") return (
     <div className="product-visual visual-dashboard" aria-hidden="true"><div className="dashboard-window"><div className="window-top"><span className="window-dots">● ● ●</span><span>Workspace overview</span><span>↗</span></div><div className="dashboard-body"><aside>Overview<br /><span>Activity</span><br /><span>Reports</span><br /><span>Settings</span></aside><div><span className="dash-kicker">YOUR WORK, IN FOCUS</span><strong>A clearer picture.</strong><div className="dash-stat-row"><i>Overview<b>24</b></i><i>In progress<b>08</b></i><i>Completed<b>16</b></i></div><div className="bar-chart">{[30,55,40,70,52,83,64,93,76,100,85,115].map((height,i)=><span key={i} style={{height}} />)}</div></div></div></div><span className="visual-caption">DASHBOARD INTERFACE CONCEPT · SAMPLE DATA</span></div>
   );

@@ -2,7 +2,7 @@ export type Project = {
   slug: string;
   number: string;
   title: string;
-  category: "Web" | "Android" | "iOS" | "Android & iOS" | "Desktop" | "Video";
+  category: "Web" | "Android" | "iOS" | "Android & iOS" | "Desktop";
   shortDescription: string;
   description: string;
   type: "REAL PROJECT" | "CONCEPT PROJECT";
@@ -158,33 +158,6 @@ export const projects: Project[] = [
       "The proposed flow separates service selection, booking, and account tasks to explore a simpler customer journey.",
     result:
       "An iOS experience concept for discussion. Development, device testing, and App Store release would be separate stages.",
-    coverImage: "",
-    githubUrl: "",
-    liveUrl: "",
-  },
-
-  {
-    slug: "social-video-editing",
-    number: "06",
-    title: "Social Media Video Editing",
-    category: "Video",
-    shortDescription:
-      "A short-form video editing concept for social media campaigns, ads, and creator content.",
-    description:
-      "A visual direction for short-form video, exploring pacing, captions, and a consistent campaign style.",
-    type: "CONCEPT PROJECT",
-    technologies: [
-      "Premiere Pro",
-      "After Effects",
-      "CapCut",
-      "Motion Graphics",
-    ],
-    challenge:
-      "Short-form content must capture attention quickly while keeping the message clear.",
-    solution:
-      "The proposed editing approach combines an opening hook, concise cuts, captions, and sound design tailored to the intended platform.",
-    result:
-      "A storyboard-style visual and proposed editing approach. The illustration is not a playable video or a completed client campaign.",
     coverImage: "",
     githubUrl: "",
     liveUrl: "",

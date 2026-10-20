@@ -1,5 +1,5 @@
 import CodeAtmosphere from "@/components/CodeAtmosphere";
-import { ArrowUpRight, Code2, Smartphone, Apple, Layers3, Film, Monitor } from "lucide-react";
+import { ArrowUpRight, Code2, Smartphone, Apple, Layers3, Monitor } from "lucide-react";
 
 const services = [
   {id:"web-development",number:"01",title:"Web Development",icon:Code2,description:"Business websites, landing pages, and web applications. We plan the pages and features around what your visitors need to do.",tags:["Business websites","Web applications","Landing pages"]},
@@ -7,7 +7,6 @@ const services = [
   {id:"ios-development",number:"03",title:"iOS Development",icon:Apple,description:"iPhone and iPad apps, from screen design to service integration. We define the devices and features your project needs.",tags:["iPhone & iPad","Service platforms","API integration"]},
   {id:"android-ios-development",number:"04",title:"Android & iOS, together",icon:Layers3,description:"Launch an Android and iOS project with shared requirements, aligned design, and coordinated reviews for both platforms.",tags:["Aligned design","Shared milestones","Coordinated delivery"]},
   {id:"desktop-app-development",number:"05",title:"Desktop App Development",icon:Monitor,description:"Custom desktop tools for business tasks, workflow automation, and API integration. We agree on operating systems and installation needs before development.",tags:["Business tools","Workflow automation","API integration"]},
-  {id:"video-editing",number:"06",title:"Video Editing",icon:Film,description:"Editing for social posts, brand videos, and promotional campaigns. Share your footage, message, and target platforms to define the cut and delivery formats.",tags:["Social content","Brand videos","Promotional campaigns"]},
 ];
 
 export default function Services() {

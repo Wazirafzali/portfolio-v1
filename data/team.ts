@@ -31,24 +31,16 @@ export const teamMembers: TeamMember[] = [
       "Focused on developing professional iPhone and iPad applications with clean interfaces and reliable performance.",
     initials: "ID",
   },
-  {
-    name: "Video Editing",
-    role: "Professional Video Editor",
-    specialty: "Video Editing",
-    description:
-      "Handles professional video editing for social media, advertisements, short-form content, and business videos.",
-    initials: "VE",
-  },
 ];
 
 export const teamInfo = {
   brandName: "AppFolor",
 
   tagline:
-    "Web, mobile, desktop, and video solutions built for modern businesses.",
+    "Web, mobile, and desktop applications built for modern businesses.",
 
   shortDescription:
-    "AppFolor is a digital services team offering web, Android, iOS, and desktop development, alongside video editing.",
+    "AppFolor is a digital services team offering web, Android, iOS, and desktop development.",
 
   availability:
     "Available for new client projects",
