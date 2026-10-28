@@ -226,7 +226,6 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
 .studio-site .reference-hero h1 { font-size:clamp(2.5rem,1.5rem + 3.5vw,4.75rem); max-width:14ch; overflow-wrap:normal; }
 .reference-hero .hero-copy>.eyebrow { margin-top:0; }
 .reference-hero .hero-description { max-width:44ch; }
-.product-stage { position:relative; width:100%; aspect-ratio:1.2; border-radius:20px; border:1px solid var(--editorial-edge); background:var(--chrome-surface); }
 .service-shortcuts { display:grid; grid-template-columns:1fr; gap:0; margin-top:40px; border-block:1px solid var(--editorial-edge); }
 .service-shortcuts a { display:flex; align-items:center; gap:14px; padding:22px 6px; font-size:.875rem; min-width:0; }
 .service-shortcuts a+a { border-top:1px solid var(--editorial-edge); }
@@ -256,8 +255,6 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
  .studio-sidebar { padding:24px; }
 }
 
-/* Retain AppFolor's original sculptural accents in the hero. */
-.product-stage { isolation:isolate; }
-.product-stage .clay-sphere { width:48%; right:10%; top:12%; z-index:0; pointer-events:none; }
-.product-stage .clay-ring { width:48%; height:auto; aspect-ratio:1; border-width:clamp(26px,5vw,64px); left:10%; bottom:12%; z-index:0; pointer-events:none; }
+
+
 

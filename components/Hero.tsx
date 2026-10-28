@@ -1,3 +1,4 @@
+import LogoMark from "@/components/LogoMark";
 import { ArrowDown, ArrowUpRight, Code2, Smartphone, Monitor } from "lucide-react";
 
 export default function Hero() {
@@ -13,9 +14,15 @@ export default function Hero() {
         </div>
         <div className="hero-note"><span>Clear scope</span><span>Regular reviews</span><span>Agreed deliverables</span></div>
       </div>
-      <div className="product-stage" aria-hidden="true">
+      <div className="sculpture-stage" aria-label="Explore our web, mobile and desktop services">
+        <div className="sculpture-orbit" aria-hidden="true" />
         <div className="clay-sphere" aria-hidden="true" />
         <div className="clay-ring" aria-hidden="true" />
+        <div className="clay-brand" aria-hidden="true"><LogoMark size={105} /><span>AppFolor studio</span></div>
+        <a href="#web-development" className="floating-service floating-web"><span className="clay-icon"><Code2 size={24} /></span><span><small>01 / WEB</small><strong>Websites & web apps</strong></span><ArrowUpRight size={17} /></a>
+        <a href="#android-development" className="floating-service floating-mobile"><span className="clay-icon"><Smartphone size={24} /></span><span><small>02 / ANDROID &amp; iOS</small><strong>Mobile applications</strong></span><ArrowUpRight size={17} /></a>
+        <a href="#desktop-app-development" className="floating-service floating-desktop"><span className="clay-icon"><Monitor size={24} /></span><span><small>03 / DESKTOP APPS</small><strong>Tools for your team</strong></span><ArrowUpRight size={17} /></a>
+        <span className="sculpture-caption">WEB / MOBILE / DESKTOP</span>
       </div>
     </div>
     <nav className="studio-container service-shortcuts" aria-label="Explore development services">
@@ -23,4 +30,5 @@ export default function Hero() {
     </nav>
   </section>;
 }
+
 
