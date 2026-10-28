@@ -227,15 +227,6 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
 .reference-hero .hero-copy>.eyebrow { margin-top:0; }
 .reference-hero .hero-description { max-width:44ch; }
 .product-stage { position:relative; width:100%; aspect-ratio:1.2; border-radius:20px; border:1px solid var(--editorial-edge); background:var(--chrome-surface); }
-.stage-label { display:flex; justify-content:space-between; padding:22px; font-size:.625rem; letter-spacing:.12em; color:var(--chrome-muted); }
-.stage-desktop { position:absolute; top:19%; left:5%; width:86%; border:1px solid var(--editorial-edge); border-radius:10px; overflow:hidden; }
-.device-toolbar { display:flex; align-items:center; gap:4px; padding:9px; background:#15232c; color:#d8e7e8; font-size:9px; }
-.device-toolbar i { width:5px; height:5px; background:#759499; border-radius:50%; }
-.device-toolbar span { margin-left:8px; }
-.stage-desktop img,.stage-phone img { width:100%; height:auto; display:block; }
-.stage-phone { position:absolute; right:5%; bottom:5%; width:27%; border:5px solid #14212b; border-radius:18px; overflow:hidden; box-shadow:0 8px 20px #0002; }
-.stage-caption { position:absolute; left:6%; bottom:8%; color:var(--chrome-muted); font-size:clamp(.75rem,1.2vw,1rem); }
-.stage-caption strong { color:var(--chrome-text); font-weight:500; }
 .service-shortcuts { display:grid; grid-template-columns:1fr; gap:0; margin-top:40px; border-block:1px solid var(--editorial-edge); }
 .service-shortcuts a { display:flex; align-items:center; gap:14px; padding:22px 6px; font-size:.875rem; min-width:0; }
 .service-shortcuts a+a { border-top:1px solid var(--editorial-edge); }
@@ -265,11 +256,8 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
  .studio-sidebar { padding:24px; }
 }
 
-/* Retain AppFolor's original sculptural accents around the product previews. */
+/* Retain AppFolor's original sculptural accents in the hero. */
 .product-stage { isolation:isolate; }
-.product-stage .clay-sphere { width:24%; right:2%; top:9%; z-index:0; pointer-events:none; }
-.product-stage .clay-ring { width:26%; height:auto; aspect-ratio:1; border-width:clamp(18px,3vw,38px); left:3%; bottom:3%; z-index:0; pointer-events:none; }
-.product-stage .stage-label { position:relative; z-index:1; }
-.product-stage .stage-desktop { z-index:1; }
-.product-stage .stage-phone { z-index:2; }
-.product-stage .stage-caption { left:34%; bottom:6%; max-width:33%; z-index:1; }
+.product-stage .clay-sphere { width:48%; right:10%; top:12%; z-index:0; pointer-events:none; }
+.product-stage .clay-ring { width:48%; height:auto; aspect-ratio:1; border-width:clamp(26px,5vw,64px); left:10%; bottom:12%; z-index:0; pointer-events:none; }
+
