@@ -258,3 +258,13 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
 
 
 
+
+/* Keep decorative code behind the hero content and its interactive sculpture. */
+.reference-hero > .studio-container { position:relative; z-index:1; }
+.reference-hero .code-scenery { opacity:.7; }
+.reference-hero .motion-toggle { top:6px; }
+html[data-theme=light] .reference-hero .code-fragment { color:#246763; }
+html[data-theme=light] .reference-hero .code-filename { color:#245b58; }
+@media(max-width:800px) {
+ .reference-hero { padding-top:64px; }
+}

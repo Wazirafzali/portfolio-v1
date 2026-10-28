@@ -1,8 +1,10 @@
+import CodeAtmosphere from "@/components/CodeAtmosphere";
 import LogoMark from "@/components/LogoMark";
 import { ArrowDown, ArrowUpRight, Code2, Smartphone, Monitor } from "lucide-react";
 
 export default function Hero() {
   return <section className="studio-hero reference-hero" aria-labelledby="hero-heading">
+    <CodeAtmosphere />
     <div className="studio-container reference-hero-grid">
       <div className="hero-copy">
         <p className="eyebrow">APPFOLOR / DEVELOPMENT STUDIO</p>
@@ -30,5 +32,6 @@ export default function Hero() {
     </nav>
   </section>;
 }
+
 
 
