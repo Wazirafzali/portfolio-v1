@@ -18,6 +18,8 @@ export default function Hero() {
         <div className="hero-note"><span>Clear scope</span><span>Regular reviews</span><span>Agreed deliverables</span></div>
       </div>
       <div className="product-stage">
+        <div className="clay-sphere" aria-hidden="true" />
+        <div className="clay-ring" aria-hidden="true" />
         <div className="stage-label"><span>BUILT BY OUR TEAM</span><span>01 / 02</span></div>
         <Link href="/projects/farm-pro" className="stage-desktop"><span className="device-toolbar"><i /><i /><i /><span>Farm Pro · Windows & Android</span></span><Image src={desktop} alt="Farm Pro desktop application dashboard" sizes="(max-width: 800px) 85vw, 620px" priority /></Link>
         <Link href="/projects/meadlearna" className="stage-phone"><Image src={mobile} alt="Medlearna mobile learning application" sizes="(max-width: 800px) 27vw, 180px" priority /></Link>

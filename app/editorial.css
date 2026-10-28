@@ -264,3 +264,12 @@ body:has(.studio-sidebar[open]) { overflow:hidden; }
  .reference-hero .hero-actions a { justify-content:center; min-height:50px; }
  .studio-sidebar { padding:24px; }
 }
+
+/* Retain AppFolor's original sculptural accents around the product previews. */
+.product-stage { isolation:isolate; }
+.product-stage .clay-sphere { width:24%; right:2%; top:9%; z-index:0; pointer-events:none; }
+.product-stage .clay-ring { width:26%; height:auto; aspect-ratio:1; border-width:clamp(18px,3vw,38px); left:3%; bottom:3%; z-index:0; pointer-events:none; }
+.product-stage .stage-label { position:relative; z-index:1; }
+.product-stage .stage-desktop { z-index:1; }
+.product-stage .stage-phone { z-index:2; }
+.product-stage .stage-caption { left:34%; bottom:6%; max-width:33%; z-index:1; }
