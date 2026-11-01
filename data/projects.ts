@@ -21,16 +21,14 @@ export const projects: Project[] = [
   "number": "09",
   "title": "AFloro",
   "category": "Web",
-  "shortDescription": "A new website by AppFolor, available at afloro.vercel.app.",
-  "description": "AFloro is a website built by AppFolor. Explore the current version using the website link below.",
+  "shortDescription": "An e-commerce storefront for everyday finds, with product discovery and order requests.",
+  "description": "AFloro is an e-commerce website for home and everyday essentials. Its storefront brings collection browsing, product search, a shopping cart and ordering guidance into a cohesive mobile experience.",
   "type": "REAL PROJECT",
-  "technologies": [
-    "Vercel"
-  ],
-  "challenge": "Create a dedicated web presence for AFloro.",
-  "solution": "The website is published at afloro.vercel.app, providing a direct link to the project.",
-  "result": "The project currently uses a Vercel address. A custom domain has not yet been connected.",
-  "liveUrl": "https://afloro.vercel.app"
+  "technologies": [],
+  "challenge": "Help shoppers discover everyday products and understand how to request an order from a phone.",
+  "solution": "The storefront combines category browsing, product search and sorting with navigation to the cart, ordering guide and contact information. A cream and forest-green palette gives the shopping experience a consistent visual identity.",
+  "result": "The supplied screenshots show the storefront, product discovery, mobile navigation and footer. The ordering flow is presented as a request followed by email confirmation, with no payment collected at checkout.",
+  "coverImage": "/projects/afloro/home.jpg"
 },
   {
     slug: "farm-pro",
