@@ -3,7 +3,8 @@ import LogoMark from "@/components/LogoMark";
 import Image from "next/image";
 import { ArrowUpRight, Check, Plus } from "lucide-react";
 
-export default function ProductVisual({ variant = "studio" }: { variant?: "studio" | "mobile" | "dashboard" | "farm-pro" | "meadlearna" }) {
+export default function ProductVisual({ variant = "studio" }: { variant?: "afloro" | "studio" | "mobile" | "dashboard" | "farm-pro" | "meadlearna" }) {
+  if (variant === "afloro") return <div className="product-visual visual-afloro" aria-hidden="true"><span className="afloro-kicker">WEB PROJECT</span><strong>AFloro</strong><span>afloro.vercel.app <ArrowUpRight size={18} /></span></div>;
   if (variant === "farm-pro") return <div className="product-visual visual-farm-pro" aria-hidden="true"><FarmProScreens compact /></div>;
   if (variant === "meadlearna") return (
     <div className="product-visual visual-mobile" aria-hidden="true">

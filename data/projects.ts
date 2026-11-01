@@ -16,6 +16,22 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+{
+  "slug": "afloro",
+  "number": "09",
+  "title": "AFloro",
+  "category": "Web",
+  "shortDescription": "A new website by AppFolor, available at afloro.vercel.app.",
+  "description": "AFloro is a website built by AppFolor. Explore the current version using the website link below.",
+  "type": "REAL PROJECT",
+  "technologies": [
+    "Vercel"
+  ],
+  "challenge": "Create a dedicated web presence for AFloro.",
+  "solution": "The website is published at afloro.vercel.app, providing a direct link to the project.",
+  "result": "The project currently uses a Vercel address. A custom domain has not yet been connected.",
+  "liveUrl": "https://afloro.vercel.app"
+},
   {
     slug: "farm-pro",
     number: "08",

@@ -285,3 +285,8 @@ html[data-theme=light] .studio-site .code-signal { background:linear-gradient(90
 .studio-site .code-halo { animation-duration:12s; }
 .studio-site .code-signal { animation-duration:6s; }
 .studio-site .motion-section .code-fragment { opacity:.55; }
+
+.visual-afloro { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; background:var(--chrome-surface); color:var(--chrome-text); padding:32px; }
+.visual-afloro strong { font-family:var(--font-display); font-size:clamp(3rem,7vw,6rem); letter-spacing:-.06em; line-height:1.1; }
+.visual-afloro>span { display:flex; align-items:center; gap:12px; color:var(--chrome-muted); }
+.visual-afloro .afloro-kicker { font-size:.65rem; letter-spacing:.18em; }
