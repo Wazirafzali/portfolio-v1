@@ -1,3 +1,4 @@
+import HourGlassScreens from "@/components/HourGlassScreens";
 import ImperialScreens from "@/components/ImperialScreens";
 import AFloroScreens from "@/components/AFloroScreens";
 import FarmProScreens from "@/components/FarmProScreens";
@@ -5,7 +6,8 @@ import LogoMark from "@/components/LogoMark";
 import Image from "next/image";
 import { ArrowUpRight, Check, Plus } from "lucide-react";
 
-export default function ProductVisual({ variant = "studio" }: { variant?: "imperial" | "afloro" | "studio" | "mobile" | "dashboard" | "farm-pro" | "meadlearna" }) {
+export default function ProductVisual({ variant = "studio" }: { variant?: "hourglass" | "imperial" | "afloro" | "studio" | "mobile" | "dashboard" | "farm-pro" | "meadlearna" }) {
+  if (variant === "hourglass") return <div className="product-visual visual-imperial" aria-hidden="true"><HourGlassScreens compact /></div>;
   if (variant === "imperial") return <div className="product-visual visual-imperial" aria-hidden="true"><ImperialScreens compact /></div>;
   if (variant === "afloro") return <div className="product-visual visual-afloro" aria-hidden="true"><AFloroScreens compact /></div>;
   if (variant === "farm-pro") return <div className="product-visual visual-farm-pro" aria-hidden="true"><FarmProScreens compact /></div>;

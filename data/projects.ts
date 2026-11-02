@@ -17,6 +17,20 @@ export type Project = {
 
 export const projects: Project[] = [
 {
+  "slug": "hourglass",
+  "number": "11",
+  "title": "HourGlass",
+  "category": "Web",
+  "shortDescription": "A time-management product website introducing tasks, daily planning and focused work.",
+  "description": "HourGlass presents a calmer approach to organizing time through task lists, daily planning and focus sessions. The website introduces the product through a demo, starter templates and app preview screens.",
+  "type": "REAL PROJECT",
+  "technologies": [],
+  "challenge": "Explain a time-management product clearly and help visitors explore how planning, tasks and focus fit together.",
+  "solution": "The website combines a product introduction, Today, Inbox and Focus demo views, personal, learning and work templates, searchable section navigation and a preview gallery. Contact and support sections provide a path for questions.",
+  "result": "A built product website presented as a development preview. The supplied screens show sample demo tasks and multilingual app previews. They do not establish general app availability or persistent storage for the website demo.",
+  "coverImage": "/projects/hourglass/home.png"
+},
+{
   "slug": "imperial",
   "number": "10",
   "title": "Imperial Wedding Hall",
