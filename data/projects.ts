@@ -21,13 +21,13 @@ export const projects: Project[] = [
   "number": "10",
   "title": "Imperial Wedding Hall",
   "category": "Web",
-  "shortDescription": "A wedding hall website with a public guest experience and a separate administration area.",
+  "shortDescription": "A wedding hall website with a public guest experience, booking calendar and multilingual menu administration.",
   "description": "Imperial brings a wedding hall’s welcome online through a public website and a separate administration area. The public interface introduces the venue, its hospitality and celebration planning.",
   "type": "REAL PROJECT",
   "technologies": [],
   "challenge": "Present a wedding venue with a clear path for guests to explore the setting and begin planning, while keeping the administration experience separate.",
-  "solution": "The public website combines a photographic welcome, hospitality sections and a gallery with links to menus and celebration planning. Dark surfaces, gold accents and expressive typography establish a consistent wedding venue identity.",
-  "result": "The supplied screenshots document the public homepage, hospitality section and gallery. The project also includes a separate administration area; its screens and workflows are not presented in this case study yet. Venue photography in the public design is illustrative.",
+  "solution": "The public website combines a photographic welcome, hospitality sections and a gallery with links to menus and celebration planning. The admin interface presents booking totals, deposit summaries, pending approvals and a calendar with available, booked and on-hold states. Its menu editor includes English, Dari and Pashto content, per-guest pricing and guest capacity fields.",
+  "result": "The supplied screenshots document both sides of the project: the public welcome, hospitality and gallery, alongside the administration calendar and menu editor. Dashboard figures are interface examples, not business results. Venue photography in the public design is illustrative.",
   "coverImage": "/projects/imperial/home.png"
 },
 {
