@@ -17,6 +17,20 @@ export type Project = {
 
 export const projects: Project[] = [
 {
+  "slug": "imperial",
+  "number": "10",
+  "title": "Imperial Wedding Hall",
+  "category": "Web",
+  "shortDescription": "A wedding hall website with a public guest experience and a separate administration area.",
+  "description": "Imperial brings a wedding hall’s welcome online through a public website and a separate administration area. The public interface introduces the venue, its hospitality and celebration planning.",
+  "type": "REAL PROJECT",
+  "technologies": [],
+  "challenge": "Present a wedding venue with a clear path for guests to explore the setting and begin planning, while keeping the administration experience separate.",
+  "solution": "The public website combines a photographic welcome, hospitality sections and a gallery with links to menus and celebration planning. Dark surfaces, gold accents and expressive typography establish a consistent wedding venue identity.",
+  "result": "The supplied screenshots document the public homepage, hospitality section and gallery. The project also includes a separate administration area; its screens and workflows are not presented in this case study yet. Venue photography in the public design is illustrative.",
+  "coverImage": "/projects/imperial/home.png"
+},
+{
   "slug": "afloro",
   "number": "09",
   "title": "AFloro",

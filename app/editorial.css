@@ -298,3 +298,10 @@ html[data-theme=light] .studio-site .code-signal { background:linear-gradient(90
 .afloro-screens-compact { width:100%; max-width:700px; grid-template-columns:repeat(2,minmax(0,1fr)); padding:0; gap:20px; }
 @media(max-width:1000px) { .afloro-screens:not(.afloro-screens-compact) { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .afloro-screens:not(.afloro-screens-compact) { grid-template-columns:minmax(0,1fr); max-width:420px; } .visual-afloro { padding:20px; } }
+
+.visual-imperial { display:flex; align-items:center; justify-content:center; padding:20px; background:#171714; }
+.visual-imperial img { display:block; width:100%; height:auto; border:1px solid #b6a46d55; border-radius:8px; }
+.imperial-screens { padding-block:32px; }
+.imperial-screens figure { margin:0 0 36px; }
+.imperial-screens img { display:block; width:100%; height:auto; border:1px solid var(--editorial-edge); border-radius:12px; }
+.imperial-screens figcaption,.imperial-gallery-note { margin-top:12px; color:var(--chrome-muted); font-size:.875rem; line-height:1.7; }
