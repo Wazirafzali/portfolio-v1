@@ -117,49 +117,9 @@ export const projects: Project[] = [
       liveUrl: "https://appfolor.vercel.app",
   },
 
-  {
-    slug: "modern-business-website",
-    number: "02",
-    title: "Modern Business Website",
-    category: "Web",
-    shortDescription:
-      "A business website concept exploring service presentation, clear navigation, and inquiry flows.",
-    description:
-      "A modern business website concept designed for companies that need a professional online presence and clear calls to action.",
-    type: "CONCEPT PROJECT",
-    technologies: ["Next.js", "React", "Tailwind CSS", "SEO"],
-    challenge:
-      "This exploration considers how a business could explain its services and guide visitors toward an inquiry.",
-    solution:
-      "The proposed approach groups services into clear sections and gives visitors a direct path to make an inquiry.",
-    result:
-      "A visual direction for discussion. Implementation, usability testing, and performance measurement would be separate project steps.",
-    coverImage: "",
-    githubUrl: "",
-    liveUrl: "",
-  },
 
-  {
-    slug: "trading-analytics-dashboard",
-    number: "03",
-    title: "Trading Analytics Dashboard",
-    category: "Web",
-    shortDescription:
-      "A financial dashboard concept for visualizing trading performance, portfolio statistics, and market data.",
-    description:
-      "A dashboard concept designed to organize financial and trading information into a clear interface.",
-    type: "CONCEPT PROJECT",
-    technologies: ["Next.js", "TypeScript", "Charts", "API"],
-    challenge:
-      "Financial applications often contain large amounts of information that can become difficult to understand.",
-    solution:
-      "The proposed interface groups summary figures, portfolio information, and charts. The illustration uses sample data.",
-    result:
-      "A dashboard layout exploration. Live data integrations and trading functionality are not part of this concept.",
-    coverImage: "",
-    githubUrl: "",
-    liveUrl: "",
-  },
+
+
 
   {
     slug: "android-business-app",
@@ -209,3 +169,4 @@ export const projects: Project[] = [
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
+
