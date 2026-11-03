@@ -13,7 +13,7 @@ export default function ProductVisual({ variant = "studio" }: { variant?: "hourg
   if (variant === "farm-pro") return <div className="product-visual visual-farm-pro" aria-hidden="true"><FarmProScreens compact /></div>;
   if (variant === "meadlearna") return (
     <div className="product-visual visual-mobile" aria-hidden="true">
-      <div className="medlearna-card-screens"><Image src="/projects/medlearna/home.jpg" alt="" width={1078} height={2054} sizes="(max-width: 640px) 38vw, 230px" /><Image src="/projects/medlearna/learning.jpg" alt="" width={1076} height={1913} sizes="(max-width: 640px) 38vw, 230px" /></div>
+      <div className="medlearna-card-screens"><Image src="/projects/medlearna/overview.jpg" alt="" width={649} height={1280} sizes="(max-width: 640px) 38vw, 230px" /><Image src="/projects/medlearna/settings.jpg" alt="" width={649} height={1280} sizes="(max-width: 640px) 38vw, 230px" /></div>
       <span className="visual-caption">MEDLEARNA · ANDROID & iOS · APP SCREENS</span>
     </div>
   );

@@ -83,8 +83,8 @@ export const projects: Project[] = [
     type: "REAL PROJECT",
     technologies: ["Android", "iOS"],
     challenge: "Bring a broad medical learning brief into a clear mobile experience: course discovery, revision, exam practice and individual course access. The brief also calls for Dari, Pashto and English support.",
-    solution: "The interface separates learning sections from account and access controls. The home screen provides entry points for saved lessons, continuing study, subscriptions, course purchases and offline videos. Learning sections group courses, flashcards, exams, guidelines and calculators.",
-    result: "The supplied app screens show the home dashboard and learning sections in a consistent dark interface. These screenshots document the interface; store availability, payment processing, offline protection and clinical content validation are not demonstrated by this case study.",
+    solution: "The updated overview brings course search, exams, flashcards and learning sections together. Bottom navigation connects Overview, Library, Practice, Saved and Settings. The settings screen groups profile access, subscriptions, purchases, offline videos, content management, appearance and language.",
+    result: "The supplied app screens show the updated overview and settings in a consistent dark teal interface. These screenshots document the interface; store availability, payment processing, offline protection and clinical content validation are not demonstrated by this case study.",
   },
   {
     slug: "developer-portfolio",
